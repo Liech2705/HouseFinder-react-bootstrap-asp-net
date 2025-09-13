@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\MyApi.Api",
+    "\\MyApi.Application",
+    "\\MyApi.Domain",
+    "\\MyApi.Infrastructure"
+  ],
+  "SelectedNode": "\\backend.sln",
+  "PreviewInSolutionExplorer": false
+}
