@@ -26,10 +26,10 @@ namespace MyApi.Application.DTOs.ChatConversationDtos
         public DateTime Last_Message_At { get; set; }
 
         // Thông tin quan hệ
-        public string RoomTitle { get; set; }      // từ Room.Title
-        public string UserName { get; set; }       // từ User.User_Name
-        public string HostName { get; set; }       // từ Host.User_Name
+        public string? RoomTitle { get; set; }      // từ Room.Title
+        public string? UserName { get; set; }       // từ User.User_Name
+        public string? HostName { get; set; }       // từ Host.User_Name
 
-        public ICollection<ChatMessageReadDto> ChatMessages { get; set; }
+        public ICollection<ChatMessageReadDto> ChatMessages { get; set; } = new List<ChatMessageReadDto>();
     }
 }

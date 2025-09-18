@@ -25,13 +25,13 @@ namespace MyApi.Application.DTOs.UserDtos
     public class UserReadDto
     {
         public int User_Id { get; set; }
-        public string User_Name { get; set; }
-        public string Email { get; set; }
+        public string? User_Name { get; set; }
+        public string? Email { get; set; }
         public UserRole Role { get; set; }
         public DateTime? Created_At { get; set; }
 
         // Thông tin chi tiết kèm theo (nếu cần hiển thị)
-        public UserInforReadDto UserInfor { get; set; }
-        public ICollection<BoardingHouseReadDto> BoardingHouses { get; set; }
+        public UserInforReadDto UserInfor { get; set; } = new UserInforReadDto();
+        public ICollection<BoardingHouseReadDto> BoardingHouses { get; set; } = new List<BoardingHouseReadDto>();
     }
 }

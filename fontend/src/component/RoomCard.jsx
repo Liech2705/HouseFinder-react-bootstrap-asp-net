@@ -1,9 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+
 function RoomCard({ room }) {
+    const navigate = useNavigate();
     return (
         <article className="card room-card h-100 shadow-sm border border-secondary-subtle">
             <div className="position-relative" style={{ height: "200px", overflow: "hidden" }}>
                 <img
-                    src={room.img}
+                    src={room.images?.[0] || room.img}
                     alt={room.alt}
                     className="card-img-top"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
@@ -38,7 +41,7 @@ function RoomCard({ room }) {
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                     <p className="fs-5 fw-semibold text-dark mb-1">
-                        {room.price} <span>{room.unit}</span>
+                        {(typeof room.price === 'number' ? room.price.toLocaleString('vi-VN') : room.price)} <span>{room.unit}</span>
                     </p>
 
                     <p className="fs-8 text-secondary mb-2">
@@ -82,7 +85,7 @@ function RoomCard({ room }) {
                         <i className="fas fa-check-circle text-success fs-9"></i>
                     </div>
 
-                    <button className="btn btn-dark btn-sm btn-dark-custom w-10" aria-label={`Xem chi tiết ${room.title}`}>
+                    <button className="btn btn-dark btn-sm btn-dark-custom w-10" aria-label={`Xem chi tiết ${room.title}`} onClick={() => navigate(`/rooms/${room.id}`)}>
                         Xem chi tiết
                     </button>
                 </div>

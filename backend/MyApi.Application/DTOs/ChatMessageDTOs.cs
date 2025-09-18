@@ -20,10 +20,10 @@
         public int Message_Id { get; set; }
         public int Conversation_Id { get; set; }
         public int User_Id { get; set; }
-        public string Content { get; set; }
+        public string? Content { get; set; }
         public DateTime Timestamp { get; set; }
 
         // Thông tin bổ sung
-        public string UserName { get; set; }   // từ User.User_Name
+        public string? UserName { get; set; }   // từ User.User_Name
     }
 }

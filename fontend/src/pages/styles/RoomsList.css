@@ -1,0 +1,37 @@
+/* ...existing code... */
+
+/* Prevent the view-toggle + sort select from overlapping */
+.filter-card .d-flex.align-items-center.gap-2 {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  flex-wrap: wrap; /* allow wrapping when space is tight */
+}
+
+/* Make the button group flexible but not force the select to shrink too much */
+.filter-card .btn-group.w-100 {
+  flex: 1 1 60%;
+  min-width: 160px;
+}
+
+/* Keep the select readable */
+.filter-card .form-select.w-auto {
+  flex: 0 0 auto;
+  min-width: 140px;
+}
+
+.room-amenities .badge {
+  font-size: 0.8rem;
+  padding: .35rem .5rem;
+  border-radius: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+/* Small screens: stack controls for clarity */
+@media (max-width: 768px) {
+  .filter-card .btn-group.w-100 { flex-basis: 100%; }
+  .filter-card .form-select.w-auto { flex-basis: 100%; width: 100%; min-width: 0; }
+  .filter-card .btn-group .btn span { display: none; } /* hide long labels on very small screens if present */
+}

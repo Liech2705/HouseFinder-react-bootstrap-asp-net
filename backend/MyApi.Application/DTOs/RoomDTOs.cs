@@ -22,8 +22,8 @@ namespace MyApi.Application.DTOs.RoomDtos
     public class RoomUpdateDto
     {
         public string Title { get; set; }
-        public string Description { get; set; }
-        public string Address { get; set; }
+        public string? Description { get; set; }
+        public string? Address { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
         public int? Price { get; set; }
@@ -36,9 +36,9 @@ namespace MyApi.Application.DTOs.RoomDtos
         public int Room_Id { get; set; }
         public int Owner_Id { get; set; }
         public int House_Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Address { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public string? Address { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
         public int? Price { get; set; }
@@ -46,11 +46,11 @@ namespace MyApi.Application.DTOs.RoomDtos
         public DateTime? Created_At { get; set; }
 
         // Dữ liệu quan hệ
-        public string OwnerName { get; set; }       // từ User.User_Name
-        public string HouseDescription { get; set; } // từ BoardingHouse.Description
+        public string? OwnerName { get; set; }       // từ User.User_Name
+        public string? HouseDescription { get; set; } // từ BoardingHouse.Description
 
-        public ICollection<RoomImageReadDto> RoomImages { get; set; }
-        public ICollection<ReviewReadDto> Reviews { get; set; }
-        public RoomPropertyReadDto RoomProperty { get; set; }
+        public ICollection<RoomImageReadDto> RoomImages { get; set; } = new List<RoomImageReadDto>();
+        public ICollection<ReviewReadDto> Reviews { get; set; } = new List<ReviewReadDto>();
+        public RoomPropertyReadDto RoomProperty { get; set; } = new RoomPropertyReadDto();
     }
 }

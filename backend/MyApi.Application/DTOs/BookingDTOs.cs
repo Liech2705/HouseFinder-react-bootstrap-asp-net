@@ -37,11 +37,11 @@ namespace MyApi.Application.DTOs.BookingDtos
         public DateTime Created_At { get; set; }
 
         // Thông tin quan hệ
-        public string RoomTitle { get; set; }      // từ Room.Title
-        public string UserName { get; set; }       // từ User.User_Name
+        public string? RoomTitle { get; set; }      // từ Room.Title
+        public string? UserName { get; set; }       // từ User.User_Name
 
-        public ICollection<PaymentReadDto> Payments { get; set; }
-        public ICollection<CheckBookingReadDto> CheckBookings { get; set; }
-        public ReviewReadDto Review { get; set; }
+        public ICollection<PaymentReadDto> Payments { get; set; } = new List<PaymentReadDto>();
+        public ICollection<CheckBookingReadDto> CheckBookings { get; set; } = new List<CheckBookingReadDto>();
+        public ReviewReadDto Review { get; set; } = new ReviewReadDto();
     }
 }

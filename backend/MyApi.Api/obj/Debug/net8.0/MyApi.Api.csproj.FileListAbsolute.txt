@@ -349,3 +349,6 @@ D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\bac
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\obj\Debug\net8.0\MyApi.Api.pdb
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\obj\Debug\net8.0\MyApi.Api.genruntimeconfig.cache
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\obj\Debug\net8.0\ref\MyApi.Api.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Facebook.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll

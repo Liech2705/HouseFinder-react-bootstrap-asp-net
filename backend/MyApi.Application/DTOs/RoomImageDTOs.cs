@@ -5,7 +5,7 @@
     {
         public int Image_Id { get; set; }
         public int Room_Id { get; set; }
-        public string Image_Url { get; set; }
+        public string? Image_Url { get; set; }
         public DateTime Uploaded_At { get; set; }
     }
 
@@ -13,12 +13,12 @@
     public class RoomImageCreateDto
     {
         public int Room_Id { get; set; }
-        public string Image_Url { get; set; }
+        public string? Image_Url { get; set; }
     }
 
     // DTO khi cập nhật ảnh (chỉ đổi link ảnh)
     public class RoomImageUpdateDto
     {
-        public string Image_Url { get; set; }
+        public string? Image_Url { get; set; }
     }
 }

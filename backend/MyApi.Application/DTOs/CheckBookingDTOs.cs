@@ -6,7 +6,7 @@
         public int Check_Id { get; set; }
         public int Booking_Id { get; set; }
         public string Image_Url { get; set; } = null!;
-        public string Check { get; set; }   // Trả enum dưới dạng string cho dễ đọc
+        public string? Check { get; set; }   // Trả enum dưới dạng string cho dễ đọc
         public DateTime Check_Date { get; set; }
     }
 

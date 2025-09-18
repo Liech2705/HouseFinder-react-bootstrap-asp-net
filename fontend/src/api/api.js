@@ -1,3 +1,3 @@
 import { rooms, testimonials } from './room';
-
-export { rooms, testimonials };
+import { login } from './auth';
+export { rooms, login, testimonials };

@@ -9,8 +9,8 @@ namespace MyApi.Application.DTOs.ReportDtos
         public int Reporter_Id { get; set; }
         public int Reported_Id { get; set; }
         public ReportType Type { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
         public ReportStatus Status { get; set; }
         public DateTime Created_At { get; set; }
     }
@@ -21,8 +21,8 @@ namespace MyApi.Application.DTOs.ReportDtos
         public int Reporter_Id { get; set; }     // Người báo cáo
         public int Reported_Id { get; set; }     // Người bị báo cáo
         public ReportType Type { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
     }
 
     // Dùng khi admin cập nhật trạng thái xử lý báo cáo

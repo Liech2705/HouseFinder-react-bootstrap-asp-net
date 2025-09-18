@@ -1,13 +1,18 @@
-
-using AutoMapper;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using MyApi.Application;
+using Microsoft.IdentityModel.Tokens;
 using MyApi.Application.Mappings;
 using MyApi.Domain.Interfaces;
 using MyApi.Infrastructure.Data;
 using MyApi.Infrastructure.Interfaces;
 using MyApi.Infrastructure.Repositories;
 using MyApi.Infrastructure.Services;
+using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +26,50 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// service authentication + authorization
+var jwtSettings = builder.Configuration.GetSection("Jwt");
+builder.Services.AddAuthentication(options =>
+{
+    // Cookie để giữ phiên đăng nhập tạm thời sau khi login Google/Facebook
+    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    // Khi gọi Challenge() mà không chỉ định scheme => mặc định dùng Google
+    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+})
+.AddCookie()
+.AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings["Issuer"],
+        ValidAudience = jwtSettings["Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+    };
+})
+.AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+{
+    options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+    options.CallbackPath = "/signin-google"; // 👈 callback mặc định
+    options.SaveTokens = true;
+    options.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url"); // 👈 thêm claim ảnh
+})
+.AddFacebook(FacebookDefaults.AuthenticationScheme, options =>
+{
+    options.AppId = builder.Configuration["Authentication:Facebook:AppId"];
+    options.AppSecret = builder.Configuration["Authentication:Facebook:AppSecret"];
+    options.CallbackPath = "/signin-facebook"; // 👈 callback mặc định
+    options.SaveTokens = true;
+    options.Fields.Add("picture");
+    options.ClaimActions.MapJsonKey("urn:facebook:picture", "picture.data.url"); // 👈 thêm claim ảnh
+});
+
+// service Reponsitory
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBoardingHouseRepository, BoardingHouseRepository>();
@@ -41,7 +90,7 @@ builder.Services.AddScoped<IUserInforRepository, UserInforRepository>();
 
 builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
 
-
+// service mapper
 builder.Services.AddSingleton<IMapper>(sp =>
 {
     var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
@@ -69,8 +118,27 @@ builder.Services.AddSingleton<IMapper>(sp =>
     return config.CreateMapper();
 });
 
+// Thêm CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 
 var app = builder.Build();
+
+// Dùng CORS
+app.UseCors("AllowAll");
+
+// use Auth
+app.UseAuthentication();
+app.UseAuthorization();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
