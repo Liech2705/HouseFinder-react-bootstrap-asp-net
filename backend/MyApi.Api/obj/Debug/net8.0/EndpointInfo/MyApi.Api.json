@@ -67,6 +67,37 @@
         }
       }
     },
+    "/api/Auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Auth/login-google": {
       "get": {
         "tags": [
@@ -105,6 +136,99 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/sendOtp": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SentOTPDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SentOTPDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SentOTPDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/verifyOtp": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyOtpDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyOtpDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyOtpDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/resetPassword": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -4166,20 +4290,6 @@
             "type": "string",
             "nullable": true
           },
-          "room_Count": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "is_Elevator": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "num_Floors": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "note": {
             "type": "string",
             "nullable": true
@@ -4200,20 +4310,6 @@
           },
           "description": {
             "type": "string",
-            "nullable": true
-          },
-          "room_Count": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "is_Elevator": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "num_Floors": {
-            "type": "integer",
-            "format": "int32",
             "nullable": true
           },
           "note": {
@@ -4254,20 +4350,6 @@
         "properties": {
           "description": {
             "type": "string",
-            "nullable": true
-          },
-          "room_Count": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "is_Elevator": {
-            "type": "boolean",
-            "nullable": true
-          },
-          "num_Floors": {
-            "type": "integer",
-            "format": "int32",
             "nullable": true
           },
           "note": {
@@ -4925,6 +5007,24 @@
         },
         "additionalProperties": false
       },
+      "ResetPasswordDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "otp": {
+            "type": "string",
+            "nullable": true
+          },
+          "newPassword": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ReviewCreateDto": {
         "type": "object",
         "properties": {
@@ -5156,6 +5256,35 @@
           "hasCloset": {
             "type": "boolean"
           },
+          "hasMezzanine": {
+            "type": "boolean"
+          },
+          "hasFridge": {
+            "type": "boolean"
+          },
+          "hasHotWater": {
+            "type": "boolean"
+          },
+          "hasWindow": {
+            "type": "boolean"
+          },
+          "hasPet": {
+            "type": "boolean"
+          },
+          "positionInHouse": {
+            "type": "string",
+            "nullable": true
+          },
+          "occupantCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
           "note": {
             "type": "string",
             "nullable": true
@@ -5281,6 +5410,16 @@
           },
           "status": {
             "$ref": "#/components/schemas/RoomStatus"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SentOTPDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5522,6 +5661,20 @@
           },
           "role": {
             "$ref": "#/components/schemas/UserRole"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerifyOtpDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "otp": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

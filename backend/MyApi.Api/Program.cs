@@ -12,6 +12,7 @@ using MyApi.Infrastructure.Data;
 using MyApi.Infrastructure.Interfaces;
 using MyApi.Infrastructure.Repositories;
 using MyApi.Infrastructure.Services;
+using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
 
@@ -49,6 +50,47 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = jwtSettings["Issuer"],
         ValidAudience = jwtSettings["Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]))
+    };
+
+    // Event để kiểm tra token trong DB (revoked token)
+    options.Events = new JwtBearerEvents
+    {
+        OnTokenValidated = async context =>
+        {
+            // Lấy token đã được parse
+            var jwtToken = context.SecurityToken as JwtSecurityToken;
+            if (jwtToken == null)
+            {
+                context.Fail("Token không hợp lệ");
+                return;
+            }
+
+            // Lấy AppDbContext từ DI container
+            var db = context.HttpContext.RequestServices.GetService<AppDbContext>();
+            if (db == null)
+            {
+                context.Fail("Dữ liệu không có");
+                return;
+            }
+
+            var raw = jwtToken.RawData;
+
+            // Kiểm tra token có tồn tại trong bảng UserTokens hay không
+            var exists = await db.UserTokens.AnyAsync(t => t.Token == raw);
+            if (!exists)
+            {
+                context.Fail("Token không tồn tại");
+                return;
+            }
+
+            // (Tùy chọn) bạn có thể kiểm tra thêm: token hết hạn trong DB, user bị khóa, ...
+        },
+
+        OnAuthenticationFailed = context =>
+        {
+            // Optionally log or handle failed auth
+            return Task.CompletedTask;
+        }
     };
 })
 .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
@@ -130,12 +172,15 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddScoped<EmailService>();
+
 
 var app = builder.Build();
 
 // Dùng CORS
 app.UseCors("AllowAll");
 
+app.UseRouting();
 // use Auth
 app.UseAuthentication();
 app.UseAuthorization();
