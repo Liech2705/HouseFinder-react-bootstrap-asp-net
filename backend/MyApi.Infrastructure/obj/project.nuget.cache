@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BnJ1BH4R/YE=",
+  "dgSpecHash": "5G3MdLFxHlM=",
   "success": true,
-  "projectFilePath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\MyApi.Infrastructure.csproj",
+  "projectFilePath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\MyApi.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nhlin\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\nhlin\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

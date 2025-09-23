@@ -21,3 +21,15 @@ D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\bac
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\refint\MyApi.Domain.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.pdb
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\ref\MyApi.Domain.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\bin\Debug\net8.0\MyApi.Domain.deps.json
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\bin\Debug\net8.0\MyApi.Domain.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\bin\Debug\net8.0\MyApi.Domain.pdb
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.AssemblyInfoInputs.cache
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.AssemblyInfo.cs
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.csproj.CoreCompileInputs.cache
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.sourcelink.json
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\refint\MyApi.Domain.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.pdb
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\ref\MyApi.Domain.dll

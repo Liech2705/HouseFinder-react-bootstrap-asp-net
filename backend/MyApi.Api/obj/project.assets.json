@@ -5258,11 +5258,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\MyApi.Api.csproj",
+      "projectUniqueName": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\MyApi.Api.csproj",
       "projectName": "MyApi.Api",
-      "projectPath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\MyApi.Api.csproj",
+      "projectPath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\MyApi.Api.csproj",
       "packagesPath": "C:\\Users\\nhlin\\.nuget\\packages\\",
-      "outputPath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\obj\\",
+      "outputPath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5283,11 +5283,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj": {
-              "projectPath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj"
+            "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj": {
+              "projectPath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj"
             },
-            "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\MyApi.Infrastructure.csproj": {
-              "projectPath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\MyApi.Infrastructure.csproj"
+            "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\MyApi.Infrastructure.csproj": {
+              "projectPath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\MyApi.Infrastructure.csproj"
             }
           }
         }

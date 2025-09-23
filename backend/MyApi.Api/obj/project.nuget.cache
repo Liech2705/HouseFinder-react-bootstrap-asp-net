@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0Ja/s7GLVk8=",
+  "dgSpecHash": "AQ7frYahQqg=",
   "success": true,
-  "projectFilePath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\MyApi.Api.csproj",
+  "projectFilePath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\MyApi.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nhlin\\.nuget\\packages\\automapper\\15.0.1\\automapper.15.0.1.nupkg.sha512",
     "C:\\Users\\nhlin\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

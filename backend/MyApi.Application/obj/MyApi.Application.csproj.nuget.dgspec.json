@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj": {}
+    "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj": {}
   },
   "projects": {
-    "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj": {
+    "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj",
+        "projectUniqueName": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj",
         "projectName": "MyApi.Application",
-        "projectPath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj",
+        "projectPath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\MyApi.Application.csproj",
         "packagesPath": "C:\\Users\\nhlin\\.nuget\\packages\\",
-        "outputPath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\obj\\",
+        "outputPath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\MyApi.Domain.csproj": {
-                "projectPath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\MyApi.Domain.csproj"
+              "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\MyApi.Domain.csproj": {
+                "projectPath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\MyApi.Domain.csproj"
               }
             }
           }
@@ -61,6 +61,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.13.0, )"
             },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
@@ -91,14 +95,14 @@
         }
       }
     },
-    "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\MyApi.Domain.csproj": {
+    "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\MyApi.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\MyApi.Domain.csproj",
+        "projectUniqueName": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\MyApi.Domain.csproj",
         "projectName": "MyApi.Domain",
-        "projectPath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\MyApi.Domain.csproj",
+        "projectPath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\MyApi.Domain.csproj",
         "packagesPath": "C:\\Users\\nhlin\\.nuget\\packages\\",
-        "outputPath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\obj\\",
+        "outputPath": "D:\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

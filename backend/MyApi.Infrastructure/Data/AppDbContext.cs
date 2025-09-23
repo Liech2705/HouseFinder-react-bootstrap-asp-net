@@ -28,6 +28,7 @@ namespace MyApi.Infrastructure.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<RoomImage> RoomImages { get; set; }
         public DbSet<RoomProperty> RoomProperties { get; set; }
+        public DbSet<UserToken> UserTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

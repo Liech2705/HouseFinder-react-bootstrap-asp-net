@@ -33,3 +33,21 @@ D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\bac
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.pdb
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.genruntimeconfig.cache
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\ref\MyApi.Infrastructure.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\bin\Debug\net8.0\MyApi.Infrastructure.deps.json
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\bin\Debug\net8.0\MyApi.Infrastructure.runtimeconfig.json
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\bin\Debug\net8.0\MyApi.Infrastructure.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\bin\Debug\net8.0\MyApi.Infrastructure.pdb
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\bin\Debug\net8.0\MyApi.Domain.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\bin\Debug\net8.0\MyApi.Domain.pdb
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.csproj.AssemblyReference.cache
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.AssemblyInfoInputs.cache
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.AssemblyInfo.cs
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.csproj.CoreCompileInputs.cache
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.sourcelink.json
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.In.40EA9874.Up2Date
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\refint\MyApi.Infrastructure.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.pdb
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\MyApi.Infrastructure.genruntimeconfig.cache
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Infrastructure\obj\Debug\net8.0\ref\MyApi.Infrastructure.dll

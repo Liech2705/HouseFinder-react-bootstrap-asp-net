@@ -29,3 +29,19 @@ D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\bac
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\refint\MyApi.Application.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\MyApi.Application.pdb
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\ref\MyApi.Application.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\MyApi.Application.csproj.AssemblyReference.cache
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\MyApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\MyApi.Application.AssemblyInfoInputs.cache
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\MyApi.Application.AssemblyInfo.cs
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\MyApi.Application.csproj.CoreCompileInputs.cache
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\MyApi.Application.sourcelink.json
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\MyApi.Application.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\refint\MyApi.Application.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\MyApi.Application.pdb
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\bin\Debug\net8.0\MyApi.Application.deps.json
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\bin\Debug\net8.0\MyApi.Application.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\bin\Debug\net8.0\MyApi.Application.pdb
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\bin\Debug\net8.0\MyApi.Domain.dll
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\bin\Debug\net8.0\MyApi.Domain.pdb
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\MyApi.Ap.B5EC29D1.Up2Date
+D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Application\obj\Debug\net8.0\ref\MyApi.Application.dll
