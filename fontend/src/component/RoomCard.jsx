@@ -1,7 +1,29 @@
 import { useNavigate } from 'react-router-dom';
+import { rooms } from '../api/room';
 
 function RoomCard({ room }) {
     const navigate = useNavigate();
+
+    // Chuyển các thuộc tính tiện nghi thành mảng feature
+    const feature = [];
+    if (room.properties?.HasWifi) feature.push('WiFi miễn phí');
+    if (room.properties?.HasAirConditioner) feature.push('Điều hoà');
+    if (room.properties?.HasMezzanine) feature.push('Gác xép');
+    if (room.properties?.HasFridge) feature.push('Tủ lạnh');
+    if (room.properties?.HasCloset) feature.push('Tủ quần áo');
+    if (room.properties?.HasHotWater) feature.push('Nước nóng');
+    if (room.properties?.HasWindow) feature.push('Cửa sổ');
+    if (room.properties?.HasPet) feature.push('Cho phép nuôi thú cưng');
+    // Thêm các tiện nghi khác nếu có
+    // Nếu muốn tự động duyệt tất cả key:
+    // Object.entries(room.properties || {}).forEach(([key, value]) => {
+    //   if (value === true) feature.push(key);
+    // });
+
+    const avgRating = room.reviews?.length
+        ? (room.reviews.reduce((sum, r) => sum + r.rating, 0) / room.reviews.length).toFixed(1)
+        : null;
+
     return (
         <article className="card room-card h-100 shadow-sm border border-secondary-subtle">
             <div className="position-relative" style={{ height: "200px", overflow: "hidden" }}>
@@ -29,15 +51,15 @@ function RoomCard({ room }) {
                 </h3>
 
                 <p className="text-secondary fs-8 mb-1 d-flex gap-1">
-                    <i className="fas fa-map-marker-alt"></i> {room.location}
+                    <i className="fas fa-map-marker-alt"></i> {room.address}
                 </p>
 
                 <div className="d-flex gap-1 mb-1">
                     <div className="d-flex gap-1">
                         <i className="fas fa-star text-yellow-400 fs-9"></i>
-                        <span className="fs-8 fw-semibold">4.8</span>
+                        <span className="fs-8 fw-semibold">{avgRating}</span>
                     </div>
-                    <span className="fs-8 text-secondary">(24 đánh giá)</span>
+                    <span className="fs-8 text-secondary">({room.reviews?.length} đánh giá)</span>
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                     <p className="fs-5 fw-semibold text-dark mb-1">
@@ -51,21 +73,21 @@ function RoomCard({ room }) {
 
 
                 <div className="d-flex flex-wrap gap-1 fs-9 text-dark mb-2">
-                    {room.features.slice(0, 3).map((feature, i) => (
+                    {feature.slice(0, 3).map((f, i) => (
                         <span
                             key={i}
                             className="border border-secondary-subtle rounded px-1 py-0"
                             style={{ fontSize: "0.5rem" }}
                         >
-                            {feature}
+                            {f}
                         </span>
                     ))}
-                    {room.features.length > 3 && (
+                    {feature.length > 3 && (
                         <span
                             className="border border-secondary-subtle rounded px-1 py-0"
                             style={{ fontSize: "0.5rem" }}
                         >
-                            +{room.features.length - 3} khác
+                            +{feature.length - 3} khác
                         </span>
                     )}
                 </div>
@@ -81,7 +103,7 @@ function RoomCard({ room }) {
                             style={{ objectFit: "cover" }}
                             loading="lazy"
                         />
-                        <span className="fs-8 text-secondary">{room.host.name}</span>
+                        <span className="fs-8 text-secondary truncate-text">{room.host.name}</span>
                         <i className="fas fa-check-circle text-success fs-9"></i>
                     </div>
 

@@ -16,40 +16,65 @@ const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : name === 'userType' ? Number(value) : value
-        }));
+        if (name === "phone") {
+            // Chỉ cho nhập số và tối đa 10 ký tự
+            const onlyNums = value.replace(/\D/g, '').slice(0, 10);
+            setFormData(prev => ({ ...prev, phone: onlyNums }));
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                [name]: type === 'checkbox' ? checked : name === 'userType' ? Number(value) : value
+            }));
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        let newErrors = {};
 
+        if (!formData.firstName) {
+            newErrors.firstName = "Vui lòng nhập họ!";
+        }
+        if (!formData.lastName) {
+            newErrors.lastName = "Vui lòng nhập tên!";
+        }
+        if (!formData.phone || formData.phone.length !== 10) {
+            newErrors.phone = "Vui lòng nhập đúng 10 số điện thoại!";
+        }
+        if (!formData.email) {
+            newErrors.email = "Vui lòng nhập email!";
+        }
         if (formData.password !== formData.confirmPassword) {
-            alert('Mật khẩu xác nhận không khớp!');
-            return;
+            newErrors.confirmPassword = "Mật khẩu xác nhận không khớp!";
+        }
+        if (!formData.agreeTerms) {
+            newErrors.agreeTerms = "Bạn phải đồng ý với điều khoản!";
         }
 
-        if (!formData.agreeTerms) {
-            alert('Vui lòng đồng ý với điều khoản sử dụng!');
-            return;
-        }
+        setErrors(newErrors);
+        if (Object.keys(newErrors).length > 0) return;
 
         setIsLoading(true);
 
         try {
             const { firstName, lastName, email, phone, password, userType } = formData;
-            const response = await register({firstName, lastName, email, phone, password, userType: Number(userType)});
-            console.log(response);
-            alert(response.message);
+            const response = await register({ firstName, lastName, email, phone, password, userType: Number(userType) });
+            alert(response.message || response.data);
+
+            localStorage.setItem('token', response.data.token);
+            if (response.data.user) {
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+            }
+
             window.location.href = '/';
         } catch (error) {
             console.error('Register error:', error);
-            const msg = err?.response?.data || 'Có lỗi xảy ra khi đăng ký';
-            alert('Đăng ký thất bại. Vui lòng kiểm tra thông tin.' + msg);
+            const msg = error?.response?.data || 'Có lỗi xảy ra khi đăng ký';
+            alert(msg);
             setIsLoading(false);
         }
     };
@@ -70,7 +95,7 @@ const Register = () => {
                             <div className="card-body p-0">
                                 <div className="row g-0">
                                     {/* Left side - Branding */}
-                                    <div className="col-lg-4 register-left">
+                                    <Link className="col-lg-4 register-left text-decoration-none" to="/">
                                         <div className="register-branding">
                                             <div className="brand-logo">
                                                 <img
@@ -101,7 +126,7 @@ const Register = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </Link>
 
                                     {/* Right side - Form */}
                                     <div className="col-lg-8 register-right">
@@ -169,9 +194,9 @@ const Register = () => {
                                                                 value={formData.firstName}
                                                                 onChange={handleChange}
                                                                 placeholder="Nhập họ của bạn"
-                                                                required
                                                             />
                                                         </div>
+                                                        {errors.firstName && <div className="error-message">{errors.firstName}</div>}
                                                     </div>
                                                     <div className="form-group">
                                                         <label htmlFor="lastName" className="form-label">Tên</label>
@@ -185,9 +210,9 @@ const Register = () => {
                                                                 value={formData.lastName}
                                                                 onChange={handleChange}
                                                                 placeholder="Nhập tên của bạn"
-                                                                required
                                                             />
                                                         </div>
+                                                        {errors.lastName && <div className="error-message">{errors.lastName}</div>}
                                                     </div>
                                                 </div>
 
@@ -204,10 +229,11 @@ const Register = () => {
                                                             value={formData.email}
                                                             onChange={handleChange}
                                                             placeholder="Nhập email của bạn"
-                                                            required
                                                         />
                                                     </div>
+                                                    {errors.email && <div className="error-message">{errors.email}</div>}
                                                 </div>
+
 
                                                 {/* Phone Field */}
                                                 <div className="form-group">
@@ -222,9 +248,11 @@ const Register = () => {
                                                             value={formData.phone}
                                                             onChange={handleChange}
                                                             placeholder="Nhập số điện thoại"
-                                                            required
+                                                            maxLength="10"
+                                                            pattern="[0-9]{10}"
                                                         />
                                                     </div>
+                                                    {errors.phone && <div className="error-message">{errors.phone}</div>}
                                                 </div>
 
                                                 {/* Password Fields */}
@@ -276,6 +304,7 @@ const Register = () => {
                                                                 <i className={`bi ${showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'}`}></i>
                                                             </button>
                                                         </div>
+                                                        {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
                                                     </div>
                                                 </div>
 
@@ -294,6 +323,7 @@ const Register = () => {
                                                             Tôi đồng ý với <Link to="/terms" className="terms-link">Điều khoản sử dụng</Link> và <Link to="/privacy" className="terms-link">Chính sách bảo mật</Link>
                                                         </label>
                                                     </div>
+                                                    {errors.agreeTerms && <div className="error-message">{errors.agreeTerms}</div>}
                                                 </div>
 
                                                 {/* Submit Button */}

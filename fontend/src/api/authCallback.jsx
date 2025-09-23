@@ -16,7 +16,7 @@ function CallbackPage() {
                 picture: decoded.picture
             }
             // Lưu vào localStorage
-            localStorage.setItem("jwt", token);
+            localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(userData));
 
             // Redirect về trang chủ

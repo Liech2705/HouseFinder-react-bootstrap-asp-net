@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import RoomsGrid from '../../component/RoomsGrid.jsx';
+import RoomsGrid from '../../component/RoomsGrid_nm.jsx';
 import { rooms as roomsData } from '../../api/room.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Pagination from '../../component/Pagination.jsx';
@@ -23,9 +23,14 @@ export default function RoomsList() {
     };
 
     const amenityMap = {
-        wifi: 'hasWifi',
-        ac: 'hasAirConditioner',
-        mezzanine: 'hasMezzanine',
+        wifi: 'HasWifi',
+        ac: 'HasAirConditioner',
+        mezzanine: 'HasMezzanine',
+        fridge: 'HasFridge',
+        closet: 'HasCloset',
+        hotWater: 'HasHotWater',
+        window: 'HasWindow',
+        pet: 'HasPet',
     };
 
     const toggleAmenity = (key) => {
@@ -56,8 +61,6 @@ export default function RoomsList() {
 
     const totalPages = Math.max(1, Math.ceil(filteredRooms.length / perPage));
     const paginated = filteredRooms.slice((page - 1) * perPage, page * perPage);
-
-    console.log('RoomsList:', { filtered: filteredRooms.length, perPage, totalPages, page, paginatedLength: paginated.length });
 
     const resetFilters = () => {
         setQuery('');
@@ -152,16 +155,55 @@ export default function RoomsList() {
 
                             <div className="mb-3">
                                 <label className="form-label small mb-2">Tiện nghi</label>
-                                <div className="d-flex flex-wrap gap-2">
-                                    <button type="button" onClick={() => toggleAmenity('wifi')} className={`amenity-chip btn btn-sm btn-outline-secondary ${amenities.includes('wifi') ? 'active' : 'btn-outline-secondary'}`}>
-                                        <i className="fas fa-wifi me-1" /> WiFi
-                                    </button>
-                                    <button type="button" onClick={() => toggleAmenity('ac')} className={`amenity-chip btn btn-sm btn-outline-secondary ${amenities.includes('ac') ? 'active' : 'btn-outline-secondary'}`}>
-                                        <i className="fas fa-snowflake me-1" /> Điều hoà
-                                    </button>
-                                    <button type="button" onClick={() => toggleAmenity('mezzanine')} className={`amenity-chip btn btn-sm btn-outline-secondary ${amenities.includes('mezzanine') ? 'active' : 'btn-outline-secondary'}`}>
-                                        <i className="fas fa-layer-group me-1" /> Gác xép
-                                    </button>
+                                <div className="row g-2">
+                                    <div className="col-6 col-md-4">
+                                        <button type="button" onClick={() => toggleAmenity('wifi')}
+                                            className={`amenity-chip btn btn-sm w-100 btn-outline-secondary ${amenities.includes('wifi') ? 'active' : ''}`}>
+                                            <i className="fas fa-wifi me-1" /> WiFi
+                                        </button>
+                                    </div>
+                                    <div className="col-6 col-md-4">
+                                        <button type="button" onClick={() => toggleAmenity('ac')}
+                                            className={`amenity-chip btn btn-sm w-100 btn-outline-secondary ${amenities.includes('ac') ? 'active' : ''}`}>
+                                            <i className="fas fa-snowflake me-1" /> Điều hoà
+                                        </button>
+                                    </div>
+                                    <div className="col-6 col-md-4">
+                                        <button type="button" onClick={() => toggleAmenity('mezzanine')}
+                                            className={`amenity-chip btn btn-sm w-100 btn-outline-secondary ${amenities.includes('mezzanine') ? 'active' : ''}`}>
+                                            <i className="fas fa-layer-group me-1" /> Gác xép
+                                        </button>
+                                    </div>
+                                    <div className="col-6 col-md-4">
+                                        <button type="button" onClick={() => toggleAmenity('fridge')}
+                                            className={`amenity-chip btn btn-sm w-100 btn-outline-secondary ${amenities.includes('fridge') ? 'active' : ''}`}>
+                                            <i className="fas fa-snowflake me-1" /> Tủ lạnh
+                                        </button>
+                                    </div>
+                                    <div className="col-6 col-md-4">
+                                        <button type="button" onClick={() => toggleAmenity('closet')}
+                                            className={`amenity-chip btn btn-sm w-100 btn-outline-secondary ${amenities.includes('closet') ? 'active' : ''}`}>
+                                            <i className="fas fa-archive me-1" /> Tủ quần áo
+                                        </button>
+                                    </div>
+                                    <div className="col-6 col-md-4">
+                                        <button type="button" onClick={() => toggleAmenity('hotWater')}
+                                            className={`amenity-chip btn btn-sm w-100 btn-outline-secondary ${amenities.includes('hotWater') ? 'active' : ''}`}>
+                                            <i className="fas fa-hot-tub me-1" /> Nước nóng
+                                        </button>
+                                    </div>
+                                    <div className="col-6 col-md-4">
+                                        <button type="button" onClick={() => toggleAmenity('window')}
+                                            className={`amenity-chip btn btn-sm w-100 btn-outline-secondary ${amenities.includes('window') ? 'active' : ''}`}>
+                                            <i className="fas fa-window-maximize me-1" /> Cửa sổ
+                                        </button>
+                                    </div>
+                                    <div className="col-6 col-md-4">
+                                        <button type="button" onClick={() => toggleAmenity('pet')}
+                                            className={`amenity-chip btn btn-sm w-100 btn-outline-secondary ${amenities.includes('pet') ? 'active' : ''}`}>
+                                            <i className="fas fa-dog me-1" /> Thú cưng
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 

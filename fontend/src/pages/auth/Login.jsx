@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { login } from '../../api/auth';
 
@@ -25,9 +25,8 @@ const Login = () => {
         try {
             const { email, password, rememberMe } = formData;
             const response = await login({ email, password });
-            console.log(response);
             const { token, data } = response || {};
-
+            
             if (token) {
                 if (rememberMe) {
                     localStorage.setItem('token', token);
@@ -35,16 +34,16 @@ const Login = () => {
                     sessionStorage.setItem('token', token);
                 }
             }
-
+            
             if (data.user) {
                 localStorage.setItem('user', JSON.stringify(data.user));
             }
-
             alert(response.message);
+            // console.log('Login successful:', localStorage.getItem('user'));
 
             window.location.href = '/';
         } catch (error) {
-            console.error('Login error:', error);
+            console.error('Login error:', error.data);
             alert('Đăng nhập thất bại. Vui lòng kiểm tra email/mật khẩu.');
         } finally {
             setIsLoading(false);
@@ -67,7 +66,7 @@ const Login = () => {
                                 <div className="row g-0">
                                     {/* Left side - Branding */}
                                     <div className="col-lg-6 login-left">
-                                        <div className="login-branding">
+                                        <Link className="login-branding text-decoration-none" to="/">
                                             <div className="brand-logo">
                                                 <img
                                                     src="/assets/logo/logo.png"
@@ -96,7 +95,7 @@ const Login = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Link>
                                     </div>
 
                                     {/* Right side - Form */}

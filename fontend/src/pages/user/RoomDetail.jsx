@@ -111,13 +111,30 @@ function RoomDetail() {
 
                                     <div className="d-inline-flex align-items-center px-3 py-2 bg-light border rounded-pill">
                                         <i className="fas fa-wifi me-2 text-primary" aria-hidden="true" />
-                                        <span className="fw-medium">{room.properties?.hasWifi ? 'Có WiFi' : 'Không WiFi'}</span>
+                                        <span className="fw-medium">{room.properties?.HasWifi ? 'Có WiFi' : 'Không WiFi'}</span>
                                     </div>
 
                                     <div className="d-inline-flex align-items-center px-3 py-2 bg-light border rounded-pill">
                                         <i className="fas fa-snowflake me-2 text-primary" aria-hidden="true" />
-                                        <span className="fw-medium">{room.properties?.hasAirConditioner ? 'Có điều hoà' : 'Không điều hoà'}</span>
+                                        <span className="fw-medium">{room.properties?.HasAirConditioner ? 'Có điều hoà' : 'Không điều hoà'}</span>
                                     </div>
+                                    <div className="d-inline-flex align-items-center px-3 py-2 bg-light border rounded-pill">
+                                        <i className="fas fa-door-closed me-2 text-primary" aria-hidden="true" />
+                                        <span className="fw-medium">{room.properties?.HasCloset ? 'Có tủ quần áo' : 'Không tủ quần áo'}</span>
+                                    </div>
+                                        <div className="d-inline-flex align-items-center px-3 py-2 bg-light border rounded-pill">
+                                        <i className="fas fa-fan me-2 text-primary" aria-hidden="true" />
+                                        <span className="fw-medium">{room.properties?.HasMezzanine ? 'Có gác xép' : 'Không gác xép'}</span>
+                                    </div>
+                                    <div className="d-inline-flex align-items-center px-3 py-2 bg-light border rounded-pill">
+                                        <i className="fas fa-shower me-2 text-primary" aria-hidden="true" />
+                                        <span className="fw-medium">{room.properties?.HasHotWater ? 'Có nước nóng' : 'Không nước nóng'}</span>
+                                    </div>
+                                    <div className="d-inline-flex align-items-center px-3 py-2 bg-light border rounded-pill">
+                                        <i className="fas fa-dog me-2 text-primary" aria-hidden="true" />
+                                        <span className="fw-medium">{room.properties?.HasPet ? 'Cho phép nuôi thú cưng' : 'Không cho nuôi thú cưng'}</span>
+                                    </div>
+                                    
 
                                     {room.area && (
                                         <div className="d-inline-flex align-items-center px-3 py-2 bg-light border rounded-pill">

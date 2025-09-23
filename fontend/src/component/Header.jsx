@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { logout } from '../api/auth';
 
 function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -8,7 +9,7 @@ function Header() {
     useEffect(() => {
         // Check if user is logged in (you can replace this with your actual auth logic)
         const checkAuth = () => {
-            const userData = localStorage.getItem('user') ;
+            const userData = localStorage.getItem('user');
             if (userData) {
                 setUser(JSON.parse(userData));
                 setIsLoggedIn(true);
@@ -17,8 +18,8 @@ function Header() {
         checkAuth();
     }, []);
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
+    const handleLogout = async () => {
+        await logout();
         setIsLoggedIn(false);
         setUser(null);
         // Redirect to home page
@@ -101,6 +102,24 @@ function Header() {
                                         Yêu thích
                                     </Link>
                                 </li>
+                                {user?.role == 2 ? (
+                                    <li>
+                                        <Link className="dropdown-item" to="/admin">
+                                            <i className="bi bi-gear me-2"></i>
+                                            Quản lý
+                                        </Link>
+                                    </li>
+                                ) : null
+                                }
+                                {user?.role == 1 ? (
+                                    <li>
+                                        <Link className="dropdown-item" to="/manage">
+                                            <i className="bi bi-gear me-2"></i>
+                                            Quản lý phòng trọ
+                                        </Link>
+                                    </li>
+                                ) : null
+                                }
                                 <li><hr className="dropdown-divider" /></li>
                                 <li>
                                     <button className="dropdown-item text-danger" onClick={handleLogout}>

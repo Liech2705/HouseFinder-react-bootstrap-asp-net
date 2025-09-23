@@ -33,16 +33,36 @@ const register = async ({ firstName, lastName, email, phone, password, userType 
         phone,
         role: roleValue,
     };
-
-
-    console.log(payload);
     const response = await axios.post(`${API_BASE_URL}/Auth/register`, payload, {
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         },
     });
+
+    console.log('Register response:', response);
     return response.data;
 };
 
-export { login, register };
+const logout = async () => {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    console.log('Logging out with token:', token);
+    if (!token) return;
+    try {
+        const token_ = JSON.stringify(token);
+        await axios.post(`${API_BASE_URL}/Auth/logout`, token_, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        localStorage.removeItem('user');
+    } catch (error) {
+        console.error("Logout error:", error.response?.data || error.message);
+    }
+
+}
+
+export { login, register, logout };

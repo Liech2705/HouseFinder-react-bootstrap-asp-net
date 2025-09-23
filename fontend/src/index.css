@@ -2377,3 +2377,21 @@ p {
         padding-top: calc(var(--header-height, 56px) + 0.25rem);
     }
 }
+
+/* Button Styles */
+.truncate-text {
+  display: inline-block;    /* hoặc block nếu muốn chiếm cả dòng */
+  max-width: 50px;         /* giới hạn chiều rộng */
+  white-space: nowrap;      /* không xuống dòng */
+  overflow: hidden;         /* ẩn phần dư */
+  text-overflow: ellipsis;  /* hiện ... */
+  vertical-align: middle;   /* căn cho đẹp */
+}
+
+.error-message {
+  color: #dc3545; /* text-danger */
+  font-size: 0.95rem; /* tương đương .small */
+  margin-top: 0.25rem;
+  display: block;
+  font-weight: 500;
+}
