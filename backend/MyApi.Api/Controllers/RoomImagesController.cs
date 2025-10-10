@@ -23,7 +23,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RoomImageReadDto>>> GetAll()
         {
-            var images = await _roomImageRepository.GetAllAsync();
+            var images = await _roomImageRepository.GetAllAsync<RoomImageReadDto>(_mapper.ConfigurationProvider);
             return Ok(_mapper.Map<IEnumerable<RoomImageReadDto>>(images));
         }
 

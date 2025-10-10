@@ -29,7 +29,7 @@ namespace MyApi.Infrastructure.Repositories
             return await _context.Rooms
                 .Where(r => r.House_Id == houseId)
                 .Include(r => r.RoomImages)
-                .Include(r => r.User)
+                .Include(r => r.Owner)
                 .ToListAsync();
         }
 

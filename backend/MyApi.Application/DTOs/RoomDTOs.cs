@@ -24,8 +24,6 @@ namespace MyApi.Application.DTOs.RoomDtos
         public string Title { get; set; }
         public string? Description { get; set; }
         public string? Address { get; set; }
-        public double? Latitude { get; set; }
-        public double? Longitude { get; set; }
         public int? Price { get; set; }
         public RoomStatus Status { get; set; }
     }
@@ -39,8 +37,6 @@ namespace MyApi.Application.DTOs.RoomDtos
         public string? Title { get; set; }
         public string? Description { get; set; }
         public string? Address { get; set; }
-        public double? Latitude { get; set; }
-        public double? Longitude { get; set; }
         public int? Price { get; set; }
         public RoomStatus Status { get; set; }
         public DateTime? Created_At { get; set; }

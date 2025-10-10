@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MyApi.Application.DTOs.BoardingHouseDtos;
 using MyApi.Application.DTOs.BookingDtos;
 using MyApi.Domain.Entities;
 using MyApi.Domain.Interfaces;
@@ -23,7 +24,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BookingReadDto>>> GetAll()
         {
-            var bookings = await _bookingRepository.GetAllAsync();
+            var bookings = await _bookingRepository.GetAllAsync<BookingReadDto>(_mapper.ConfigurationProvider);
             var bookingsDto = _mapper.Map<IEnumerable<BookingReadDto>>(bookings);
             return Ok(bookingsDto);
         }

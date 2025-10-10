@@ -1,6 +1,6 @@
 
 import SearchSection from './component/SearchSection.jsx'
-import RoomsGrid from './component/RoomsGrid.jsx'
+import HouseGrid from './component/HouseGrid.jsx'
 import WhyChooseUs from './component/WhyChooseUs.jsx'
 import Testimonials from './component/Testimonials.jsx'
 import Stats from './component/Stats.jsx'
@@ -10,7 +10,7 @@ function App() {
     <>
       <main>
         <SearchSection />
-        <RoomsGrid />
+        <HouseGrid />
         <WhyChooseUs />
         <Testimonials />
         <Stats />

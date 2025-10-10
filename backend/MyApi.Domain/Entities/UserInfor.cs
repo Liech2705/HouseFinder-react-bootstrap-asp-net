@@ -14,10 +14,10 @@ namespace MyApi.Domain.Entities
         public DateTime? Dob { get; set; }
 
         [MaxLength(10)]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
         [MaxLength(255)]
-        public string Avatar { get; set; }
+        public string? Avatar { get; set; }
 
         public DateTime? Update_At { get; set; }
 

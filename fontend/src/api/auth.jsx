@@ -49,12 +49,8 @@ const logout = async () => {
     console.log('Logging out with token:', token);
     if (!token) return;
     try {
-        const token_ = JSON.stringify(token);
-        await axios.post(`${API_BASE_URL}/Auth/logout`, token_, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json',
-            },
+        await axios.post(`${API_BASE_URL}/Auth/logout`, null, {
+            headers: { Authorization: `Bearer ${token}` }
         });
         localStorage.removeItem('token');
         sessionStorage.removeItem('token');

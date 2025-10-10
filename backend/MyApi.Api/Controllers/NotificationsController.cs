@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MyApi.Application.DTOs.HouseImageDtos;
 using MyApi.Application.DTOs.NotificationDtos;
 using MyApi.Domain.Entities;
 using MyApi.Domain.Interfaces;
@@ -24,7 +25,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<NotificationReadDto>>> GetAll()
         {
-            var notifications = await _notificationRepository.GetAllAsync();
+            var notifications = await _notificationRepository.GetAllAsync<NotificationReadDto>(_mapper.ConfigurationProvider);
             var notificationsDto = _mapper.Map<IEnumerable<NotificationReadDto>>(notifications);
             return Ok(notificationsDto);
         }

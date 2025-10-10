@@ -1,9 +1,11 @@
 ﻿using MyApi.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyApi.Domain.Entities
 {
     public class Notification
     {
+        [Key]
         public int Notification_Id { get; set; }
         public int User_Id { get; set; }
         public string Title { get; set; } = null!;

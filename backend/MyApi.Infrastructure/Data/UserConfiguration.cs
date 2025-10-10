@@ -42,43 +42,58 @@ namespace MyApi.Infrastructure.Configurations
             builder.HasOne(u => u.UserInfor)
                    .WithOne(ui => ui.User)
                    .HasForeignKey<UserInfor>(ui => ui.User_Id)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.Cascade); // Giữ nguyên, chỉ 1-1
 
             builder.HasMany(u => u.BoardingHouses)
                    .WithOne(b => b.User)
-                   .HasForeignKey(b => b.User_Id);
+                   .HasForeignKey(b => b.User_Id)
+                   .OnDelete(DeleteBehavior.NoAction); // ⚠️ thêm dòng này
 
             builder.HasMany(u => u.Rooms)
-                   .WithOne(r => r.User)
-                   .HasForeignKey(r => r.Owner_Id);
+                   .WithOne(r => r.Owner)
+                   .HasForeignKey(r => r.Owner_Id)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(u => u.PaymentMethods)
                    .WithOne(pm => pm.User)
-                   .HasForeignKey(pm => pm.User_Id);
+                   .HasForeignKey(pm => pm.User_Id)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(u => u.Bookings)
                    .WithOne(b => b.User)
-                   .HasForeignKey(b => b.User_Id);
+                   .HasForeignKey(b => b.User_Id)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(u => u.Reviews)
                    .WithOne(r => r.User)
-                   .HasForeignKey(r => r.User_Id);
+                   .HasForeignKey(r => r.User_Id)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(u => u.Notifications)
                    .WithOne(n => n.User)
-                   .HasForeignKey(n => n.User_Id);
+                   .HasForeignKey(n => n.User_Id)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(u => u.Reports)
                    .WithOne(r => r.Reporter)
-                   .HasForeignKey(r => r.Reporter_Id);
+                   .HasForeignKey(r => r.Reporter_Id)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(u => u.chatMessages)
                    .WithOne(cm => cm.User)
-                   .HasForeignKey(cm => cm.User_Id);
+                   .HasForeignKey(cm => cm.User_Id)
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(u => u.ChatConversations)
                    .WithOne(cc => cc.User)
-                   .HasForeignKey(cc => cc.User_Id);
+                   .HasForeignKey(cc => cc.User_Id)
+                   .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany(u => u.HostConversations)
+                   .WithOne(cc => cc.Host)
+                   .HasForeignKey(cc => cc.Host_Id)
+                   .OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }

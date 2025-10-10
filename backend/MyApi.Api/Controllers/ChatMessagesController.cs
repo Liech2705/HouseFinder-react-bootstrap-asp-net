@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MyApi.Application.DTOs.ChatConversationDtos;
 using MyApi.Application.DTOs.ChatMessageDtos;
 using MyApi.Domain.Entities;
 using MyApi.Domain.Interfaces;
@@ -23,7 +24,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChatMessageReadDto>>> GetAll()
         {
-            var messages = await _chatMessageRepository.GetAllAsync();
+            var messages = await _chatMessageRepository.GetAllAsync<ChatMessageReadDto>(_mapper.ConfigurationProvider);
             var messagesDto = _mapper.Map<IEnumerable<ChatMessageReadDto>>(messages);
             return Ok(messagesDto);
         }

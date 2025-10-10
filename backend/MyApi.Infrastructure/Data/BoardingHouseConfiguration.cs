@@ -21,16 +21,26 @@ namespace MyApi.Infrastructure.Configurations
             builder.Property(bh => bh.Description)
                    .HasColumnType("nvarchar(max)");
 
-            builder.Property(bh => bh.Room_Count)
-                   .HasColumnType("int");
+            builder.Property(bh => bh.House_Name)
+                   .HasColumnType("nvarchar(max)");
 
             builder.Property(bh => bh.Is_Elevator)
                    .HasColumnType("bit");
-
-            builder.Property(bh => bh.Num_Floors)
+            builder.Property(bh => bh.Electric_Cost)
                    .HasColumnType("int");
+            builder.Property(bh => bh.Water_Cost)
+                   .HasColumnType("int");
+            builder.Property(r => r.Latitude)
+                   .HasColumnType("float");
 
-            builder.Property(bh => bh.Note)
+            builder.Property(r => r.Longitude)
+                   .HasColumnType("float");
+            builder.Property(bh => bh.Province)
+                   .HasColumnType("nvarchar(max)");
+            builder.Property(bh => bh.Commune)
+                   .HasColumnType("nvarchar(max)");
+
+            builder.Property(bh => bh.Street)
                    .HasColumnType("nvarchar(max)");
 
             builder.Property(bh => bh.Status)

@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 using MyApi.Infrastructure.Data;
 using MyApi.Infrastructure.Interfaces;
 using System.Linq.Expressions;
@@ -16,9 +18,9 @@ namespace MyApi.Infrastructure.Repositories
             _dbSet = _context.Set<T>();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<TDto>> GetAllAsync<TDto>(IConfigurationProvider mapperConfig)
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.ProjectTo<TDto>(mapperConfig).ToListAsync();
         }
 
         public async Task<T?> GetByIdAsync(int id)
@@ -59,6 +61,11 @@ namespace MyApi.Infrastructure.Repositories
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();
+        }
+
+        public Task<IEnumerable<TDto>> GetAllAsync<TDto>(Microsoft.Extensions.Configuration.IConfigurationProvider mapperConfig)
+        {
+            throw new NotImplementedException();
         }
     }
 }

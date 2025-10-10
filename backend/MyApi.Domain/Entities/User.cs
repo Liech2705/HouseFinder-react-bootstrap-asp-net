@@ -1,5 +1,6 @@
 ﻿using MyApi.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyApi.Domain.Entities
 {
@@ -30,7 +31,13 @@ namespace MyApi.Domain.Entities
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
         public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
         public ICollection<ChatMessage> chatMessages { get; set; } = new List<ChatMessage>();
+
+        [InverseProperty(nameof(ChatConversation.User))]
         public ICollection<ChatConversation> ChatConversations { get; set; } = new List<ChatConversation>();
+
+        [InverseProperty(nameof(ChatConversation.Host))]
+        public ICollection<ChatConversation> HostConversations { get; set; } = new List<ChatConversation>();
+
         public ICollection<Report> Reports { get; set; } = new List<Report>();
     }
 }

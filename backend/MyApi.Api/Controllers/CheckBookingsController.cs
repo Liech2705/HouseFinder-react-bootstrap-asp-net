@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MyApi.Application.DTOs.ChatMessageDtos;
 using MyApi.Application.DTOs.CheckBookingDtos;
 using MyApi.Domain.Entities;
 using MyApi.Domain.Enums;
@@ -24,7 +25,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CheckBookingReadDto>>> GetAll()
         {
-            var checks = await _checkBookingRepository.GetAllAsync();
+            var checks = await _checkBookingRepository.GetAllAsync<CheckBookingReadDto>(_mapper.ConfigurationProvider);
             var checksDto = _mapper.Map<IEnumerable<CheckBookingReadDto>>(checks);
             return Ok(checksDto);
         }

@@ -1,11 +1,24 @@
-import React, { useMemo, useState } from 'react';
-import RoomsGrid from '../../component/RoomsGrid_nm.jsx';
-import { rooms as roomsData } from '../../api/room.js';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import Pagination from '../../component/Pagination.jsx';
-import Breadcrumbs from '../../component/Breadcrumbs.jsx';
-import '../styles/RoomsList.css'; // custom styles for this page
-export default function RoomsList() {
+import { useMemo, useState, useEffect } from 'react';
+// Giả định component HouseCard nằm cùng cấp với HouseList trong thư mục component/
+import HouseCard from '../../../component/HouseCard.jsx';
+// Giả định API nằm ở ../api/room.jsx (Đường dẫn có thể cần điều chỉnh lại nếu cấu trúc thư mục khác)
+import { rooms as fetchHouses } from '../../../api/room.jsx';
+
+// ✅ Khắc phục lỗi import CSS và components
+// Giả định CSS file nằm trong thư mục styles cùng cấp với component
+import '../../styles/RoomsList.css';
+// Sử dụng thư viện icon Font Awesome (thay vì bootstrap-icons)
+// Nếu muốn dùng bootstrap-icons, cần đảm bảo thư viện đó đã được cài đặt và cấu hình đúng trong dự án.
+
+import Pagination from '../../../component/Pagination.jsx';
+import Breadcrumbs from '../../../component/Breadcrumbs.jsx';
+
+export default function HouseList() {
+    // State để lưu dữ liệu và trạng thái tải
+    const [houses, setHouses] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    // Filter/Sort States
     const [query, setQuery] = useState('');
     const [priceMin, setPriceMin] = useState('');
     const [priceMax, setPriceMax] = useState('');
@@ -22,15 +35,16 @@ export default function RoomsList() {
         priceDesc: 'Giá: cao → thấp'
     };
 
+    // Ánh xạ tên tiện ích từ state (wifi, ac,...) sang key trong roomProperty (snake_case)
     const amenityMap = {
-        wifi: 'HasWifi',
-        ac: 'HasAirConditioner',
-        mezzanine: 'HasMezzanine',
-        fridge: 'HasFridge',
-        closet: 'HasCloset',
-        hotWater: 'HasHotWater',
-        window: 'HasWindow',
-        pet: 'HasPet',
+        wifi: 'has_Wifi',
+        ac: 'has_AirConditioner',
+        mezzanine: 'has_Mezzanine',
+        fridge: 'has_Fridge',
+        closet: 'has_Closet',
+        hotWater: 'has_Hot_Water',
+        window: 'has_Window',
+        pet: 'has_Pet',
     };
 
     const toggleAmenity = (key) => {
@@ -38,29 +52,74 @@ export default function RoomsList() {
         setPage(1);
     };
 
-    const filteredRooms = useMemo(() => {
-        let rs = roomsData.filter((r) => {
-            const hay = (r.title + ' ' + r.location + ' ' + (r.address || '')).toLowerCase();
+    // useEffect để gọi API khi component mount
+    useEffect(() => {
+        const loadHouses = async () => {
+            try {
+                // Gọi hàm API (fetchHouses) để lấy dữ liệu
+                const data = await fetchHouses();
+                setHouses(data);
+            } catch (error) {
+                console.error("Error loading house list:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadHouses();
+    }, []);
+
+    const filteredHouses = useMemo(() => {
+        // Sử dụng state houses đã được load
+        let hs = houses.filter((h) => {
+            // 1. Dữ liệu tìm kiếm (query)
+            const hay = (h.house_Name + ' ' + h.province + ' ' + h.commune + ' ' + (h.street || '')).toLowerCase();
             const q = query.trim().toLowerCase();
             const matchesQuery = q ? hay.includes(q) : true;
-            const matchesMin = priceMin ? r.price >= Number(priceMin) : true;
-            const matchesMax = priceMax ? r.price <= Number(priceMax) : true;
-            const matchesAvailable = onlyAvailable ? r.status === 'Còn trống' : true;
 
+            // 2. Dữ liệu giá (Cần tìm giá thấp nhất trong nhà trọ)
+            const prices = h.rooms?.map(r => r.price).filter(p => typeof p === 'number') || [];
+            const minPrice = prices.length > 0 ? Math.min(...prices) : null;
+
+            const matchesMin = priceMin ? minPrice !== null && minPrice >= Number(priceMin) : true;
+            const matchesMax = priceMax ? minPrice !== null && minPrice <= Number(priceMax) : true;
+
+            // 3. Dữ liệu khả dụng (Còn phòng trống - status = 1)
+            const availableRoomsCount = h.rooms?.filter(r => r.status === 1).length || 0;
+            const matchesAvailable = onlyAvailable ? availableRoomsCount > 0 : true;
+
+            // 4. Lọc theo tiện ích
             const matchesAmenities = amenities.length
-                ? amenities.every(a => !!r.properties?.[amenityMap[a]])
+                ? amenities.every(requiredAmenityKey => {
+                    const propKey = amenityMap[requiredAmenityKey];
+                    // Kiểm tra xem có phòng nào trong nhà trọ có tiện ích này không
+                    return h.rooms?.some(room => room.roomProperty?.[propKey] === true);
+                })
                 : true;
 
             return matchesQuery && matchesMin && matchesMax && matchesAvailable && matchesAmenities;
         });
 
-        if (sort === 'priceAsc') rs = rs.sort((a, b) => a.price - b.price);
-        if (sort === 'priceDesc') rs = rs.sort((a, b) => b.price - a.price);
-        return rs;
-    }, [query, priceMin, priceMax, onlyAvailable, sort, amenities]);
+        // 5. Sắp xếp (Sắp xếp theo giá thấp nhất)
+        if (sort === 'priceAsc') {
+            hs = hs.sort((a, b) => {
+                const aPrice = Math.min(...(a.rooms?.map(r => r.price) || []));
+                const bPrice = Math.min(...(b.rooms?.map(r => r.price) || []));
+                return (aPrice || Infinity) - (bPrice || Infinity);
+            });
+        }
+        if (sort === 'priceDesc') {
+            hs = hs.sort((a, b) => {
+                const aPrice = Math.min(...(a.rooms?.map(r => r.price) || []));
+                const bPrice = Math.min(...(b.rooms?.map(r => r.price) || []));
+                return (bPrice || 0) - (aPrice || 0);
+            });
+        }
+        return hs;
+    }, [houses, query, priceMin, priceMax, onlyAvailable, sort, amenities]);
 
-    const totalPages = Math.max(1, Math.ceil(filteredRooms.length / perPage));
-    const paginated = filteredRooms.slice((page - 1) * perPage, page * perPage);
+    const totalPages = Math.max(1, Math.ceil(filteredHouses.length / perPage));
+    const paginated = filteredHouses.slice((page - 1) * perPage, page * perPage);
 
     const resetFilters = () => {
         setQuery('');
@@ -74,11 +133,11 @@ export default function RoomsList() {
 
     return (
         <div className="container py-4">
-            <Breadcrumbs items={[{ label: 'Trang chủ', to: '/' }, { label: 'Tìm phòng', active: true }]} />
+            <Breadcrumbs items={[{ label: 'Trang chủ', to: '/' }, { label: 'Tìm nhà trọ', active: true }]} />
 
             <div className="d-flex flex-column gap-2 mb-3 ms-2">
-                <h1 className="h4 fw-semibold mb-0">Danh sách phòng trọ</h1>
-                <div className="text-muted small">Tìm và lọc phòng theo nhu cầu của bạn</div>
+                <h1 className="h4 fw-semibold mb-0">Danh sách nhà trọ</h1>
+                <div className="text-muted small">Tìm và lọc nhà trọ theo nhu cầu của bạn</div>
             </div>
 
             <div className="row">
@@ -86,11 +145,10 @@ export default function RoomsList() {
                     <div className="card filter-card shadow-sm sticky-top">
                         <div className="card-body">
                             <div className="d-flex align-items-center justify-content-between mb-3">
-                                <h5 className="card-title mb-0">Bộ lọc & Tìm kiếm</h5>
+                                <h5 className="card-title mb-0 locc">Bộ lọc & Tìm kiếm</h5>
                                 <button className="btn btn-sm btn-link text-muted" onClick={resetFilters}>Xóa</button>
                             </div>
 
-                            {/* search + view toggle moved into left column */}
                             <div className="mb-3">
                                 <div className="input-group shadow-sm rounded overflow-hidden">
                                     <input
@@ -120,7 +178,6 @@ export default function RoomsList() {
                                     </button>
                                 </div>
 
-                                {/* prettier sort dropdown - prevent shrinking */}
                                 <div className="sort-dropdown ms-2 flex-shrink-0">
                                     <div className="btn-group">
                                         <button
@@ -154,7 +211,7 @@ export default function RoomsList() {
                             </div>
 
                             <div className="mb-3">
-                                <label className="form-label small mb-2">Tiện nghi</label>
+                                <label className="form-label small mb-2">Tiện nghi (Chung của nhà trọ)</label>
                                 <div className="row g-2">
                                     <div className="col-6 col-md-4">
                                         <button type="button" onClick={() => toggleAmenity('wifi')}
@@ -177,7 +234,7 @@ export default function RoomsList() {
                                     <div className="col-6 col-md-4">
                                         <button type="button" onClick={() => toggleAmenity('fridge')}
                                             className={`amenity-chip btn btn-sm w-100 btn-outline-secondary ${amenities.includes('fridge') ? 'active' : ''}`}>
-                                            <i className="fas fa-snowflake me-1" /> Tủ lạnh
+                                            <i className="fas fa-archive me-1" /> Tủ lạnh
                                         </button>
                                     </div>
                                     <div className="col-6 col-md-4">
@@ -209,7 +266,7 @@ export default function RoomsList() {
 
                             <div className="form-check form-switch mb-3">
                                 <input className="form-check-input" type="checkbox" id="onlyAvailable" checked={onlyAvailable} onChange={(e) => { setOnlyAvailable(e.target.checked); setPage(1); }} />
-                                <label className="form-check-label small" htmlFor="onlyAvailable">Chỉ hiện phòng còn trống</label>
+                                <label className="form-check-label small" htmlFor="onlyAvailable">Chỉ hiện nhà trọ còn phòng trống</label>
                             </div>
                         </div>
                     </div>
@@ -217,18 +274,22 @@ export default function RoomsList() {
 
                 <section className="col-12 col-lg-8">
                     <div className="mb-3 d-flex align-items-center justify-content-between">
-                        <div className="text-muted small">Hiển thị {filteredRooms.length} kết quả</div>
+                        <div className="text-muted small">
+                            {loading ? "Đang tải..." : `Hiển thị ${filteredHouses.length} kết quả`}
+                        </div>
                         <div className="d-none d-md-block">
                             <small className="text-muted">Trang {page} / {totalPages}</small>
                         </div>
                     </div>
 
-                    {view === 'map' ? (
+                    {loading ? (
+                        <div className="card p-4 text-center text-muted">Đang tải dữ liệu nhà trọ...</div>
+                    ) : view === 'map' ? (
                         <div className="card shadow-sm mb-4">
                             <div className="ratio ratio-16x9">
                                 <iframe
                                     title="Bản đồ"
-                                    src={`https://www.google.com/maps/embed/v1/search?key=YOUR_KEY&q=${encodeURIComponent('Phòng trọ gần đây')}`}
+                                    src={`https://www.google.com/maps/embed/v1/search?key=YOUR_KEY&q=${encodeURIComponent('Nhà trọ gần đây')}`}
                                     allowFullScreen
                                     loading="lazy"
                                 />
@@ -236,60 +297,19 @@ export default function RoomsList() {
                         </div>
                     ) : (
                         <>
-                            {filteredRooms.length === 0 ? (
-                                <div className="card p-4 text-center text-muted">Không tìm thấy phòng phù hợp.</div>
+                            {filteredHouses.length === 0 ? (
+                                <div className="card p-4 text-center text-muted">Không tìm thấy nhà trọ phù hợp với tiêu chí lọc.</div>
                             ) : (
                                 <>
-                                    {view === 'grid' ? (
-                                        <RoomsGrid roomsOverride={paginated} />
-                                    ) : (
-                                        <div className="list-view">
-                                            {paginated.map((r) => (
-                                                <div key={r.id} className="card mb-3 room-list-item shadow-sm">
-                                                    <div className="row g-0">
-                                                        <div className="col-4 col-md-3">
-                                                            <img src={(r.images && r.images[0]) || 'https://via.placeholder.com/320x200'} alt={r.title} className="img-fluid rounded-start" style={{ height: '100%', objectFit: 'cover' }} />
-                                                        </div>
-                                                        <div className="col-8 col-md-9">
-                                                            <div className="card-body d-flex flex-column h-100">
-                                                                <div className="d-flex justify-content-between">
-                                                                    <h5 className="card-title mb-1">{r.title}</h5>
-                                                                    <div className="text-primary fw-bold">{new Intl.NumberFormat('vi-VN').format(r.price)}₫</div>
-                                                                </div>
-                                                                <p className="text-secondary small mb-2">{r.location || r.address}</p>
+                                    <div className={view === 'grid' ? 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2 mb-4' : 'list-view'}>
+                                        {paginated.map((house) => (
+                                            <div key={house.house_Id} className={view === 'grid' ? 'col' : 'col-12'}>
+                                                {/* Truyền view xuống HouseCard để nó tự xử lý layout list/grid */}
+                                                <HouseCard house={house} view={view} />
+                                            </div>
+                                        ))}
+                                    </div>
 
-                                                                {/* tiện nghi hiển thị trong list view */}
-                                                                <div className="room-amenities mb-2">
-                                                                    {r.properties?.hasWifi && (
-                                                                        <span className="badge bg-light text-muted me-1">
-                                                                            <i className="fas fa-wifi me-1" /> WiFi
-                                                                        </span>
-                                                                    )}
-                                                                    {r.properties?.hasAirConditioner && (
-                                                                        <span className="badge bg-light text-muted me-1">
-                                                                            <i className="fas fa-snowflake me-1" /> Điều hoà
-                                                                        </span>
-                                                                    )}
-                                                                    {r.properties?.hasMezzanine && (
-                                                                        <span className="badge bg-light text-muted me-1">
-                                                                            <i className="fas fa-layer-group me-1" /> Gác xép
-                                                                        </span>
-                                                                    )}
-                                                                </div>
-
-                                                                <div className="mt-auto d-flex justify-content-between align-items-center">
-                                                                    <div className="text-muted small">{r.properties?.bedCount || 1} giường • {r.area ? `${r.area} m²` : ''}</div>
-                                                                    <a href={`/rooms/${r.id}`} className="btn btn-outline-primary btn-sm">Xem chi tiết</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-
-                                    {/* replace inline pagination with reusable component */}
                                     <Pagination page={page} totalPages={totalPages} onPageChange={(p) => setPage(p)} maxButtons={7} showIfSinglePage={true} />
                                 </>
                             )}
@@ -300,5 +320,3 @@ export default function RoomsList() {
         </div>
     );
 }
-
-

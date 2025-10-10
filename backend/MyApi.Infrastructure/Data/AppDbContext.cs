@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyApi.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyApi.Infrastructure.Data
 {
@@ -28,6 +23,7 @@ namespace MyApi.Infrastructure.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<RoomImage> RoomImages { get; set; }
         public DbSet<RoomProperty> RoomProperties { get; set; }
+        public DbSet<UserToken> UserTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

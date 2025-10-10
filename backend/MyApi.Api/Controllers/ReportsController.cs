@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MyApi.Application.DTOs.PaymentDtos;
 using MyApi.Application.DTOs.ReportDtos;
 using MyApi.Domain.Entities;
 using MyApi.Domain.Enums;
@@ -24,7 +25,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReportReadDto>>> GetAll()
         {
-            var reports = await _reportRepository.GetAllAsync();
+            var reports = await _reportRepository.GetAllAsync<ReportReadDto>(_mapper.ConfigurationProvider);
             return Ok(_mapper.Map<IEnumerable<ReportReadDto>>(reports));
         }
 

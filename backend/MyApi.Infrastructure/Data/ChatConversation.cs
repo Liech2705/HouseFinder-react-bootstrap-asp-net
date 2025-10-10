@@ -8,39 +8,35 @@ namespace MyApi.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<ChatConversation> builder)
         {
-            // Table name
             builder.ToTable("ChatConversations");
-
-            // Primary key
             builder.HasKey(cc => cc.Conversation_Id);
 
-            builder.Property(cc => cc.Conversation_Id)
-                   .ValueGeneratedOnAdd();
+            builder.Property(cc => cc.Conversation_Id).ValueGeneratedOnAdd();
+            builder.Property(cc => cc.Last_Message_At).HasDefaultValueSql("GETDATE()");
 
-            // Properties
-            builder.Property(cc => cc.Last_Message_At)
-                   .HasDefaultValueSql("GETDATE()");
-
-            // Relationships
+            // Room
             builder.HasOne(cc => cc.Room)
                    .WithMany(r => r.ChatConversations)
                    .HasForeignKey(cc => cc.Room_Id)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(cc => cc.User)   // Người thuê
+            // User (Renter)
+            builder.HasOne(cc => cc.User)
                    .WithMany(u => u.ChatConversations)
                    .HasForeignKey(cc => cc.User_Id)
                    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(cc => cc.Host)   // Chủ nhà
-                   .WithMany()              // tránh vòng lặp navigation
+            // Host
+            builder.HasOne(cc => cc.Host)
+                   .WithMany(u => u.HostConversations)
                    .HasForeignKey(cc => cc.Host_Id)
                    .OnDelete(DeleteBehavior.Restrict);
 
+            // Messages
             builder.HasMany(cc => cc.ChatMessages)
                    .WithOne(m => m.ChatConversation)
                    .HasForeignKey(m => m.Conversation_Id)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

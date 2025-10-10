@@ -25,8 +25,9 @@ namespace MyApi.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var houses = await _boardingHouseRepository.GetAllAsync();
-            return Ok(_mapper.Map<IEnumerable<BoardingHouseReadDto>>(houses));
+            var houses = await _boardingHouseRepository.GetAllAsync<BoardingHouseReadDto>(_mapper.ConfigurationProvider);
+
+            return Ok(houses);
         }
 
         // GET: api/BoardingHouse/{id}

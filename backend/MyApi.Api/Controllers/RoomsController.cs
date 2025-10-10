@@ -24,7 +24,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RoomReadDto>>> GetAll()
         {
-            var rooms = await _roomRepository.GetAllAsync();
+            var rooms = await _roomRepository.GetAllAsync<RoomReadDto>(_mapper.ConfigurationProvider);
             return Ok(_mapper.Map<IEnumerable<RoomReadDto>>(rooms));
         }
 

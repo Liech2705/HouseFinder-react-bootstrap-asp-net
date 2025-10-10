@@ -10,7 +10,7 @@ namespace MyApi.Application.Mappings
         {
             // Room -> RoomReadDto
             CreateMap<Room, RoomReadDto>()
-                .ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.User.User_Name))
+                .ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.Owner.User_Name))
                 .ForMember(dest => dest.HouseDescription, opt => opt.MapFrom(src => src.BoardingHouse.Description))
                 .ForMember(dest => dest.Reviews, opt => opt.MapFrom(src => src.Reviews))
                 .ForMember(dest => dest.RoomImages, opt => opt.MapFrom(src => src.RoomImages))

@@ -36,7 +36,7 @@ namespace MyApi.API.Controllers
             await _roomPropertyRepository.AddAsync(property);
             await _roomPropertyRepository.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetByRoomId), new { roomId = property.RoomId }, _mapper.Map<RoomPropertyReadDto>(property));
+            return CreatedAtAction(nameof(GetByRoomId), new { roomId = property.Room_Id }, _mapper.Map<RoomPropertyReadDto>(property));
         }
 
         // PUT: api/RoomProperties/5

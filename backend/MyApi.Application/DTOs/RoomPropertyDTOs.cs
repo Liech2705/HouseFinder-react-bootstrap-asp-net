@@ -3,34 +3,49 @@
     // DTO trả dữ liệu cho client
     public class RoomPropertyReadDto
     {
-        public int PropertyId { get; set; }
-        public int RoomId { get; set; }
-        public bool HasAirConditioner { get; set; }
-        public bool HasWifi { get; set; }
-        public int BedCount { get; set; }
-        public bool HasCloset { get; set; }
+        public int Property_Id { get; set; }
+        public int Room_Id { get; set; }
+        public bool Has_AirConditioner { get; set; }
+        public bool Has_Wifi { get; set; }
+        public int Bed_Count { get; set; }
+        public bool Has_Closet { get; set; }
+        public bool Has_Mezzanine { get; set; }
+        public bool Has_Fridge { get; set; }
+        public bool Has_Hot_Water { get; set; }
+        public bool Has_Window { get; set; }
+        public bool Has_Pet { get; set; }
         public string? Note { get; set; }
-        public DateTime UpdateAt { get; set; }
+        public DateTime Update_At { get; set; }
     }
 
     // DTO khi tạo mới thuộc tính phòng
     public class RoomPropertyCreateDto
     {
-        public int RoomId { get; set; }
-        public bool HasAirConditioner { get; set; }
-        public bool HasWifi { get; set; }
-        public int BedCount { get; set; }
-        public bool HasCloset { get; set; }
+        public int Room_Id { get; set; }
+        public bool Has_AirConditioner { get; set; }
+        public bool Has_Wifi { get; set; }
+        public int Bed_Count { get; set; }
+        public bool Has_Closet { get; set; }
+        public bool Has_Mezzanine { get; set; }
+        public bool Has_Fridge { get; set; }
+        public bool Has_Hot_Water { get; set; }
+        public bool Has_Window { get; set; }
+        public bool Has_Pet { get; set; }
         public string? Note { get; set; }
     }
 
     // DTO khi cập nhật thuộc tính phòng
     public class RoomPropertyUpdateDto
     {
-        public bool HasAirConditioner { get; set; }
-        public bool HasWifi { get; set; }
-        public int BedCount { get; set; }
-        public bool HasCloset { get; set; }
+        public bool Has_AirConditioner { get; set; }
+        public bool Has_Wifi { get; set; }
+        public int Bed_Count { get; set; }
+        public bool Has_Closet { get; set; }
+        public bool Has_Mezzanine { get; set; }
+        public bool Has_Fridge { get; set; }
+        public bool Has_Hot_Water { get; set; }
+        public bool Has_Window { get; set; }
+        public bool Has_Pet { get; set; }
         public string? Note { get; set; }
     }
 }

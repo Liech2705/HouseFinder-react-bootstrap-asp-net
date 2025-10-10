@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { logout } from '../api/auth';
+import { logout } from '../api/auth.jsx';
 
 function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,12 +18,13 @@ function Header() {
         checkAuth();
     }, []);
 
+
     const handleLogout = async () => {
         await logout();
         setIsLoggedIn(false);
         setUser(null);
         // Redirect to home page
-        window.location.href = '/';
+        // window.location.href = '/';
     };
 
     return (
@@ -46,7 +47,7 @@ function Header() {
                         </Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link px-2 text-dark" to="/rooms">
+                        <Link className="nav-link px-2 text-dark" to="/houses">
                             Tìm phòng
                         </Link>
                     </li>

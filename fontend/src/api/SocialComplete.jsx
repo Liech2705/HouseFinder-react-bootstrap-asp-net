@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register } from './auth';
+import { register } from './auth.jsx';
 import { jwtDecode } from "jwt-decode";
 
 export default function SocialComplete() {

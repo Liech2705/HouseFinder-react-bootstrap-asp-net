@@ -17,7 +17,7 @@ namespace MyApi.Infrastructure.Repositories
         public async Task<RoomProperty?> GetByRoomIdAsync(int roomId)
         {
             return await _context.RoomProperties
-                .FirstOrDefaultAsync(rp => rp.RoomId == roomId);
+                .FirstOrDefaultAsync(rp => rp.Room_Id == roomId);
         }
     }
 }

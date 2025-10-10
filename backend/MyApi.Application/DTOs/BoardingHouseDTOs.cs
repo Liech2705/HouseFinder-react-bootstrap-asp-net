@@ -7,20 +7,35 @@ namespace MyApi.Application.DTOs.BoardingHouseDtos
     public class BoardingHouseCreateDto
     {
         public int User_Id { get; set; }
-        public string? Description { get; set; }
-        public int? Room_Count { get; set; }
+        public string House_Name { get; set; }
+
+        public string Description { get; set; }
+
         public bool? Is_Elevator { get; set; }
-        public int? Num_Floors { get; set; }
+        public int Electric_Cost { get; set; }
+        public int Water_Cost { get; set; }
+        public string Province { get; set; }
+        public string Commune { get; set; }
+        public string Street { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         public string? Note { get; set; }
+
     }
 
     // Dùng cho PUT/PATCH (cập nhật)
     public class BoardingHouseUpdateDto
     {
+        public string House_Name { get; set; }
         public string? Description { get; set; }
-        public int? Room_Count { get; set; }
         public bool? Is_Elevator { get; set; }
-        public int? Num_Floors { get; set; }
+        public int Electric_Cost { get; set; }
+        public int Water_Cost { get; set; }
+        public string Province { get; set; }
+        public string Commune { get; set; }
+        public string Street { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         public string? Note { get; set; }
         public HouseStatus Status { get; set; }
     }
@@ -30,10 +45,16 @@ namespace MyApi.Application.DTOs.BoardingHouseDtos
     {
         public int House_Id { get; set; }   // Giữ cả get;set; để AutoMapper map
         public int User_Id { get; set; }
+        public string House_Name { get; set; }
         public string? Description { get; set; }
-        public int? Room_Count { get; set; }
         public bool? Is_Elevator { get; set; }
-        public int? Num_Floors { get; set; }
+        public int Electric_Cost { get; set; }
+        public int Water_Cost { get; set; }
+        public string Province { get; set; }
+        public string Commune { get; set; }
+        public string Street { get; set; }
+        public double? Latitude { get; set; }
+        public double? Longitude { get; set; }
         public string? Note { get; set; }
         public HouseStatus Status { get; set; }
         public DateTime? Create_At { get; set; }

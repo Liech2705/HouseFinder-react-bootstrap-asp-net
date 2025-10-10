@@ -13,11 +13,11 @@ namespace MyApi.Application.Mappings
 
             // RoomPropertyCreateDto -> RoomProperty
             CreateMap<RoomPropertyCreateDto, RoomProperty>()
-                .ForMember(dest => dest.UpdateAt, opt => opt.MapFrom(_ => DateTime.UtcNow));
+                .ForMember(dest => dest.Update_At, opt => opt.MapFrom(_ => DateTime.UtcNow));
 
             // RoomPropertyUpdateDto -> RoomProperty
             CreateMap<RoomPropertyUpdateDto, RoomProperty>()
-                .ForMember(dest => dest.UpdateAt, opt => opt.MapFrom(_ => DateTime.UtcNow))
+                .ForMember(dest => dest.Update_At, opt => opt.MapFrom(_ => DateTime.UtcNow))
                 .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
         }
     }

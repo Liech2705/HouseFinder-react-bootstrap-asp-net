@@ -1,14 +1,10 @@
-﻿using MailKit;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using MimeKit;
 using MyApi.Application.DTOs;
 using MyApi.Domain.Entities;
-using MyApi.Domain.Enums;
 using MyApi.Infrastructure.Data;
 using MyApi.Infrastructure.Services;
 using System.Collections.Concurrent;
@@ -144,8 +140,10 @@ namespace MyApi.API.Controllers
         }
 
         [HttpPost("logout")]
-        public IActionResult Logout([FromBody] string token)
+        public IActionResult Logout()
         {
+            var token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
             var storedToken = _context.UserTokens.FirstOrDefault(t => t.Token == token);
             if (storedToken != null)
             {
@@ -203,11 +201,11 @@ namespace MyApi.API.Controllers
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-            new Claim(ClaimTypes.Email, email ?? ""),
-            new Claim(ClaimTypes.Name, name ?? ""),
-            new Claim("picture", picture ?? "")
-        }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                    new Claim(ClaimTypes.Email, email ?? ""),
+                    new Claim(ClaimTypes.Name, name ?? ""),
+                    new Claim("picture", picture ?? "")
+                }),
+
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature
@@ -262,9 +260,9 @@ namespace MyApi.API.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        // Biến dùng để quên mật khẩu
         private static readonly ConcurrentDictionary<string, (string Otp, DateTime Expiry)> _otpStore
                             = new ConcurrentDictionary<string, (string, DateTime)>();
-
 
         // POST: api/auth/sendOtp
         [HttpPost("sendOtp")]

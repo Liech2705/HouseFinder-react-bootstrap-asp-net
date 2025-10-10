@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using MyApi.Application.DTOs.BoardingHouseDtos;
-using MyApi.Application.DTOs.HouseImageDtos;
-using MyApi.Application.DTOs.RoomDtos;
 using MyApi.Domain.Entities;
 using MyApi.Domain.Enums;
 

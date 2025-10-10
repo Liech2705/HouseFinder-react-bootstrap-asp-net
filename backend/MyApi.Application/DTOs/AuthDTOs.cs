@@ -18,4 +18,28 @@ namespace MyApi.Application.DTOs
         public string Email { get; set; } = "Người dùng";
         public string Password { get; set; } = "matkhau123";
     }
+
+
+    public class UserTokenDto
+    {
+        public string Token { get; set; } = string.Empty;
+    }
+
+    public class SentOTPDto
+    {
+        public string Email { get; set; }
+    }
+
+    public class VerifyOtpDto
+    {
+        public string Email { get; set; }
+        public string Otp { get; set; }
+    }
+
+    public class ResetPasswordDto
+    {
+        public string Email { get; set; }
+        public string Otp { get; set; }
+        public string NewPassword { get; set; }
+    }
 }

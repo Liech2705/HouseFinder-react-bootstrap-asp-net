@@ -26,7 +26,7 @@ namespace MyApi.Infrastructure.Data
             b.HasOne(ui => ui.User)
              .WithOne(u => u.UserInfor)
              .HasForeignKey<UserInfor>(ui => ui.User_Id)
-             .OnDelete(DeleteBehavior.Cascade);
+             .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

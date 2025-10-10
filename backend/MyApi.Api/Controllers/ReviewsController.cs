@@ -23,7 +23,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReviewReadDto>>> GetAll()
         {
-            var reviews = await _reviewRepository.GetAllAsync();
+            var reviews = await _reviewRepository.GetAllAsync<ReviewReadDto>(_mapper.ConfigurationProvider);
             return Ok(_mapper.Map<IEnumerable<ReviewReadDto>>(reviews));
         }
 

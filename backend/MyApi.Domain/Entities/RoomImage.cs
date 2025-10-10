@@ -1,8 +1,11 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace MyApi.Domain.Entities
 {
     public class RoomImage
     {
+        [Key]
         public int Image_Id { get; set; }
         public int Room_Id { get; set; }
         public string Image_Url { get; set; } = null!;

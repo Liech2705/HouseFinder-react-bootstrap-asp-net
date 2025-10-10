@@ -1,9 +1,11 @@
 ﻿using MyApi.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyApi.Domain.Entities
 {
     public class CheckBooking
     {
+        [Key]
         public int Check_Id { get; set; }
         public int Booking_Id { get; set; }
         public string Image_Url { get; set; } = null!;

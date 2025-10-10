@@ -23,7 +23,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ChatConversationReadDto>>> GetAll()
         {
-            var conversations = await _chatConversationRepository.GetAllAsync();
+            var conversations = await _chatConversationRepository.GetAllAsync<ChatConversationReadDto>(_mapper.ConfigurationProvider);
             var conversationsDto = _mapper.Map<IEnumerable<ChatConversationReadDto>>(conversations);
             return Ok(conversationsDto);
         }

@@ -1,18 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
+using MyApi.Infrastructure.Data;
+using System.IO;
 
-namespace MyApi.Infrastructure.Data
+public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
 {
-    public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    public AppDbContext CreateDbContext(string[] args)
     {
-        public AppDbContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+        var currentDirectory = Directory.GetCurrentDirectory();
 
-            // ✅ Trùng với connection string trong appsettings.json
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=HouseFinder;Trusted_Connection=True;");
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile(Path.Combine(currentDirectory, "appsettings.json"), optional: false, reloadOnChange: true)
+            .Build();
 
-            return new AppDbContext(optionsBuilder.Options);
-        }
+        var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+        optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+
+        return new AppDbContext(optionsBuilder.Options);
     }
 }

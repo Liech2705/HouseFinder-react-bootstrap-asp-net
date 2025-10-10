@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MyApi.Application.DTOs.CheckBookingDtos;
 using MyApi.Application.DTOs.HouseImageDtos;
 using MyApi.Domain.Entities;
 using MyApi.Domain.Interfaces;
@@ -23,7 +24,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<HouseImageReadDto>>> GetAll()
         {
-            var images = await _houseImageRepository.GetAllAsync();
+            var images = await _houseImageRepository.GetAllAsync<HouseImageReadDto>(_mapper.ConfigurationProvider);
             var imagesDto = _mapper.Map<IEnumerable<HouseImageReadDto>>(images);
             return Ok(imagesDto);
         }

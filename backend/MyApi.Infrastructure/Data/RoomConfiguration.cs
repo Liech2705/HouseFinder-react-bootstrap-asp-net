@@ -29,12 +29,6 @@ namespace MyApi.Infrastructure.Configurations
             builder.Property(r => r.Address)
                    .HasColumnType("nvarchar(max)");
 
-            builder.Property(r => r.Latitude)
-                   .HasColumnType("float");
-
-            builder.Property(r => r.Longitude)
-                   .HasColumnType("float");
-
             builder.Property(r => r.Price)
                    .HasColumnType("int");
 
@@ -47,25 +41,32 @@ namespace MyApi.Infrastructure.Configurations
                    .HasDefaultValueSql("GETDATE()");
 
             // Relationships
-            builder.HasOne(r => r.User)
+            builder.HasOne(r => r.Owner)
                    .WithMany(u => u.Rooms)
                    .HasForeignKey(r => r.Owner_Id)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(r => r.BoardingHouse)
                    .WithMany(bh => bh.Rooms)
                    .HasForeignKey(r => r.House_Id)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.NoAction); // Giữ nguyên
 
             builder.HasMany(r => r.RoomImages)
                    .WithOne(i => i.Room)
                    .HasForeignKey(r => r.Room_Id)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.NoAction); // ✅ OK
 
             builder.HasMany(r => r.ChatConversations)
                    .WithOne(cc => cc.Room)
                    .HasForeignKey(cc => cc.Room_Id)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.NoAction); // ⚠️ sửa lại dòng này
+
+            builder.HasOne(r => r.RoomProperty)
+                   .WithOne(rp => rp.Room)
+                   .HasForeignKey<RoomProperty>(rp => rp.Room_Id)
+                   .OnDelete(DeleteBehavior.NoAction);
+
+
         }
     }
 }

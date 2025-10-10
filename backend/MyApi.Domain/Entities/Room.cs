@@ -22,16 +22,12 @@ namespace MyApi.Domain.Entities
 
         public string Address { get; set; }
 
-        public double? Latitude { get; set; }
-
-        public double? Longitude { get; set; }
-
         public int? Price { get; set; }
         public RoomStatus Status { get; set; } = RoomStatus.visible;
         public DateTime? Created_At { get; set; }
 
         // Navigation
-        public User User { get; set; }
+        public User Owner { get; set; }
         public BoardingHouse BoardingHouse { get; set; }
         public ICollection<RoomImage> RoomImages { get; set; }
         public ICollection<Review> Reviews { get; set; } = new List<Review>();

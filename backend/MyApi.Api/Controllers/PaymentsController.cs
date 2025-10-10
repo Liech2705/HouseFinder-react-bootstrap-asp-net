@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using MyApi.Application.DTOs.NotificationDtos;
 using MyApi.Application.DTOs.PaymentDtos;
 using MyApi.Domain.Entities;
 using MyApi.Domain.Interfaces;
@@ -23,7 +24,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PaymentReadDto>>> GetAll()
         {
-            var payments = await _paymentRepository.GetAllAsync();
+            var payments = await _paymentRepository.GetAllAsync<PaymentReadDto>(_mapper.ConfigurationProvider);
             var paymentsDto = _mapper.Map<IEnumerable<PaymentReadDto>>(payments);
             return Ok(paymentsDto);
         }

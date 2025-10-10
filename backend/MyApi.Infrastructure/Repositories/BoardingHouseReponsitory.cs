@@ -19,6 +19,7 @@ namespace MyApi.Infrastructure.Repositories
         {
             return await _context.BoardingHouses
                                  .Where(h => h.User_Id == userId)
+                                 .Include(u => u.User)
                                  .ToListAsync();
         }
     }

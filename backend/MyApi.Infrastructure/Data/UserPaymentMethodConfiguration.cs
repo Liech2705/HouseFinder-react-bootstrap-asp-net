@@ -41,7 +41,7 @@ namespace MyApi.Infrastructure.Configurations
             builder.HasOne(pm => pm.User)
                    .WithMany(u => u.PaymentMethods)
                    .HasForeignKey(pm => pm.User_Id)
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(pm => pm.Payments)
                    .WithOne(p => p.UserPaymentMethod)

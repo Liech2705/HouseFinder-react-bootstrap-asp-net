@@ -72,25 +72,6 @@
         "tags": [
           "Auth"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "string"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -4286,8 +4267,46 @@
             "type": "integer",
             "format": "int32"
           },
+          "house_Name": {
+            "type": "string",
+            "nullable": true
+          },
           "description": {
             "type": "string",
+            "nullable": true
+          },
+          "is_Elevator": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "electric_Cost": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "water_Cost": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "province": {
+            "type": "string",
+            "nullable": true
+          },
+          "commune": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           },
           "note": {
@@ -4308,8 +4327,46 @@
             "type": "integer",
             "format": "int32"
           },
+          "house_Name": {
+            "type": "string",
+            "nullable": true
+          },
           "description": {
             "type": "string",
+            "nullable": true
+          },
+          "is_Elevator": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "electric_Cost": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "water_Cost": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "province": {
+            "type": "string",
+            "nullable": true
+          },
+          "commune": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           },
           "note": {
@@ -4348,8 +4405,46 @@
       "BoardingHouseUpdateDto": {
         "type": "object",
         "properties": {
+          "house_Name": {
+            "type": "string",
+            "nullable": true
+          },
           "description": {
             "type": "string",
+            "nullable": true
+          },
+          "is_Elevator": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "electric_Cost": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "water_Cost": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "province": {
+            "type": "string",
+            "nullable": true
+          },
+          "commune": {
+            "type": "string",
+            "nullable": true
+          },
+          "street": {
+            "type": "string",
+            "nullable": true
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           },
           "note": {
@@ -5181,21 +5276,36 @@
       "RoomPropertyCreateDto": {
         "type": "object",
         "properties": {
-          "roomId": {
+          "room_Id": {
             "type": "integer",
             "format": "int32"
           },
-          "hasAirConditioner": {
+          "has_AirConditioner": {
             "type": "boolean"
           },
-          "hasWifi": {
+          "has_Wifi": {
             "type": "boolean"
           },
-          "bedCount": {
+          "bed_Count": {
             "type": "integer",
             "format": "int32"
           },
-          "hasCloset": {
+          "has_Closet": {
+            "type": "boolean"
+          },
+          "has_Mezzanine": {
+            "type": "boolean"
+          },
+          "has_Fridge": {
+            "type": "boolean"
+          },
+          "has_Hot_Water": {
+            "type": "boolean"
+          },
+          "has_Window": {
+            "type": "boolean"
+          },
+          "has_Pet": {
             "type": "boolean"
           },
           "note": {
@@ -5208,32 +5318,47 @@
       "RoomPropertyReadDto": {
         "type": "object",
         "properties": {
-          "propertyId": {
+          "property_Id": {
             "type": "integer",
             "format": "int32"
           },
-          "roomId": {
+          "room_Id": {
             "type": "integer",
             "format": "int32"
           },
-          "hasAirConditioner": {
+          "has_AirConditioner": {
             "type": "boolean"
           },
-          "hasWifi": {
+          "has_Wifi": {
             "type": "boolean"
           },
-          "bedCount": {
+          "bed_Count": {
             "type": "integer",
             "format": "int32"
           },
-          "hasCloset": {
+          "has_Closet": {
+            "type": "boolean"
+          },
+          "has_Mezzanine": {
+            "type": "boolean"
+          },
+          "has_Fridge": {
+            "type": "boolean"
+          },
+          "has_Hot_Water": {
+            "type": "boolean"
+          },
+          "has_Window": {
+            "type": "boolean"
+          },
+          "has_Pet": {
             "type": "boolean"
           },
           "note": {
             "type": "string",
             "nullable": true
           },
-          "updateAt": {
+          "update_At": {
             "type": "string",
             "format": "date-time"
           }
@@ -5243,47 +5368,33 @@
       "RoomPropertyUpdateDto": {
         "type": "object",
         "properties": {
-          "hasAirConditioner": {
+          "has_AirConditioner": {
             "type": "boolean"
           },
-          "hasWifi": {
+          "has_Wifi": {
             "type": "boolean"
           },
-          "bedCount": {
+          "bed_Count": {
             "type": "integer",
             "format": "int32"
           },
-          "hasCloset": {
+          "has_Closet": {
             "type": "boolean"
           },
-          "hasMezzanine": {
+          "has_Mezzanine": {
             "type": "boolean"
           },
-          "hasFridge": {
+          "has_Fridge": {
             "type": "boolean"
           },
-          "hasHotWater": {
+          "has_Hot_Water": {
             "type": "boolean"
           },
-          "hasWindow": {
+          "has_Window": {
             "type": "boolean"
           },
-          "hasPet": {
+          "has_Pet": {
             "type": "boolean"
-          },
-          "positionInHouse": {
-            "type": "string",
-            "nullable": true
-          },
-          "occupantCount": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "size": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
           },
           "note": {
             "type": "string",
@@ -5317,16 +5428,6 @@
           },
           "address": {
             "type": "string",
-            "nullable": true
-          },
-          "latitude": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "longitude": {
-            "type": "number",
-            "format": "double",
             "nullable": true
           },
           "price": {
@@ -5391,16 +5492,6 @@
           },
           "address": {
             "type": "string",
-            "nullable": true
-          },
-          "latitude": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "longitude": {
-            "type": "number",
-            "format": "double",
             "nullable": true
           },
           "price": {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { sendOtp, verifyOtp, resetPassword } from "../../api/api";
+import { sendOtp, verifyOtp, resetPassword } from "../../api/api.jsx";
 import { useNavigate, Link } from "react-router-dom";
 
 const steps = [

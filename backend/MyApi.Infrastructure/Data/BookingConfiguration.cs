@@ -54,10 +54,6 @@ namespace MyApi.Infrastructure.Configurations
             builder.HasMany(b => b.CheckBookings)
                    .WithOne(cb => cb.Booking)
                    .HasForeignKey(cb => cb.Booking_Id);
-
-            builder.HasOne(b => b.Review)
-                   .WithOne(rv => rv.Booking)
-                   .HasForeignKey<Review>(rv => rv.Booking_Id);
         }
     }
 }
