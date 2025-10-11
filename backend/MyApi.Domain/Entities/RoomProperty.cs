@@ -6,9 +6,7 @@ namespace MyApi.Domain.Entities
 {
     public class RoomProperty
     {
-        [Key]
         public int Property_Id { get; set; }
-        [ForeignKey("Room")]
         public int Room_Id { get; set; }
         public bool Has_AirConditioner { get; set; }
         public bool Has_Wifi { get; set; }

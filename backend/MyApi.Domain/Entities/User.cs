@@ -6,18 +6,13 @@ namespace MyApi.Domain.Entities
 {
     public class User
     {
-        [Key]
         public int User_Id { get; set; }
 
-        [MaxLength(255)]
         public string User_Name { get; set; }
-
-        [MaxLength(255)]
         public string Email { get; set; }
 
         public string PasswordHash { get; set; }
 
-        [MaxLength(20)]
         public UserRole Role { get; set; } = UserRole.User;
 
         public DateTime? Created_At { get; set; }

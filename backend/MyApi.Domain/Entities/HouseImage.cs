@@ -5,7 +5,6 @@ namespace MyApi.Domain.Entities
 {
     public class HouseImage
     {
-        [Key]
         public int House_Image_Id { get; set; }
         public int House_Id { get; set; }
         public string Image_Url { get; set; } = null!;

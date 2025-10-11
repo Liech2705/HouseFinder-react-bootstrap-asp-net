@@ -4,11 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 public class Review
 {
-    [Key]
     public int Review_Id { get; set; }
     public int User_Id { get; set; }
-
-    [ForeignKey("Booking")] // ✅ Chỉ rõ bên phụ thuộc
     public int Booking_Id { get; set; }
 
     public byte Rating { get; set; }

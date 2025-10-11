@@ -6,19 +6,13 @@ namespace MyApi.Domain.Entities
 {
     public class UserPaymentMethod
     {
-        [Key]
         public int Payment_Method_Id { get; set; }
 
-        [ForeignKey("User")]
         public int User_Id { get; set; }
 
-        [MaxLength(255)]
         public string Account_User_Name { get; set; }
 
-        [MaxLength(255)]
         public string Bank_Account_Number { get; set; }
-
-        [MaxLength(255)]
         public string Bank_Name { get; set; }
 
         public bool? Status { get; set; }

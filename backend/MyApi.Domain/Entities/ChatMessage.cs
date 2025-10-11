@@ -5,7 +5,6 @@ namespace MyApi.Domain.Entities
 {
     public class ChatMessage
     {
-        [Key]
         public int Message_Id { get; set; }
         public int Conversation_Id { get; set; }
         public int User_Id { get; set; }

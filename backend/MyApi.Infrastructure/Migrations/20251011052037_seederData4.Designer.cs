@@ -5,14 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using MyApi.Infrastructure.Data;
 
 #nullable disable
 
 namespace MyApi.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251009125307_add-properties-boardinghouse")]
-    partial class addpropertiesboardinghouse
+    [Migration("20251011052037_seederData4")]
+    partial class seederData4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +38,9 @@ namespace MyApi.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("Create_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -63,8 +66,10 @@ namespace MyApi.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Street")
                         .IsRequired()
@@ -80,7 +85,7 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("BoardingHouses");
+                    b.ToTable("BoardingHouses", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.Booking", b =>
@@ -101,30 +106,28 @@ namespace MyApi.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Created_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int>("Room_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Room_Id1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("User_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("User_Id1")
-                        .HasColumnType("int");
-
                     b.HasKey("Booking_Id");
 
-                    b.HasIndex("Room_Id1");
+                    b.HasIndex("Room_Id");
 
-                    b.HasIndex("User_Id1");
+                    b.HasIndex("User_Id");
 
-                    b.ToTable("Bookings");
+                    b.ToTable("Bookings", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.ChatConversation", b =>
@@ -139,7 +142,9 @@ namespace MyApi.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Last_Message_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int>("Room_Id")
                         .HasColumnType("int");
@@ -155,7 +160,7 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("ChatConversations");
+                    b.ToTable("ChatConversations", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.ChatMessage", b =>
@@ -166,32 +171,29 @@ namespace MyApi.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Message_Id"));
 
-                    b.Property<int>("ChatConversationConversation_Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<int>("Conversation_Id")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Timestamp")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<int>("User_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("User_Id1")
-                        .HasColumnType("int");
-
                     b.HasKey("Message_Id");
 
-                    b.HasIndex("ChatConversationConversation_Id");
+                    b.HasIndex("Conversation_Id");
 
-                    b.HasIndex("User_Id1");
+                    b.HasIndex("User_Id");
 
-                    b.ToTable("ChatMessages");
+                    b.ToTable("ChatMessages", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.CheckBooking", b =>
@@ -205,24 +207,28 @@ namespace MyApi.Infrastructure.Migrations
                     b.Property<int>("Booking_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Booking_Id1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Check")
-                        .HasColumnType("int");
+                    b.Property<string>("Check")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasDefaultValue("CheckIn");
 
                     b.Property<DateTime>("Check_Date")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Image_Url")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Check_Id");
 
-                    b.HasIndex("Booking_Id1");
+                    b.HasIndex("Booking_Id");
 
-                    b.ToTable("CheckBookings");
+                    b.ToTable("CheckBookings", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.HouseImage", b =>
@@ -233,24 +239,24 @@ namespace MyApi.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("House_Image_Id"));
 
-                    b.Property<int>("BoardingHouseHouse_Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("House_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Image_Url")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("Uploaded_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("House_Image_Id");
 
-                    b.HasIndex("BoardingHouseHouse_Id");
+                    b.HasIndex("House_Id");
 
-                    b.ToTable("HouseImages");
+                    b.ToTable("HouseImage", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.Notification", b =>
@@ -262,10 +268,14 @@ namespace MyApi.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Notification_Id"));
 
                     b.Property<DateTime>("Create_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<bool>("Is_Read")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -273,22 +283,24 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasDefaultValue("General");
 
                     b.Property<int>("User_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("User_Id1")
-                        .HasColumnType("int");
-
                     b.HasKey("Notification_Id");
 
-                    b.HasIndex("User_Id1");
+                    b.HasIndex("User_Id");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.Payment", b =>
@@ -305,29 +317,27 @@ namespace MyApi.Infrastructure.Migrations
                     b.Property<int>("Booking_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Booking_Id1")
-                        .HasColumnType("int");
-
                     b.Property<int>("Method_Id")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Paid_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Transaction_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserPaymentMethodPayment_Method_Id")
-                        .HasColumnType("int");
-
                     b.HasKey("Payment_Id");
 
-                    b.HasIndex("Booking_Id1");
+                    b.HasIndex("Booking_Id");
 
-                    b.HasIndex("UserPaymentMethodPayment_Method_Id");
+                    b.HasIndex("Method_Id");
 
                     b.ToTable("Payments");
                 });
@@ -341,34 +351,37 @@ namespace MyApi.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Report_Id"));
 
                     b.Property<DateTime>("Created_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<int>("Reported_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReporterUser_Id")
                         .HasColumnType("int");
 
                     b.Property<int>("Reporter_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Report_Id");
 
-                    b.HasIndex("ReporterUser_Id");
+                    b.HasIndex("Reporter_Id");
 
                     b.ToTable("Reports");
                 });
@@ -386,7 +399,9 @@ namespace MyApi.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("Created_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -401,8 +416,10 @@ namespace MyApi.Infrastructure.Migrations
                     b.Property<int?>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -415,7 +432,7 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.HasIndex("Owner_Id");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Rooms", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.RoomImage", b =>
@@ -428,56 +445,74 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.Property<string>("Image_Url")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("Room_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Room_Id1")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Uploaded_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("Image_Id");
 
-                    b.HasIndex("Room_Id1");
+                    b.HasIndex("Room_Id");
 
-                    b.ToTable("RoomImages");
+                    b.ToTable("RoomImages", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.RoomProperty", b =>
                 {
-                    b.Property<int>("PropertyId")
+                    b.Property<int>("Property_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PropertyId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Property_Id"));
 
-                    b.Property<int>("BedCount")
+                    b.Property<int>("Bed_Count")
                         .HasColumnType("int");
 
-                    b.Property<bool>("HasAirConditioner")
+                    b.Property<bool>("Has_AirConditioner")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("HasCloset")
+                    b.Property<bool>("Has_Closet")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("HasWifi")
+                    b.Property<bool>("Has_Fridge")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Has_Hot_Water")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Has_Mezzanine")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Has_Pet")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Has_Wifi")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Has_Window")
                         .HasColumnType("bit");
 
                     b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("RoomId")
+                    b.Property<int>("Room_Id")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime>("Update_At")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
-                    b.HasKey("PropertyId");
+                    b.HasKey("Property_Id");
 
-                    b.HasIndex("RoomId")
+                    b.HasIndex("Room_Id")
                         .IsUnique();
 
                     b.ToTable("RoomProperties");
@@ -492,7 +527,9 @@ namespace MyApi.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("User_Id"));
 
                     b.Property<DateTime?>("Created_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -503,9 +540,10 @@ namespace MyApi.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Role")
+                    b.Property<string>("Role")
+                        .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("User_Name")
                         .IsRequired()
@@ -514,33 +552,7 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.HasKey("User_Id");
 
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            User_Id = 1,
-                            Email = "admin@gmail.com",
-                            PasswordHash = "admin",
-                            Role = 2,
-                            User_Name = "admin"
-                        },
-                        new
-                        {
-                            User_Id = 2,
-                            Email = "test@gmail.com",
-                            PasswordHash = "123456",
-                            Role = 0,
-                            User_Name = "test"
-                        },
-                        new
-                        {
-                            User_Id = 3,
-                            Email = "host@gmail.com",
-                            PasswordHash = "123456",
-                            Role = 1,
-                            User_Name = "host test"
-                        });
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.UserInfor", b =>
@@ -552,15 +564,13 @@ namespace MyApi.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Infor_Id"));
 
                     b.Property<string>("Avatar")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("Dob")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Phone")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("Update_At")
                         .HasColumnType("datetime2");
@@ -573,21 +583,7 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasIndex("User_Id")
                         .IsUnique();
 
-                    b.ToTable("UserInfors");
-
-                    b.HasData(
-                        new
-                        {
-                            Infor_Id = 1,
-                            Phone = "0123456789",
-                            User_Id = 1
-                        },
-                        new
-                        {
-                            Infor_Id = 2,
-                            Phone = "0987654321",
-                            User_Id = 2
-                        });
+                    b.ToTable("UserInfor", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.UserPaymentMethod", b =>
@@ -614,10 +610,14 @@ namespace MyApi.Infrastructure.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("Create_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<bool?>("Status")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<int>("User_Id")
                         .HasColumnType("int");
@@ -626,7 +626,7 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.HasIndex("User_Id");
 
-                    b.ToTable("UserPaymentMethods");
+                    b.ToTable("UserPaymentMethods", (string)null);
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.UserToken", b =>
@@ -666,21 +666,22 @@ namespace MyApi.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("Created_At")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<byte>("Rating")
-                        .HasColumnType("tinyint");
+                        .HasColumnType("tinyint")
+                        .HasComment("Giá trị từ 1 đến 5");
 
                     b.Property<int?>("Room_Id")
                         .HasColumnType("int");
 
                     b.Property<int>("User_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("User_Id1")
                         .HasColumnType("int");
 
                     b.HasKey("Review_Id");
@@ -690,7 +691,7 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.HasIndex("Room_Id");
 
-                    b.HasIndex("User_Id1");
+                    b.HasIndex("User_Id");
 
                     b.ToTable("Reviews");
                 });
@@ -700,7 +701,7 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithMany("BoardingHouses")
                         .HasForeignKey("User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -710,14 +711,14 @@ namespace MyApi.Infrastructure.Migrations
                 {
                     b.HasOne("MyApi.Domain.Entities.Room", "Room")
                         .WithMany("Bookings")
-                        .HasForeignKey("Room_Id1")
+                        .HasForeignKey("Room_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithMany("Bookings")
-                        .HasForeignKey("User_Id1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Room");
@@ -730,19 +731,19 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasOne("MyApi.Domain.Entities.User", "Host")
                         .WithMany("HostConversations")
                         .HasForeignKey("Host_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("MyApi.Domain.Entities.Room", "Room")
                         .WithMany("ChatConversations")
                         .HasForeignKey("Room_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithMany("ChatConversations")
                         .HasForeignKey("User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Host");
@@ -756,14 +757,14 @@ namespace MyApi.Infrastructure.Migrations
                 {
                     b.HasOne("MyApi.Domain.Entities.ChatConversation", "ChatConversation")
                         .WithMany("ChatMessages")
-                        .HasForeignKey("ChatConversationConversation_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Conversation_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithMany("chatMessages")
-                        .HasForeignKey("User_Id1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("ChatConversation");
@@ -775,8 +776,8 @@ namespace MyApi.Infrastructure.Migrations
                 {
                     b.HasOne("MyApi.Domain.Entities.Booking", "Booking")
                         .WithMany("CheckBookings")
-                        .HasForeignKey("Booking_Id1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Booking_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Booking");
@@ -786,8 +787,8 @@ namespace MyApi.Infrastructure.Migrations
                 {
                     b.HasOne("MyApi.Domain.Entities.BoardingHouse", "BoardingHouse")
                         .WithMany("HouseImages")
-                        .HasForeignKey("BoardingHouseHouse_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("House_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("BoardingHouse");
@@ -797,8 +798,8 @@ namespace MyApi.Infrastructure.Migrations
                 {
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithMany("Notifications")
-                        .HasForeignKey("User_Id1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -808,14 +809,14 @@ namespace MyApi.Infrastructure.Migrations
                 {
                     b.HasOne("MyApi.Domain.Entities.Booking", "Booking")
                         .WithMany("Payments")
-                        .HasForeignKey("Booking_Id1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Booking_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MyApi.Domain.Entities.UserPaymentMethod", "UserPaymentMethod")
                         .WithMany("Payments")
-                        .HasForeignKey("UserPaymentMethodPayment_Method_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Method_Id")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Booking");
@@ -827,8 +828,8 @@ namespace MyApi.Infrastructure.Migrations
                 {
                     b.HasOne("MyApi.Domain.Entities.User", "Reporter")
                         .WithMany("Reports")
-                        .HasForeignKey("ReporterUser_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Reporter_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Reporter");
@@ -839,13 +840,13 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasOne("MyApi.Domain.Entities.BoardingHouse", "BoardingHouse")
                         .WithMany("Rooms")
                         .HasForeignKey("House_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("MyApi.Domain.Entities.User", "Owner")
                         .WithMany("Rooms")
                         .HasForeignKey("Owner_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("BoardingHouse");
@@ -857,8 +858,8 @@ namespace MyApi.Infrastructure.Migrations
                 {
                     b.HasOne("MyApi.Domain.Entities.Room", "Room")
                         .WithMany("RoomImages")
-                        .HasForeignKey("Room_Id1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Room_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Room");
@@ -868,8 +869,8 @@ namespace MyApi.Infrastructure.Migrations
                 {
                     b.HasOne("MyApi.Domain.Entities.Room", "Room")
                         .WithOne("RoomProperty")
-                        .HasForeignKey("MyApi.Domain.Entities.RoomProperty", "RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("MyApi.Domain.Entities.RoomProperty", "Room_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Room");
@@ -880,7 +881,7 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithOne("UserInfor")
                         .HasForeignKey("MyApi.Domain.Entities.UserInfor", "User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -891,7 +892,7 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithMany("PaymentMethods")
                         .HasForeignKey("User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -913,7 +914,7 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasOne("MyApi.Domain.Entities.Booking", "Booking")
                         .WithOne("Review")
                         .HasForeignKey("Review", "Booking_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MyApi.Domain.Entities.Room", null)
@@ -922,8 +923,8 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("User_Id1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Booking");

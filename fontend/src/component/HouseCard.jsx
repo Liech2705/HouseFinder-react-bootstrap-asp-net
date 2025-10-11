@@ -66,8 +66,8 @@ function HouseCard({ house, view }) { // Nhận thêm prop 'view' từ HouseList
     return (
         <article className="card house-card h-100 shadow-sm border border-secondary-subtle">
             {/* ✅ ĐÃ SỬA: Bọc toàn bộ nội dung trừ phần chân thẻ bằng Link */}
-            <Link 
-                to={`/houses/${houseData.house_Id}`} 
+            <Link
+                to={`/houses/${houseData.house_Id}`}
                 className="text-decoration-none text-dark d-flex flex-column h-100"
                 style={{ flexGrow: 1 }} // Cho phép link chiếm hết không gian
             >
@@ -101,7 +101,7 @@ function HouseCard({ house, view }) { // Nhận thêm prop 'view' từ HouseList
                         >
                             Có Thang máy
                         </span>
-                        )}
+                    )}
                 </div>
                 <div className="card-body d-flex flex-column p-3">
                     <h3
@@ -144,7 +144,7 @@ function HouseCard({ house, view }) { // Nhận thêm prop 'view' từ HouseList
                     </div>
                 </div>
             </Link> {/* Kết thúc Link ở đây */}
-            
+
             {/* Vùng tương tác cuối thẻ (không bọc Link) */}
             <div className="d-flex justify-content-between gap-2 p-3 pt-2 border-top">
                 <div className="d-flex align-items-center gap-2">
@@ -159,6 +159,9 @@ function HouseCard({ house, view }) { // Nhận thêm prop 'view' từ HouseList
                     />
                     <span className="fs-8 text-secondary truncate-text">{hostName}</span>
                 </div>
+                <Link to={`/houses/${houseData.house_Id}`} className="btn btn-dark btn-sm btn-dark-custom w-10" aria-label={`Xem chi tiết ${houseData.title}`}>
+                    Xem chi tiết
+                </Link>
             </div>
         </article>
     );

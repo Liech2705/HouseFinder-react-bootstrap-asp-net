@@ -6,10 +6,7 @@ namespace MyApi.Domain.Entities
 {
     public class BoardingHouse
     {
-        [Key]
         public int House_Id { get; set; }
-
-        [ForeignKey("User")]
         public int User_Id { get; set; }
         public string House_Name { get; set; }
         public string Description { get; set; }

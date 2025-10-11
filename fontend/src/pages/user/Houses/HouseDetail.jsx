@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 // ✅ SỬA ĐƯỜNG DẪN: Giả định API ở '../api/room.jsx'
 import { rooms as fetchHouses } from '../../../api/room.jsx';
@@ -329,7 +329,7 @@ function HouseDetail() {
                                             house.latitude && house.longitude
                                                 ? `https://maps.google.com/maps?q=${house.latitude},${house.longitude}&hl=vi&z=16&output=embed`
                                                 : `https://maps.google.com/maps?q=${encodeURIComponent(
-                                                   house.address || house.title
+                                                    house.address || house.title
                                                 )}&hl=vi&z=16&output=embed`
                                         }
                                     />

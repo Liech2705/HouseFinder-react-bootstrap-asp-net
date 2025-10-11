@@ -3,12 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace MyApi.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,8 +20,8 @@ namespace MyApi.Infrastructure.Migrations
                     User_Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Role = table.Column<int>(type: "int", maxLength: 20, nullable: false),
-                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Role = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
@@ -45,8 +43,10 @@ namespace MyApi.Infrastructure.Migrations
                     Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Commune = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Create_At = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Latitude = table.Column<double>(type: "float", nullable: true),
+                    Longitude = table.Column<double>(type: "float", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Create_At = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
@@ -55,8 +55,7 @@ namespace MyApi.Infrastructure.Migrations
                         name: "FK_BoardingHouses_Users_User_Id",
                         column: x => x.User_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "User_Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -66,22 +65,20 @@ namespace MyApi.Infrastructure.Migrations
                     Notification_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     User_Id = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Is_Read = table.Column<bool>(type: "bit", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Create_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    User_Id1 = table.Column<int>(type: "int", nullable: false)
+                    Is_Read = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, defaultValue: "General"),
+                    Create_At = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notifications", x => x.Notification_Id);
                     table.ForeignKey(
-                        name: "FK_Notifications_Users_User_Id1",
-                        column: x => x.User_Id1,
+                        name: "FK_Notifications_Users_User_Id",
+                        column: x => x.User_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "User_Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -92,45 +89,42 @@ namespace MyApi.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Reporter_Id = table.Column<int>(type: "int", nullable: false),
                     Reported_Id = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReporterUser_Id = table.Column<int>(type: "int", nullable: false)
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reports", x => x.Report_Id);
                     table.ForeignKey(
-                        name: "FK_Reports_Users_ReporterUser_Id",
-                        column: x => x.ReporterUser_Id,
+                        name: "FK_Reports_Users_Reporter_Id",
+                        column: x => x.Reporter_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "User_Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserInfors",
+                name: "UserInfor",
                 columns: table => new
                 {
                     Infor_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     User_Id = table.Column<int>(type: "int", nullable: false),
                     Dob = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    Avatar = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Update_At = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserInfors", x => x.Infor_Id);
+                    table.PrimaryKey("PK_UserInfor", x => x.Infor_Id);
                     table.ForeignKey(
-                        name: "FK_UserInfors_Users_User_Id",
+                        name: "FK_UserInfor_Users_User_Id",
                         column: x => x.User_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "User_Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -143,8 +137,8 @@ namespace MyApi.Infrastructure.Migrations
                     Account_User_Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Bank_Account_Number = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Bank_Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: true),
-                    Create_At = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Status = table.Column<bool>(type: "bit", nullable: true, defaultValue: true),
+                    Create_At = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
@@ -153,8 +147,7 @@ namespace MyApi.Infrastructure.Migrations
                         name: "FK_UserPaymentMethods_Users_User_Id",
                         column: x => x.User_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "User_Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -175,29 +168,28 @@ namespace MyApi.Infrastructure.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "HouseImages",
+                name: "HouseImage",
                 columns: table => new
                 {
                     House_Image_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     House_Id = table.Column<int>(type: "int", nullable: false),
-                    Image_Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Uploaded_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BoardingHouseHouse_Id = table.Column<int>(type: "int", nullable: false)
+                    Image_Url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Uploaded_At = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HouseImages", x => x.House_Image_Id);
+                    table.PrimaryKey("PK_HouseImage", x => x.House_Image_Id);
                     table.ForeignKey(
-                        name: "FK_HouseImages_BoardingHouses_BoardingHouseHouse_Id",
-                        column: x => x.BoardingHouseHouse_Id,
+                        name: "FK_HouseImage_BoardingHouses_House_Id",
+                        column: x => x.House_Id,
                         principalTable: "BoardingHouses",
                         principalColumn: "House_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -211,11 +203,9 @@ namespace MyApi.Infrastructure.Migrations
                     Title = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<double>(type: "float", nullable: true),
-                    Longitude = table.Column<double>(type: "float", nullable: true),
                     Price = table.Column<int>(type: "int", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
@@ -224,14 +214,12 @@ namespace MyApi.Infrastructure.Migrations
                         name: "FK_Rooms_BoardingHouses_House_Id",
                         column: x => x.House_Id,
                         principalTable: "BoardingHouses",
-                        principalColumn: "House_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "House_Id");
                     table.ForeignKey(
                         name: "FK_Rooms_Users_Owner_Id",
                         column: x => x.Owner_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "User_Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -243,28 +231,25 @@ namespace MyApi.Infrastructure.Migrations
                     Room_Id = table.Column<int>(type: "int", nullable: false),
                     User_Id = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Check_In_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Check_Out_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Room_Id1 = table.Column<int>(type: "int", nullable: false),
-                    User_Id1 = table.Column<int>(type: "int", nullable: false)
+                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bookings", x => x.Booking_Id);
                     table.ForeignKey(
-                        name: "FK_Bookings_Rooms_Room_Id1",
-                        column: x => x.Room_Id1,
+                        name: "FK_Bookings_Rooms_Room_Id",
+                        column: x => x.Room_Id,
                         principalTable: "Rooms",
                         principalColumn: "Room_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Bookings_Users_User_Id1",
-                        column: x => x.User_Id1,
+                        name: "FK_Bookings_Users_User_Id",
+                        column: x => x.User_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "User_Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -276,7 +261,7 @@ namespace MyApi.Infrastructure.Migrations
                     Room_Id = table.Column<int>(type: "int", nullable: false),
                     User_Id = table.Column<int>(type: "int", nullable: false),
                     Host_Id = table.Column<int>(type: "int", nullable: false),
-                    Last_Message_At = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Last_Message_At = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
@@ -285,20 +270,17 @@ namespace MyApi.Infrastructure.Migrations
                         name: "FK_ChatConversations_Rooms_Room_Id",
                         column: x => x.Room_Id,
                         principalTable: "Rooms",
-                        principalColumn: "Room_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Room_Id");
                     table.ForeignKey(
                         name: "FK_ChatConversations_Users_Host_Id",
                         column: x => x.Host_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "User_Id");
                     table.ForeignKey(
                         name: "FK_ChatConversations_Users_User_Id",
                         column: x => x.User_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "User_Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -308,44 +290,46 @@ namespace MyApi.Infrastructure.Migrations
                     Image_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Room_Id = table.Column<int>(type: "int", nullable: false),
-                    Image_Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Uploaded_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Room_Id1 = table.Column<int>(type: "int", nullable: false)
+                    Image_Url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Uploaded_At = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RoomImages", x => x.Image_Id);
                     table.ForeignKey(
-                        name: "FK_RoomImages_Rooms_Room_Id1",
-                        column: x => x.Room_Id1,
+                        name: "FK_RoomImages_Rooms_Room_Id",
+                        column: x => x.Room_Id,
                         principalTable: "Rooms",
-                        principalColumn: "Room_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Room_Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "RoomProperties",
                 columns: table => new
                 {
-                    PropertyId = table.Column<int>(type: "int", nullable: false)
+                    Property_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoomId = table.Column<int>(type: "int", nullable: false),
-                    HasAirConditioner = table.Column<bool>(type: "bit", nullable: false),
-                    HasWifi = table.Column<bool>(type: "bit", nullable: false),
-                    BedCount = table.Column<int>(type: "int", nullable: false),
-                    HasCloset = table.Column<bool>(type: "bit", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Room_Id = table.Column<int>(type: "int", nullable: false),
+                    Has_AirConditioner = table.Column<bool>(type: "bit", nullable: false),
+                    Has_Wifi = table.Column<bool>(type: "bit", nullable: false),
+                    Bed_Count = table.Column<int>(type: "int", nullable: false),
+                    Has_Closet = table.Column<bool>(type: "bit", nullable: false),
+                    Has_Mezzanine = table.Column<bool>(type: "bit", nullable: false),
+                    Has_Fridge = table.Column<bool>(type: "bit", nullable: false),
+                    Has_Hot_Water = table.Column<bool>(type: "bit", nullable: false),
+                    Has_Window = table.Column<bool>(type: "bit", nullable: false),
+                    Has_Pet = table.Column<bool>(type: "bit", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Update_At = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoomProperties", x => x.PropertyId);
+                    table.PrimaryKey("PK_RoomProperties", x => x.Property_Id);
                     table.ForeignKey(
-                        name: "FK_RoomProperties_Rooms_RoomId",
-                        column: x => x.RoomId,
+                        name: "FK_RoomProperties_Rooms_Room_Id",
+                        column: x => x.Room_Id,
                         principalTable: "Rooms",
-                        principalColumn: "Room_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Room_Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -355,20 +339,19 @@ namespace MyApi.Infrastructure.Migrations
                     Check_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Booking_Id = table.Column<int>(type: "int", nullable: false),
-                    Image_Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Check = table.Column<int>(type: "int", nullable: false),
-                    Check_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Booking_Id1 = table.Column<int>(type: "int", nullable: false)
+                    Image_Url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Check = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false, defaultValue: "CheckIn"),
+                    Check_Date = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CheckBookings", x => x.Check_Id);
                     table.ForeignKey(
-                        name: "FK_CheckBookings_Bookings_Booking_Id1",
-                        column: x => x.Booking_Id1,
+                        name: "FK_CheckBookings_Bookings_Booking_Id",
+                        column: x => x.Booking_Id,
                         principalTable: "Bookings",
                         principalColumn: "Booking_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -381,26 +364,24 @@ namespace MyApi.Infrastructure.Migrations
                     Transaction_Id = table.Column<int>(type: "int", nullable: false),
                     Method_Id = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Paid_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Booking_Id1 = table.Column<int>(type: "int", nullable: false),
-                    UserPaymentMethodPayment_Method_Id = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Paid_At = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Payments", x => x.Payment_Id);
                     table.ForeignKey(
-                        name: "FK_Payments_Bookings_Booking_Id1",
-                        column: x => x.Booking_Id1,
+                        name: "FK_Payments_Bookings_Booking_Id",
+                        column: x => x.Booking_Id,
                         principalTable: "Bookings",
                         principalColumn: "Booking_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Payments_UserPaymentMethods_UserPaymentMethodPayment_Method_Id",
-                        column: x => x.UserPaymentMethodPayment_Method_Id,
+                        name: "FK_Payments_UserPaymentMethods_Method_Id",
+                        column: x => x.Method_Id,
                         principalTable: "UserPaymentMethods",
                         principalColumn: "Payment_Method_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -411,10 +392,9 @@ namespace MyApi.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     User_Id = table.Column<int>(type: "int", nullable: false),
                     Booking_Id = table.Column<int>(type: "int", nullable: false),
-                    Rating = table.Column<byte>(type: "tinyint", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    User_Id1 = table.Column<int>(type: "int", nullable: false),
+                    Rating = table.Column<byte>(type: "tinyint", nullable: false, comment: "Giá trị từ 1 đến 5"),
+                    Comment = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    Created_At = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()"),
                     Room_Id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -425,18 +405,17 @@ namespace MyApi.Infrastructure.Migrations
                         column: x => x.Booking_Id,
                         principalTable: "Bookings",
                         principalColumn: "Booking_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reviews_Rooms_Room_Id",
                         column: x => x.Room_Id,
                         principalTable: "Rooms",
                         principalColumn: "Room_Id");
                     table.ForeignKey(
-                        name: "FK_Reviews_Users_User_Id1",
-                        column: x => x.User_Id1,
+                        name: "FK_Reviews_Users_User_Id",
+                        column: x => x.User_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "User_Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -447,45 +426,23 @@ namespace MyApi.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Conversation_Id = table.Column<int>(type: "int", nullable: false),
                     User_Id = table.Column<int>(type: "int", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ChatConversationConversation_Id = table.Column<int>(type: "int", nullable: false),
-                    User_Id1 = table.Column<int>(type: "int", nullable: false)
+                    Content = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ChatMessages", x => x.Message_Id);
                     table.ForeignKey(
-                        name: "FK_ChatMessages_ChatConversations_ChatConversationConversation_Id",
-                        column: x => x.ChatConversationConversation_Id,
+                        name: "FK_ChatMessages_ChatConversations_Conversation_Id",
+                        column: x => x.Conversation_Id,
                         principalTable: "ChatConversations",
                         principalColumn: "Conversation_Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ChatMessages_Users_User_Id1",
-                        column: x => x.User_Id1,
+                        name: "FK_ChatMessages_Users_User_Id",
+                        column: x => x.User_Id,
                         principalTable: "Users",
-                        principalColumn: "User_Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "User_Id", "Created_At", "Email", "PasswordHash", "Role", "User_Name" },
-                values: new object[,]
-                {
-                    { 1, null, "admin@gmail.com", "admin", 2, "admin" },
-                    { 2, null, "test@gmail.com", "123456", 0, "test" },
-                    { 3, null, "host@gmail.com", "123456", 1, "host test" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "UserInfors",
-                columns: new[] { "Infor_Id", "Avatar", "Dob", "Phone", "Update_At", "User_Id" },
-                values: new object[,]
-                {
-                    { 1, null, null, "0123456789", null, 1 },
-                    { 2, null, null, "0987654321", null, 2 }
+                        principalColumn: "User_Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -494,14 +451,14 @@ namespace MyApi.Infrastructure.Migrations
                 column: "User_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_Room_Id1",
+                name: "IX_Bookings_Room_Id",
                 table: "Bookings",
-                column: "Room_Id1");
+                column: "Room_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_User_Id1",
+                name: "IX_Bookings_User_Id",
                 table: "Bookings",
-                column: "User_Id1");
+                column: "User_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChatConversations_Host_Id",
@@ -519,44 +476,44 @@ namespace MyApi.Infrastructure.Migrations
                 column: "User_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChatMessages_ChatConversationConversation_Id",
+                name: "IX_ChatMessages_Conversation_Id",
                 table: "ChatMessages",
-                column: "ChatConversationConversation_Id");
+                column: "Conversation_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChatMessages_User_Id1",
+                name: "IX_ChatMessages_User_Id",
                 table: "ChatMessages",
-                column: "User_Id1");
+                column: "User_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CheckBookings_Booking_Id1",
+                name: "IX_CheckBookings_Booking_Id",
                 table: "CheckBookings",
-                column: "Booking_Id1");
+                column: "Booking_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HouseImages_BoardingHouseHouse_Id",
-                table: "HouseImages",
-                column: "BoardingHouseHouse_Id");
+                name: "IX_HouseImage_House_Id",
+                table: "HouseImage",
+                column: "House_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notifications_User_Id1",
+                name: "IX_Notifications_User_Id",
                 table: "Notifications",
-                column: "User_Id1");
+                column: "User_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_Booking_Id1",
+                name: "IX_Payments_Booking_Id",
                 table: "Payments",
-                column: "Booking_Id1");
+                column: "Booking_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Payments_UserPaymentMethodPayment_Method_Id",
+                name: "IX_Payments_Method_Id",
                 table: "Payments",
-                column: "UserPaymentMethodPayment_Method_Id");
+                column: "Method_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reports_ReporterUser_Id",
+                name: "IX_Reports_Reporter_Id",
                 table: "Reports",
-                column: "ReporterUser_Id");
+                column: "Reporter_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_Booking_Id",
@@ -570,19 +527,19 @@ namespace MyApi.Infrastructure.Migrations
                 column: "Room_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_User_Id1",
+                name: "IX_Reviews_User_Id",
                 table: "Reviews",
-                column: "User_Id1");
+                column: "User_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoomImages_Room_Id1",
+                name: "IX_RoomImages_Room_Id",
                 table: "RoomImages",
-                column: "Room_Id1");
+                column: "Room_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RoomProperties_RoomId",
+                name: "IX_RoomProperties_Room_Id",
                 table: "RoomProperties",
-                column: "RoomId",
+                column: "Room_Id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -596,8 +553,8 @@ namespace MyApi.Infrastructure.Migrations
                 column: "Owner_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserInfors_User_Id",
-                table: "UserInfors",
+                name: "IX_UserInfor_User_Id",
+                table: "UserInfor",
                 column: "User_Id",
                 unique: true);
 
@@ -622,7 +579,7 @@ namespace MyApi.Infrastructure.Migrations
                 name: "CheckBookings");
 
             migrationBuilder.DropTable(
-                name: "HouseImages");
+                name: "HouseImage");
 
             migrationBuilder.DropTable(
                 name: "Notifications");
@@ -643,7 +600,7 @@ namespace MyApi.Infrastructure.Migrations
                 name: "RoomProperties");
 
             migrationBuilder.DropTable(
-                name: "UserInfors");
+                name: "UserInfor");
 
             migrationBuilder.DropTable(
                 name: "UserTokens");

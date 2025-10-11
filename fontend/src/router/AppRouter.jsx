@@ -13,6 +13,7 @@ import AdminLayout from '../layouts/AdminLayout.jsx';
 import Dashboard from '../pages/admin/Dashboard.jsx';
 import HostelManager from '../pages/admin/HostelManager.jsx';
 import HouseList from '../pages/user/Houses/HouseList.jsx';
+import RoomDetail from '../pages/user/Rooms/RoomDetail.jsx';
 
 
 const AppRouter = () => {
@@ -23,6 +24,7 @@ const AppRouter = () => {
                 <Route path="/" element={<MainLayout><App /></MainLayout>} />
                 <Route path="/houses" element={<MainLayout><HouseList /></MainLayout>} />
                 <Route path="/houses/:id" element={<MainLayout><HouseDetail /></MainLayout>} />
+                <Route path="/houses/:houseId/rooms/:roomId" element={<MainLayout><RoomDetail /></MainLayout>} />
 
                 <Route path="/admin" element={<AdminLayout />}>
                     <Route index element={<Dashboard />} />

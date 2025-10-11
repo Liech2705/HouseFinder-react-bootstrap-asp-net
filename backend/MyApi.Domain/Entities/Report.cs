@@ -5,7 +5,6 @@ namespace MyApi.Domain.Entities
 {
     public class Report
     {
-        [Key]
         public int Report_Id { get; set; }
         public int Reporter_Id { get; set; }      // Người báo cáo
         public int Reported_Id { get; set; }  // Người bị báo cáo

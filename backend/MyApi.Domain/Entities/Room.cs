@@ -6,16 +6,9 @@ namespace MyApi.Domain.Entities
 {
     public class Room
     {
-        [Key]
         public int Room_Id { get; set; }
-
-        [ForeignKey("Owner")]
         public int Owner_Id { get; set; }
-
-        [ForeignKey("BoardingHouse")]
         public int House_Id { get; set; }
-
-        [MaxLength(255)]
         public string Title { get; set; }
 
         public string Description { get; set; }
