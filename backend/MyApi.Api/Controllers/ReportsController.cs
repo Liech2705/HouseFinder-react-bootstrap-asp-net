@@ -25,7 +25,7 @@ namespace MyApi.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReportReadDto>>> GetAll()
         {
-            var reports = await _reportRepository.GetAllAsync<ReportReadDto>(_mapper.ConfigurationProvider);
+            var reports = await _reportRepository.GetReportsWithNamesAsync(_mapper.ConfigurationProvider);
             return Ok(_mapper.Map<IEnumerable<ReportReadDto>>(reports));
         }
 
@@ -55,13 +55,19 @@ namespace MyApi.API.Controllers
             return Ok(_mapper.Map<IEnumerable<ReportReadDto>>(reports));
         }
 
-        // GET: api/Reports/status/Pending
-        [HttpGet("status/{status}")]
-        public async Task<ActionResult<IEnumerable<ReportReadDto>>> GetByStatus(ReportStatus status)
+        // PUT: api/Reports/status/5
+        [HttpPut("status/{id}")]
+        public async Task<IActionResult> UpdateStatus(int id, [FromBody] string newStatus)
         {
-            var reports = await _reportRepository.GetByStatusAsync(status);
-            return Ok(_mapper.Map<IEnumerable<ReportReadDto>>(reports));
+            if (!Enum.TryParse<ReportStatus>(newStatus, true, out var statusEnum))
+                return BadRequest("Trạng thái không hợp lệ.");
+
+            var success = await _reportRepository.UpdateStatusAsync(id, statusEnum);
+            if (!success) return NotFound("Không tìm thấy báo cáo.");
+
+            return Ok(new { message = $"Đã cập nhật trạng thái báo cáo thành {statusEnum}" });
         }
+
 
         // GET: api/Reports/type/Spam
         [HttpGet("type/{type}")]

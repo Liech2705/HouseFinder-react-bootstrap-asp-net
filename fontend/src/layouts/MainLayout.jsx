@@ -1,5 +1,5 @@
-import Header from '../component/Header.jsx'
-import Footer from '../component/Footer.jsx'
+import Header from '../components/Header.jsx'
+import Footer from '../components/Footer.jsx'
 
 export default function MainLayout({ children }) {
     return (

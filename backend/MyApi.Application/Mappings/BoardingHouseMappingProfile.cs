@@ -22,6 +22,9 @@ namespace MyApi.Application.Mappings
 
             // BoardingHouseUpdateDto -> BoardingHouse
             CreateMap<BoardingHouseUpdateDto, BoardingHouse>();
+
+            CreateMap<statusHouse, BoardingHouse>()
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status));
         }
     }
 }

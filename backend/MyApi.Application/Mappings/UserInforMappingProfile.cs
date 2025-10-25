@@ -9,8 +9,7 @@ namespace MyApi.Application.Mappings
         public UserInforMappingProfile()
         {
             // UserInfor -> UserInforReadDto
-            CreateMap<UserInfor, UserInforReadDto>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.User_Name));
+            CreateMap<UserInfor, UserInforReadDto>();
 
             // UserInforCreateDto -> UserInfor
             CreateMap<UserInforCreateDto, UserInfor>()

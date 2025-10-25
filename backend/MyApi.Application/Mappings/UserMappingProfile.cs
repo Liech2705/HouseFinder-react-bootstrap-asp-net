@@ -11,8 +11,7 @@ namespace MyApi.Application.Mappings
             // User -> UserReadDto (kèm UserInfor và BoardingHouses)
             CreateMap<User, UserReadDto>()
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role))
-                .ForMember(dest => dest.UserInfor, opt => opt.MapFrom(src => src.UserInfor))
-                .ForMember(dest => dest.BoardingHouses, opt => opt.MapFrom(src => src.BoardingHouses));
+                .ForMember(dest => dest.UserInfor, opt => opt.MapFrom(src => src.UserInfor));
 
             // UserCreateDto -> User
             CreateMap<UserCreateDto, User>()
@@ -22,6 +21,9 @@ namespace MyApi.Application.Mappings
             // UserUpdateDto -> User
             CreateMap<UserUpdateDto, User>()
                 .ForMember(dest => dest.PasswordHash, opt => opt.Ignore()); // hash nếu đổi pass
+
+            CreateMap<User, LockedUser>();
+            CreateMap<User, UnlockUser>();
         }
     }
 }

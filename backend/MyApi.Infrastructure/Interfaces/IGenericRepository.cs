@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using System.Linq.Expressions;
 
 namespace MyApi.Infrastructure.Interfaces

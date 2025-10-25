@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using MyApi.Domain.Entities;
 using MyApi.Application.DTOs.ReportDtos;
+using MyApi.Domain.Entities;
 using MyApi.Domain.Enums;
 
 namespace MyApi.Application.Mappings
@@ -10,7 +10,11 @@ namespace MyApi.Application.Mappings
         public ReportMappingProfile()
         {
             // Report -> ReportReadDto
-            CreateMap<Report, ReportReadDto>();
+            CreateMap<Report, ReportReadDto>()
+                .ForMember(dest => dest.Reporter_Name, opt => opt.MapFrom(src => src.Reporter.User_Name))
+                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type.ToString()))
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+                .ForMember(dest => dest.Reported_Title, opt => opt.Ignore()); // Tự xử lý riêng phần này
 
             // ReportCreateDto -> Report
             CreateMap<ReportCreateDto, Report>()

@@ -28,10 +28,23 @@ namespace MyApi.Application.DTOs.UserDtos
         public string? User_Name { get; set; }
         public string? Email { get; set; }
         public UserRole Role { get; set; }
+        public DateTime? Lock_Until { get; set; }
+        public string? Reason { get; set; }
         public DateTime? Created_At { get; set; }
 
         // Thông tin chi tiết kèm theo (nếu cần hiển thị)
         public UserInforReadDto UserInfor { get; set; } = new UserInforReadDto();
         public ICollection<BoardingHouseReadDto> BoardingHouses { get; set; } = new List<BoardingHouseReadDto>();
+    }
+
+    public class LockedUser
+    {
+        public DateTime Lock_Until { get; set; }
+        public string? Reason { get; set; }
+    }
+
+    public class UnlockUser
+    {
+        public string? Reason { get; set; }
     }
 }

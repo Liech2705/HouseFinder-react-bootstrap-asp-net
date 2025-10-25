@@ -27,7 +27,5 @@
         public string? Avatar { get; set; }
         public DateTime? Update_At { get; set; }
 
-        // Optional: nếu muốn trả kèm tên user
-        public string? UserName { get; set; }
     }
 }

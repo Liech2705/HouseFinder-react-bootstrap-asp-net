@@ -1,5 +1,4 @@
 ﻿using MyApi.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace MyApi.Domain.Entities
 {

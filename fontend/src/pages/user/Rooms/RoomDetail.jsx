@@ -1,8 +1,8 @@
 import { useMemo, useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 import { rooms as fetchHouses } from '../../../api/room.jsx';
-import StarRating from '../../../component/StarRating.jsx';
-import Breadcrumbs from '../../../component/Breadcrumbs.jsx';
+import StarRating from '../../../components/StarRating.jsx';
+import Breadcrumbs from '../../../components/Breadcrumbs.jsx';
 
 function RoomDetail() {
     // Trích xuất cả houseId và roomId từ URL
@@ -14,7 +14,7 @@ function RoomDetail() {
     const [loading, setLoading] = useState(true);
     const placeholder = 'https://s3.tech12h.com/sites/default/files/styles/inbody400/public/field/image/no-image-available.jpg';
     // Sửa lỗi cú pháp: Thêm tên biến và giá trị khởi tạo cho useState (ảnh được chọn)
-    const [selectedImage, setSelectedImage] = useState(placeholder); 
+    const [selectedImage, setSelectedImage] = useState(placeholder);
 
 
     // 1. Fetch dữ liệu House (Hook 1)
@@ -30,8 +30,8 @@ function RoomDetail() {
             }
         };
         loadData();
-    // Sửa lỗi Dependency Array: useEffect gọi API fetch data chỉ nên chạy MỘT LẦN khi component mount
-    }, []); 
+        // Sửa lỗi Dependency Array: useEffect gọi API fetch data chỉ nên chạy MỘT LẦN khi component mount
+    }, []);
 
     // 2. Tìm đối tượng House và Room dựa trên houseId và roomId (Hook 2 - useMemo)
     const { house, room } = useMemo(() => {
@@ -46,15 +46,15 @@ function RoomDetail() {
         const foundRoom = foundHouse.rooms.find((r) => String(r.room_Id) === String(roomId));
 
         return { house: foundHouse, room: foundRoom };
-    // Sửa lỗi Dependency Array: useMemo phải phụ thuộc vào housesData, houseId, và roomId
+        // Sửa lỗi Dependency Array: useMemo phải phụ thuộc vào housesData, houseId, và roomId
     }, [housesData, houseId, roomId]);
 
     // --- Tính toán dữ liệu hiển thị của Room ---
-    
+
     // Sửa lỗi cú pháp: Thay | thành || trong toán tử nullish coalescing
-    const reviews = room?.reviews || []; 
+    const reviews = room?.reviews || [];
     const images = room?.roomImages?.map(img => img.imageUrl) || [placeholder];
-    
+
     // Tính rating trung bình CỦA PHÒNG NÀY
     const averageRating = reviews.length
         ? +(reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)
@@ -64,11 +64,11 @@ function RoomDetail() {
     const priceFormatted = room?.price
         ? `${room.price.toLocaleString('vi-VN')} ₫/tháng`
         : 'Liên hệ';
-    
+
     // Trạng thái phòng (Giả định 1 = còn trống)
     const isAvailable = room?.status === 1;
-    const roomStatus = isAvailable? 'Còn trống' : 'Đã thuê/Hết phòng';
-    const statusColor = isAvailable? 'success' : 'secondary';
+    const roomStatus = isAvailable ? 'Còn trống' : 'Đã thuê/Hết phòng';
+    const statusColor = isAvailable ? 'success' : 'secondary';
 
 
     // Trích xuất tiện ích (Hợp nhất tiện ích phòng và tiện ích nhà trọ)
@@ -78,7 +78,7 @@ function RoomDetail() {
         'has_Mezzanine': 'Gác xép', 'has_Hot_Water': 'Nước nóng', 'has_Pet': 'Thú cưng',
         'has_Fridge': 'Tủ lạnh', 'has_Window': 'Cửa sổ'
     };
-    
+
     // 1. Tiện ích từ thuộc tính phòng
     const props = room?.roomProperty;
     if (props) {
@@ -105,9 +105,9 @@ function RoomDetail() {
         if (images.length > 0 && selectedImage !== images[0]) {
             setSelectedImage(images[0]); // Đặt ảnh đầu tiên
         }
-    // Sửa lỗi Dependency Array: Phụ thuộc vào mảng images và selectedImage
-    // images có thể thay đổi khi data load xong. selectedImage thay đổi để tránh loop vô hạn
-    }, [images]); 
+        // Sửa lỗi Dependency Array: Phụ thuộc vào mảng images và selectedImage
+        // images có thể thay đổi khi data load xong. selectedImage thay đổi để tránh loop vô hạn
+    }, [images]);
 
 
     // --- CÁC ĐIỀU KIỆN RETURN SỚM ---
@@ -154,7 +154,7 @@ function RoomDetail() {
             </main>
         );
     }
-    
+
     // --- KHAI BÁO BREADCRUMBS CUỐI CÙNG TRƯỚC RENDER CHÍNH ---
     // Hoàn thiện Breadcrumbs data sau khi đã có house và room
     const breadcrumbItems = [
@@ -196,7 +196,7 @@ function RoomDetail() {
                                 loading="lazy"
                             />
                             <span className={`position-absolute top-0 end-0 m-2 badge rounded-pill text-white bg-${statusColor}`}
-                                >
+                            >
                                 {roomStatus}
                             </span>
                         </div>
@@ -211,7 +211,7 @@ function RoomDetail() {
                                             key={idx}
                                             type="button"
                                             // Đã sửa: So sánh với selectedImage
-                                            className={`gallery-thumb btn p-0 ${selectedImage === url? 'active' : ''}`} 
+                                            className={`gallery-thumb btn p-0 ${selectedImage === url ? 'active' : ''}`}
                                             onClick={() => setSelectedImage(url)} // Đã sửa: Sử dụng setSelectedImage
                                         >
                                             <img src={url} alt={`thumb-${idx + 1}`} className="gallery-thumb-img" style={{ width: '64px', height: '64px', objectFit: 'cover' }} />

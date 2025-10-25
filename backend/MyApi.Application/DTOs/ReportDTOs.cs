@@ -7,11 +7,13 @@ namespace MyApi.Application.DTOs.ReportDtos
     {
         public int Report_Id { get; set; }
         public int Reporter_Id { get; set; }
+        public string Reporter_Name { get; set; } = string.Empty;
         public int Reported_Id { get; set; }
-        public ReportType Type { get; set; }
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public ReportStatus Status { get; set; }
+        public string Reported_Title { get; set; } = string.Empty;
+        public string Type { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
         public DateTime Created_At { get; set; }
     }
 

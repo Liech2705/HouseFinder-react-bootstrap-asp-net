@@ -130,6 +130,7 @@ builder.Services.AddScoped<IRoomImageRepository, RoomImageRepository>();
 builder.Services.AddScoped<IUserPaymentMethodRepository, UserPaymentMethodRepository>();
 builder.Services.AddScoped<IRoomPropertyRepository, RoomPropertyRepository>();
 builder.Services.AddScoped<IUserInforRepository, UserInforRepository>();
+builder.Services.AddScoped<IFavoriteHouseRepository, FavoriteHouseRepository>();
 
 builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
 
@@ -155,6 +156,7 @@ builder.Services.AddSingleton<IMapper>(sp =>
         cfg.AddMaps(typeof(RoomPropertyMappingProfile).Assembly);
         cfg.AddMaps(typeof(UserInforMappingProfile).Assembly);
         cfg.AddMaps(typeof(UserPaymentMethodMappingProfile).Assembly);
+        cfg.AddMaps(typeof(FavoriteHouseMappingProfile).Assembly);
 
     }, loggerFactory);
 
@@ -164,12 +166,15 @@ builder.Services.AddSingleton<IMapper>(sp =>
 // Thêm CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
+    options.AddPolicy("AllowReactApp",
         policy =>
         {
-            policy.AllowAnyOrigin()
+            policy.WithOrigins(
+                    "http://localhost:5173",
+                    "https://localhost:5173")
                   .AllowAnyHeader()
-                  .AllowAnyMethod();
+                  .AllowAnyMethod()
+                  .AllowCredentials();
         });
 });
 
@@ -182,16 +187,14 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasherService>();
-    UserSeeder.Seed(context, hasher);
+    DataSeeder.Seed(context, hasher);
 }
 
-// Dùng CORS
-app.UseCors("AllowAll");
+app.UseHttpsRedirection();
 
 app.UseRouting();
-// use Auth
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseCors("AllowReactApp");
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -200,8 +203,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
+// use Auth
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

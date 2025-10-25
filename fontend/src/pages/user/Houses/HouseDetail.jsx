@@ -1,18 +1,17 @@
 import { useMemo, useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-// ✅ SỬA ĐƯỜNG DẪN: Giả định API ở '../api/room.jsx'
-import { rooms as fetchHouses } from '../../../api/room.jsx';
-// ✅ SỬA ĐƯỜNG DẪN: Giả định các component cùng cấp ở './StarRating.jsx'
-import StarRating from '../../../component/StarRating.jsx';
-import Breadcrumbs from '../../../component/Breadcrumbs.jsx';
-import HouseCard from '../../../component/HouseCard.jsx'; // Dùng lại HouseCard
+import { rooms as fetchHouses, getFavorite, postFavorite } from '../../../api/api.jsx';
+import StarRating from '../../../components/StarRating.jsx';
+import Breadcrumbs from '../../../components/Breadcrumbs.jsx';
 
 function HouseDetail() {
     // Đổi tên biến: id trong URL giờ là houseId
     const { id: houseId } = useParams();
     const navigate = useNavigate();
+    const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : null;
 
     const [housesData, setHousesData] = useState([]);
+    const [isFavorite, setIsFavorite] = useState(false);
     const [loading, setLoading] = useState(true);
     const placeholder = 'https://s3.tech12h.com/sites/default/files/styles/inbody400/public/field/image/no-image-available.jpg';
 
@@ -29,9 +28,27 @@ function HouseDetail() {
                 setLoading(false);
             }
         };
+        const checkFavorite = async () => {
+            try {
+                const res = await getFavorite(userId, houseId);
+                setIsFavorite(res);
+            } catch (err) {
+                console.error('Error checking favorite:', err);
+            }
+        };
+        if (houseId) checkFavorite();
         loadData();
-    }, []);
+    }, [houseId]);
 
+    // Hàm toggle yêu thích
+    const toggleFavorite = async () => {
+        try {
+            await postFavorite(userId, houseId);
+            setIsFavorite(prev => !prev);
+        } catch (err) {
+            console.error('Error toggling favorite:', err);
+        }
+    };
     // 2. Tìm đối tượng House dựa trên houseId (Hook 2)
     const house = useMemo(() => {
         if (!housesData || housesData.length === 0) return null;
@@ -152,10 +169,22 @@ function HouseDetail() {
                                 className="gallery-cover-image"
                                 loading="lazy"
                             />
-                            <span className={`position-absolute top-0 end-0 m-2 badge rounded-pill text-white bg-${statusColor}`}>
-                                {houseStatus} ({availableRoomsCount}/{rooms.length})
-                            </span>
+
+                            <div className="position-absolute top-0 end-0 m-2 d-flex align-items-center gap-2">
+                                {/* Trạng thái nhà trọ */}
+                                <span className={`badge rounded-pill text-white bg-${statusColor}`}>
+                                    {houseStatus} ({availableRoomsCount}/{rooms.length})
+                                </span>
+
+                                {/* Icon yêu thích */}
+                                <i
+                                    className={`fa${isFavorite ? 's' : 'r'} fa-heart fs-3 text-danger cursor-pointer`}
+                                    onClick={toggleFavorite}
+                                    title={isFavorite ? 'Bỏ yêu thích' : 'Thêm vào yêu thích'}
+                                ></i>
+                            </div>
                         </div>
+
 
                         {images.length > 1 && (
                             <>
@@ -378,6 +407,16 @@ function HouseDetail() {
                 }
                 .fs-8 { font-size: 0.85rem; }
                 .fs-9 { font-size: 0.75rem; }
+                .cursor-pointer {
+                cursor: pointer;
+                }
+
+                .gallery-cover-image {
+                width: 100%;
+                height: auto;
+                border-radius: 0.5rem;
+                }
+
             `}</style>
         </main>
     );

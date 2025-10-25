@@ -29,5 +29,6 @@ namespace MyApi.Domain.Entities
         public User User { get; set; }
         public ICollection<Room> Rooms { get; set; }
         public ICollection<HouseImage> HouseImages { get; set; }
+        public ICollection<FavoriteHouse> FavoriteHouses { get; set; }
     }
 }

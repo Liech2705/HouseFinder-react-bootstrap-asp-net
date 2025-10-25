@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using MyApi.Application.DTOs.BoardingHouseDtos;
 using MyApi.Domain.Entities;
@@ -6,6 +8,7 @@ using MyApi.Domain.Interfaces;
 
 namespace MyApi.Api.Controllers
 {
+    
     [ApiController]
     [Route("api/[controller]")]
     public class BoardingHouseController : ControllerBase
@@ -20,7 +23,7 @@ namespace MyApi.Api.Controllers
             _boardingHouseRepository = boardingHouseRepository;
             _mapper = mapper;
         }
-
+        [AllowAnonymous]
         // GET: api/BoardingHouse
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -29,7 +32,7 @@ namespace MyApi.Api.Controllers
 
             return Ok(houses);
         }
-
+        [AllowAnonymous]
         // GET: api/BoardingHouse/{id}
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
@@ -39,7 +42,7 @@ namespace MyApi.Api.Controllers
 
             return Ok(_mapper.Map<BoardingHouseReadDto>(house));
         }
-
+        [AllowAnonymous]
         // GET: api/BoardingHouse/user/{userId}
         [HttpGet("user/{userId:int}")]
         public async Task<IActionResult> GetByUser(int userId)
@@ -47,7 +50,7 @@ namespace MyApi.Api.Controllers
             var houses = await _boardingHouseRepository.GetByUserIdAsync(userId);
             return Ok(_mapper.Map<IEnumerable<BoardingHouseReadDto>>(houses));
         }
-
+        [Authorize(Roles = "Admin,Host")]
         // POST: api/BoardingHouse
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] BoardingHouseCreateDto dto)
@@ -77,6 +80,7 @@ namespace MyApi.Api.Controllers
         }
 
         // DELETE: api/BoardingHouse/{id}
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -87,6 +91,26 @@ namespace MyApi.Api.Controllers
             await _boardingHouseRepository.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        //[Authorize(Roles = "Admin")]
+        [HttpPut("hide/{id:int}")]
+        public async Task<IActionResult> HidenHouse(int id)
+        {
+            var house = await _boardingHouseRepository.HidenHouseAsync(id);
+            if (house == null) return NotFound(new { message = "Boarding house not found" });
+
+            return Ok(_mapper.Map<BoardingHouseReadDto>(house));
+        }
+
+        //[Authorize(Roles = "Admin")]
+        [HttpPut("visible/{id:int}")]
+        public async Task<IActionResult> VisibleHouse(int id)
+        {
+            var house = await _boardingHouseRepository.VisibleHouseAsync(id);
+            if (house == null) return NotFound(new { message = "Boarding house not found" });
+
+            return Ok(_mapper.Map<BoardingHouseReadDto>(house));
         }
     }
 }

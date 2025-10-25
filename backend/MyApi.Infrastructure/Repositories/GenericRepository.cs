@@ -18,7 +18,7 @@ namespace MyApi.Infrastructure.Repositories
             _dbSet = _context.Set<T>();
         }
 
-        public async Task<IEnumerable<TDto>> GetAllAsync<TDto>(IConfigurationProvider mapperConfig)
+        public virtual async Task<IEnumerable<TDto>> GetAllAsync<TDto>(IConfigurationProvider mapperConfig)
         {
             return await _dbSet.ProjectTo<TDto>(mapperConfig).ToListAsync();
         }

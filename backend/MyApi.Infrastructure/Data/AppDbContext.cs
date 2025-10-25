@@ -24,6 +24,7 @@ namespace MyApi.Infrastructure.Data
         public DbSet<RoomImage> RoomImages { get; set; }
         public DbSet<RoomProperty> RoomProperties { get; set; }
         public DbSet<UserToken> UserTokens { get; set; }
+        public DbSet<FavoriteHouse> FavoriteHouses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

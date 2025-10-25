@@ -24,7 +24,7 @@ function Header() {
         setIsLoggedIn(false);
         setUser(null);
         // Redirect to home page
-        // window.location.href = '/';
+        window.location.href = '/';
     };
 
     return (
@@ -98,7 +98,7 @@ function Header() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link className="dropdown-item" to="/favorites">
+                                    <Link className="dropdown-item" to="/favorite">
                                         <i className="bi bi-heart me-2"></i>
                                         Yêu thích
                                     </Link>

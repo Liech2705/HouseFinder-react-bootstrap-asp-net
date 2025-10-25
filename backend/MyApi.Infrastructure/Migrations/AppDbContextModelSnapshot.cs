@@ -228,6 +228,40 @@ namespace MyApi.Infrastructure.Migrations
                     b.ToTable("CheckBookings", (string)null);
                 });
 
+            modelBuilder.Entity("MyApi.Domain.Entities.FavoriteHouse", b =>
+                {
+                    b.Property<int>("Favorite_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Favorite_Id"));
+
+                    b.Property<DateTime>("Created_At")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("House_Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsFavorite")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("Room_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Favorite_Id");
+
+                    b.HasIndex("House_Id");
+
+                    b.HasIndex("Room_Id");
+
+                    b.HasIndex("User_Id");
+
+                    b.ToTable("FavoriteHouse", (string)null);
+                });
+
             modelBuilder.Entity("MyApi.Domain.Entities.HouseImage", b =>
                 {
                     b.Property<int>("House_Image_Id")
@@ -533,9 +567,16 @@ namespace MyApi.Infrastructure.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<DateTime?>("Lock_Until")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reason")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Role")
                         .IsRequired()
@@ -780,6 +821,31 @@ namespace MyApi.Infrastructure.Migrations
                     b.Navigation("Booking");
                 });
 
+            modelBuilder.Entity("MyApi.Domain.Entities.FavoriteHouse", b =>
+                {
+                    b.HasOne("MyApi.Domain.Entities.BoardingHouse", "BoardingHouse")
+                        .WithMany("FavoriteHouses")
+                        .HasForeignKey("House_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MyApi.Domain.Entities.Room", "Room")
+                        .WithMany("FavoriteHouse")
+                        .HasForeignKey("Room_Id");
+
+                    b.HasOne("MyApi.Domain.Entities.User", "User")
+                        .WithMany("FavoriteHouses")
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BoardingHouse");
+
+                    b.Navigation("Room");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MyApi.Domain.Entities.HouseImage", b =>
                 {
                     b.HasOne("MyApi.Domain.Entities.BoardingHouse", "BoardingHouse")
@@ -931,6 +997,8 @@ namespace MyApi.Infrastructure.Migrations
 
             modelBuilder.Entity("MyApi.Domain.Entities.BoardingHouse", b =>
                 {
+                    b.Navigation("FavoriteHouses");
+
                     b.Navigation("HouseImages");
 
                     b.Navigation("Rooms");
@@ -957,6 +1025,8 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.Navigation("ChatConversations");
 
+                    b.Navigation("FavoriteHouse");
+
                     b.Navigation("Reviews");
 
                     b.Navigation("RoomImages");
@@ -972,6 +1042,8 @@ namespace MyApi.Infrastructure.Migrations
                     b.Navigation("Bookings");
 
                     b.Navigation("ChatConversations");
+
+                    b.Navigation("FavoriteHouses");
 
                     b.Navigation("HostConversations");
 

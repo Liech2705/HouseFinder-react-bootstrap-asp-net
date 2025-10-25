@@ -6,7 +6,7 @@ using System;
 
 namespace MyApi.Infrastructure.Seeders
 {
-    public static class UserSeeder
+    public static class DataSeeder
     {
         public static void Seed(AppDbContext context, IPasswordHasherService passwordHasher)
         {
@@ -191,6 +191,75 @@ namespace MyApi.Infrastructure.Seeders
                 context.RoomProperties.AddRange(roomProperties);
                 context.SaveChanges();
             }
+
+            if (!context.Reports.Any())
+            {
+                var random = new Random();
+                var users = context.Users.ToList();
+                var houses = context.BoardingHouses.ToList();
+                var rooms = context.Rooms.ToList();
+                var reviews = context.Reviews.ToList();
+
+                var reports = new List<Report>();
+
+                // Báo cáo người dùng
+                reports.Add(new Report
+                {
+                    Reporter_Id = users[1].User_Id,
+                    Reported_Id = users[2].User_Id,
+                    Type = ReportType.User,
+                    Title = "Người dùng có hành vi spam",
+                    Description = "Người này gửi nhiều tin nhắn làm phiền.",
+                    Status = ReportStatus.Pending,
+                    Created_At = DateTime.Now.AddDays(-3)
+                });
+
+                // Báo cáo nhà trọ
+                if (houses.Any())
+                {
+                    reports.Add(new Report
+                    {
+                        Reporter_Id = users[1].User_Id,
+                        Reported_Id = houses[random.Next(houses.Count)].House_Id,
+                        Type = ReportType.House,
+                        Title = "Nhà trọ không như mô tả",
+                        Description = "Phòng nhỏ và không có máy lạnh như hình đăng.",
+                        Status = ReportStatus.Reviewed,
+                        Created_At = DateTime.Now.AddDays(-7)
+                    });
+                }
+
+                // Báo cáo bài đánh giá
+                if (reviews.Any())
+                {
+                    reports.Add(new Report
+                    {
+                        Reporter_Id = users[2].User_Id,
+                        Reported_Id = reviews[random.Next(reviews.Count)].Review_Id,
+                        Type = ReportType.Review,
+                        Title = "Đánh giá không trung thực",
+                        Description = "Bình luận sai sự thật và mang tính công kích.",
+                        Status = ReportStatus.Resolved,
+                        Created_At = DateTime.Now.AddDays(-10)
+                    });
+                }
+
+                // Báo cáo tin nhắn
+                reports.Add(new Report
+                {
+                    Reporter_Id = users[0].User_Id,
+                    Reported_Id = random.Next(1, 100), // Ví dụ id tin nhắn giả lập
+                    Type = ReportType.Message,
+                    Title = "Tin nhắn xúc phạm",
+                    Description = "Người dùng có lời lẽ không phù hợp trong tin nhắn.",
+                    Status = ReportStatus.Pending,
+                    Created_At = DateTime.Now.AddDays(-15)
+                });
+
+                context.Reports.AddRange(reports);
+                context.SaveChanges();
+            }
+
         }
     }
 }

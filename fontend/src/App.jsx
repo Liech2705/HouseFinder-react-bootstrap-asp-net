@@ -1,9 +1,9 @@
 
-import SearchSection from './component/SearchSection.jsx'
-import HouseGrid from './component/HouseGrid.jsx'
-import WhyChooseUs from './component/WhyChooseUs.jsx'
-import Testimonials from './component/Testimonials.jsx'
-import Stats from './component/Stats.jsx'
+import SearchSection from './components/SearchSection.jsx'
+import HouseGrid from './components/HouseGrid.jsx'
+import WhyChooseUs from './components/WhyChooseUs.jsx'
+import Testimonials from './components/Testimonials.jsx'
+import Stats from './components/Stats.jsx'
 
 function App() {
   return (

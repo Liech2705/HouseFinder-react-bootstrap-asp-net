@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { register } from './auth.jsx';
 import { jwtDecode } from "jwt-decode";
@@ -46,19 +46,14 @@ export default function SocialComplete() {
                 userType: form.userType,
                 picture: user.avatar
             };
-            await register(userData);
-            alert('Đăng ký thành công!');
-
-            const lsUserData = {
-                email: user.email,
-                userName: user.userName,
-                picture: user.avatar
-            };
-            localStorage.setItem("token", token);
-            localStorage.setItem("user", JSON.stringify(lsUserData));
+            const res = await register(userData);
+            alert(res.message);
+            console.log('Registration successful:', res);
+            localStorage.setItem("token", res.token);
+            localStorage.setItem("user", JSON.stringify(res.data.user));
             navigate('/');
-        } catch {
-            alert('Có lỗi xảy ra, thử lại sau');
+        } catch (error) {
+            console.error('Có lỗi xảy ra, thử lại sau', error);
         }
         setLoading(false);
     };

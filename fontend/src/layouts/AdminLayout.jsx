@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
-import Header from "../component/Header.jsx";
+import Header from "../components/Header.jsx";
 
 const menu = [
     { label: "Tổng quan", icon: "bi bi-speedometer2", to: "/admin" },
-    { label: "Quản lý phòng", icon: "bi bi-house-door", to: "/admin/rooms" },
-    { label: "Tin đăng", icon: "bi bi-file-earmark-text", to: "/admin/posts" },
-    { label: "Tài khoản", icon: "bi bi-person", to: "/admin/profile" },
+    { label: "Nhà trọ", icon: "bi bi-house-door", to: "/admin/rooms" },
+    { label: "Vi phạm", icon: "bi bi-file-earmark-text", to: "/admin/reports" },
+    { label: "Tài khoản", icon: "bi bi-person", to: "/admin/accounts" },
+
 ];
 
 export default function AdminLayout() {
@@ -40,14 +41,19 @@ export default function AdminLayout() {
     return (
         <>
             <Header />
-            <div className="d-flex min-vh-100 bg-light">
+            <div className="d-flex bg-light" style={{ minHeight: "100vh", overflow: "hidden" }}>
                 {/* Sidebar */}
                 <nav
                     className={`dashboard-sidebar bg-white border-end shadow-sm ${collapsed ? "collapsed" : ""}`}
                     style={{
                         width: collapsed ? 64 : 220,
                         transition: "width .2s",
-                        minHeight: "100vh",
+                        height: "100vh",
+                        position: "fixed",
+                        top: 'calc(var(--header-height, 64px) + 1rem)',
+                        left: 0,
+                        overflowY: "auto",
+                        zIndex: 1040,
                     }}
                 >
                     <div className="d-flex flex-column h-100">
@@ -65,6 +71,7 @@ export default function AdminLayout() {
                                 <i className={`bi ${collapsed ? "bi bi-chevron-right" : "bi bi-chevron-left"}`}></i>
                             </button>
                         </div>
+
                         <ul className="nav flex-column pt-2">
                             {menu.map((item) => (
                                 <li key={item.to} className="nav-item">
@@ -85,30 +92,48 @@ export default function AdminLayout() {
                         </ul>
                     </div>
                 </nav>
+
                 {/* Main content */}
-                <main className="flex-grow-1 p-4">
+                <main
+                    className="flex-grow-1 p-4"
+                    style={{
+                        marginLeft: collapsed ? 64 : 220,
+                        transition: "margin-left .2s",
+                        width: "100%",
+                    }}
+                >
                     <Outlet />
                 </main>
+
                 {/* Sidebar CSS */}
                 <style>{`
-        .dashboard-sidebar {
-          z-index: 100;
-        }
-        .dashboard-sidebar.collapsed .nav-link {
-          justify-content: center;
-          padding-left: 0.5rem;
-          padding-right: 0.5rem;
-        }
-        .dashboard-sidebar.collapsed .sidebar-header {
-          justify-content: center;
-        }
-        .nav-link.active {
-          background: #0d6efd;
-          color: #fff !important;
-          border-radius: 0.5rem;
-        }
-      `}</style>
+                .dashboard-sidebar {
+                    scrollbar-width: thin;
+                    scrollbar-color: #ccc #f8f9fa;
+                    }
+                    .dashboard-sidebar::-webkit-scrollbar {
+                    width: 6px;
+                    }
+                    .dashboard-sidebar::-webkit-scrollbar-thumb {
+                    background-color: #ccc;
+                    border-radius: 10px;
+                    }
+                    .dashboard-sidebar.collapsed .nav-link {
+                    justify-content: center;
+                    padding-left: 0.5rem;
+                    padding-right: 0.5rem;
+                    }
+                    .dashboard-sidebar.collapsed .sidebar-header {
+                    justify-content: center;
+                    }
+                    .nav-link.active {
+                    background: #0d6efd;
+                    color: #fff !important;
+                    border-radius: 0.5rem;
+                    }
+                `}</style>
             </div>
+
         </>
     );
 }

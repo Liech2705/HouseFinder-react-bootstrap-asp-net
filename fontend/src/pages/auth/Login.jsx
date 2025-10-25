@@ -26,7 +26,7 @@ const Login = () => {
             const { email, password, rememberMe } = formData;
             const response = await login({ email, password });
             const { token, data } = response || {};
-            
+
             if (token) {
                 if (rememberMe) {
                     localStorage.setItem('token', token);
@@ -34,14 +34,14 @@ const Login = () => {
                     sessionStorage.setItem('token', token);
                 }
             }
-            
+
             if (data.user) {
                 localStorage.setItem('user', JSON.stringify(data.user));
             }
             alert(response.message);
-            // console.log('Login successful:', localStorage.getItem('user'));
-
+            console.log('Login successful:', localStorage.getItem('user'));
             window.location.href = '/';
+
         } catch (error) {
             console.error('Login error:', error.data);
             alert('Đăng nhập thất bại. Vui lòng kiểm tra email/mật khẩu.');

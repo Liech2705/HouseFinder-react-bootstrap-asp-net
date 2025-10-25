@@ -7,5 +7,7 @@ namespace MyApi.Domain.Interfaces
     {
         // Thêm các method đặc thù riêng cho BoardingHouse (nếu cần)
         Task<IEnumerable<BoardingHouse>> GetByUserIdAsync(int userId);
+        Task<BoardingHouse> HidenHouseAsync(int houseId);
+        Task<BoardingHouse> VisibleHouseAsync(int houseId);
     }
 }

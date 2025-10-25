@@ -64,4 +64,10 @@ namespace MyApi.Application.DTOs.BoardingHouseDtos
         public ICollection<RoomReadDto> Rooms { get; set; } = new List<RoomReadDto>();
         public ICollection<HouseImageReadDto> HouseImages { get; set; } = new List<HouseImageReadDto>();
     }
+
+    public class statusHouse
+    {
+        public int House_Id { get; set; }
+        public HouseStatus Status { get; set; }
+    }
 }

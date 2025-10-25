@@ -88,12 +88,14 @@ namespace MyApi.API.Controllers
                 {
                     user = new
                     {
-                        email = user.Email,
-                        userName = user.User_Name,
+                        id = user.User_Id,
+                        email = user.Email, 
+                        userName = user.User_Name, 
                         role = user.Role,
+                        lock_until = user.Lock_Until
                     }
                 },
-                Token = jwt,
+                token = jwt,
             });
 
         }
@@ -130,12 +132,14 @@ namespace MyApi.API.Controllers
                 { 
                     user = new 
                     { 
+                        id = user.User_Id,
                         email = user.Email, 
                         userName = user.User_Name, 
-                        role = user.Role, 
+                        role = user.Role,
+                        lock_until = user.Lock_Until
                     } 
                 }, 
-                Token = jwt, 
+                token = jwt, 
             });
         }
 
@@ -223,13 +227,6 @@ namespace MyApi.API.Controllers
             if (user != null)
             {
                 aut = "-re";
-                var userToken = new UserToken
-                {
-                    UserId = user.User_Id,
-                    Token = jwt,
-                };
-                _context.UserTokens.Add(userToken);
-                _context.SaveChanges();
             }
             // Redirect về frontend với JWT
             var redirectUrl = $"http://localhost:5173/auth" + aut + $"/callback?token={Uri.EscapeDataString(jwt)}";
@@ -257,7 +254,7 @@ namespace MyApi.API.Controllers
             );
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return jwt;
         }
 
         // Biến dùng để quên mật khẩu

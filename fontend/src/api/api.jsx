@@ -4,3 +4,5 @@ import { login } from './auth.jsx';
 export { rooms, login, testimonials };
 export * from './forgot-password.jsx';
 export * from './house.jsx';
+export * from './users.jsx';
+export * from './UserFavorite.jsx';

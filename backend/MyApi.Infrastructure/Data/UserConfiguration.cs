@@ -35,6 +35,10 @@ namespace MyApi.Infrastructure.Configurations
                    .HasMaxLength(20)
                    .IsRequired();
 
+            builder.Property(u => u.Reason)
+                   .HasMaxLength(255);
+
+
             builder.Property(u => u.Created_At)
                    .HasDefaultValueSql("GETDATE()");
 
@@ -93,7 +97,6 @@ namespace MyApi.Infrastructure.Configurations
                    .WithOne(cc => cc.Host)
                    .HasForeignKey(cc => cc.Host_Id)
                    .OnDelete(DeleteBehavior.NoAction);
-
         }
     }
 }

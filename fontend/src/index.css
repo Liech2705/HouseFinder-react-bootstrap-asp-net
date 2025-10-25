@@ -264,7 +264,7 @@ p {
     font-size: var(--font-size-xl);
     font-weight: 700;
     color: var(--primary-color);
-     display: -webkit-box;
+    display: -webkit-box;
     -webkit-line-clamp: 2;
     /* Giới hạn 2 dòng */
     -webkit-box-orient: vertical;

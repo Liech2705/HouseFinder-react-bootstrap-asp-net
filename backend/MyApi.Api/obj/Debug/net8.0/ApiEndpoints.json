@@ -206,6 +206,22 @@
   },
   {
     "ContainingType": "MyApi.Api.Controllers.BoardingHouseController",
+    "Method": "HidenHouse",
+    "RelativePath": "api/BoardingHouse/hide/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.Api.Controllers.BoardingHouseController",
     "Method": "GetByUser",
     "RelativePath": "api/BoardingHouse/user/{userId}",
     "HttpMethod": "GET",
@@ -214,6 +230,22 @@
     "Parameters": [
       {
         "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.Api.Controllers.BoardingHouseController",
+    "Method": "VisibleHouse",
+    "RelativePath": "api/BoardingHouse/visible/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -891,6 +923,80 @@
     ]
   },
   {
+    "ContainingType": "MyApi.Api.Controllers.FavoriteHouseController",
+    "Method": "ToggleFavorite",
+    "RelativePath": "api/FavoriteHouse/{houseId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "houseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.Api.Controllers.FavoriteHouseController",
+    "Method": "CheckFavorite",
+    "RelativePath": "api/FavoriteHouse/{houseId}/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "houseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.Api.Controllers.FavoriteHouseController",
+    "Method": "ToggleFavorite",
+    "RelativePath": "api/FavoriteHouse/toggle",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "MyApi.Application.DTOs.FavoriteHouseDTOs\u002BFavoriteHouseCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.Api.Controllers.FavoriteHouseController",
+    "Method": "GetFavorites",
+    "RelativePath": "api/FavoriteHouse/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MyApi.API.Controllers.HouseImagesController",
     "Method": "GetAll",
     "RelativePath": "api/HouseImages",
@@ -1484,29 +1590,24 @@
   },
   {
     "ContainingType": "MyApi.API.Controllers.ReportsController",
-    "Method": "GetByStatus",
-    "RelativePath": "api/Reports/status/{status}",
-    "HttpMethod": "GET",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/Reports/status/{id}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "status",
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newStatus",
         "Type": "System.String",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[MyApi.Application.DTOs.ReportDtos.ReportReadDto, MyApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "MyApi.API.Controllers.ReportsController",
@@ -2338,6 +2439,26 @@
   },
   {
     "ContainingType": "MyApi.API.Controllers.UsersController",
+    "Method": "GetAll",
+    "RelativePath": "api/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "MyApi.Application.DTOs.UserDtos.UserReadDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.UsersController",
     "Method": "GetById",
     "RelativePath": "api/Users/{id}",
     "HttpMethod": "GET",
@@ -2427,28 +2548,44 @@
   },
   {
     "ContainingType": "MyApi.API.Controllers.UsersController",
-    "Method": "Register",
-    "RelativePath": "api/Users/register",
-    "HttpMethod": "POST",
+    "Method": "Lock",
+    "RelativePath": "api/Users/locked/{id}",
+    "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "createDto",
-        "Type": "MyApi.Application.DTOs.UserDtos.UserCreateDto",
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "lockedDto",
+        "Type": "MyApi.Application.DTOs.UserDtos.LockedUser",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.UsersController",
+    "Method": "UnLock",
+    "RelativePath": "api/Users/unlock/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Type": "MyApi.Application.DTOs.UserDtos.UserReadDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "unlockedDto",
+        "Type": "MyApi.Application.DTOs.UserDtos.UnlockUser",
+        "IsRequired": true
       }
-    ]
+    ],
+    "ReturnTypes": []
   }
 ]

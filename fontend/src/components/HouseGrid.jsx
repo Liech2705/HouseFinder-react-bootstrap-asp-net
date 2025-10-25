@@ -4,12 +4,12 @@ import HouseCard from "./HouseCard.jsx";
 import { rooms as housesData } from "../api/room.jsx";
 import { Link } from "react-router-dom";
 
+// Định nghĩa trạng thái hiển thị (Giả định 1 là trạng thái hiển thị công khai)
+const VISIBLE_STATUS = 1;
+
 // ✅ Component hiển thị danh sách Nhà trọ dưới dạng lưới
 function HouseGrid({ housesOverride }) {
     // housesData là một function, cần gọi nó. Dùng useState và useEffect để load data.
-    // Tuy nhiên, vì code gốc dùng .sort() trực tiếp, ta sẽ giả định housesData là mảng, 
-    // và xử lý nếu nó là function (như API call) ở component cha.
-    // Ở đây, ta giữ housesOverride ?? housesData cho tính tương thích:
     const rawList = housesOverride ?? housesData;
 
     // ✅ Thêm state để lưu trữ dữ liệu sau khi được load (nếu housesData là async function)
@@ -26,26 +26,30 @@ function HouseGrid({ housesOverride }) {
                 })
                 .catch(error => {
                     console.error("Error fetching houses data:", error);
+                    setList([]); // Đặt thành mảng rỗng khi lỗi
                     setLoading(false);
                 });
         }
     }, [rawList]);
 
 
-    // ✅ SỬA LOGIC: Sử dụng useMemo để tính toán 5 nhà trọ phổ biến nhất dựa trên dữ liệu có sẵn
+    // ✅ LOGIC ĐÃ SỬA: Lọc chỉ những nhà trọ có status = VISIBLE_STATUS
     const popularHouses = useMemo(() => {
-        // Loại bỏ những nhà trọ không có phòng
-        let filtered = list.filter(house => house.rooms && house.rooms.length > 0);
+        // 1. Lọc: Chỉ lấy những nhà trọ có status là visible (1)
+        let visibleHouses = list.filter(house => house.status === VISIBLE_STATUS);
+        
+        // 2. Lọc tiếp: Loại bỏ những nhà trọ không có phòng
+        let filtered = visibleHouses.filter(house => house.rooms && house.rooms.length > 0);
 
-        // Giả lập "Phổ biến" bằng cách ưu tiên nhà trọ có nhiều phòng trống nhất
+        // 3. Sắp xếp: Giả lập "Phổ biến" bằng cách ưu tiên nhà trọ có nhiều phòng trống nhất
         const sorted = filtered.map(house => ({
             ...house,
             // Thêm trường calculatedPopularity: số lượng phòng còn trống
-            calculatedPopularity: house.rooms.filter(r => r.status === 1).length
+            calculatedPopularity: house.rooms.filter(r => r.status === VISIBLE_STATUS).length
         })).sort((a, b) => b.calculatedPopularity - a.calculatedPopularity); // Sắp xếp giảm dần
 
         return sorted.slice(0, 5); // Lấy 5 kết quả hàng đầu
-    }, [list]);
+    }, [list]); // Dependency list giữ nguyên
 
     const [visibleCount, setVisibleCount] = useState(5);
 
@@ -67,8 +71,9 @@ function HouseGrid({ housesOverride }) {
         return <div className="text-center my-5 text-muted">Đang tải danh sách nhà trọ...</div>;
     }
 
-    if (list.length === 0) {
-        return <div className="text-center my-5 text-muted">Hiện chưa có dữ liệu nhà trọ.</div>;
+    // Kiểm tra nếu danh sách list rỗng ban đầu, hoặc sau khi lọc popularHouses rỗng
+    if (list.length === 0 || popularHouses.length === 0) {
+        return <div className="text-center my-5 text-muted">Hiện chưa có dữ liệu nhà trọ công khai hoặc không có nhà trọ nào đủ điều kiện phổ biến.</div>;
     }
 
     return (
@@ -88,6 +93,7 @@ function HouseGrid({ housesOverride }) {
                     className="d-flex justify-content-center align-items-stretch gap-3 flex-nowrap"
                     style={{ width: "100%" }}
                 >
+                    {/* Chỉ render các nhà trọ phổ biến đã được lọc và sắp xếp */}
                     {popularHouses.slice(0, visibleCount).map((house) => (
                         <div
                             key={house.house_Id}

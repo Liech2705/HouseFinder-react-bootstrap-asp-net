@@ -36,16 +36,6 @@ export default function Dashboard() {
                 </div>
                 <div className="col-12 col-sm-6 col-lg-3">
                     <div className="card dashboard-card border-0 shadow-sm text-center py-4 px-2 h-100">
-                        <div className="dashboard-card-icon bg-warning mb-3 mx-auto">
-                            <i className="bi bi-file-earmark-text text-white fs-2"></i>
-                        </div>
-                        <h6 className="fw-semibold text-warning mb-1">Tin đăng mới</h6>
-                        <div className="fs-3 fw-bold text-dark">35</div>
-                        <div className="text-muted small">Trong tuần này</div>
-                    </div>
-                </div>
-                <div className="col-12 col-sm-6 col-lg-3">
-                    <div className="card dashboard-card border-0 shadow-sm text-center py-4 px-2 h-100">
                         <div className="dashboard-card-icon bg-success mb-3 mx-auto">
                             <i className="bi bi-person text-white fs-2"></i>
                         </div>

@@ -365,6 +365,52 @@
         }
       }
     },
+    "/api/BoardingHouse/hide/{id}": {
+      "put": {
+        "tags": [
+          "BoardingHouse"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/BoardingHouse/visible/{id}": {
+      "put": {
+        "tags": [
+          "BoardingHouse"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Bookings": {
       "get": {
         "tags": [
@@ -1546,6 +1592,137 @@
         }
       }
     },
+    "/api/FavoriteHouse/toggle": {
+      "post": {
+        "tags": [
+          "FavoriteHouse"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FavoriteHouseCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FavoriteHouseCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FavoriteHouseCreateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FavoriteHouse/user/{userId}": {
+      "get": {
+        "tags": [
+          "FavoriteHouse"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FavoriteHouse/{houseId}": {
+      "post": {
+        "tags": [
+          "FavoriteHouse"
+        ],
+        "parameters": [
+          {
+            "name": "houseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FavoriteHouse/{houseId}/{userId}": {
+      "get": {
+        "tags": [
+          "FavoriteHouse"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "houseId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/HouseImages": {
       "get": {
         "tags": [
@@ -2580,50 +2757,44 @@
         }
       }
     },
-    "/api/Reports/status/{status}": {
-      "get": {
+    "/api/Reports/status/{id}": {
+      "put": {
         "tags": [
           "Reports"
         ],
         "parameters": [
           {
-            "name": "status",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/ReportStatus"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ReportReadDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ReportReadDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ReportReadDto"
-                  }
-                }
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
               }
             }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -4069,30 +4240,11 @@
         }
       }
     },
-    "/api/Users/register": {
-      "post": {
+    "/api/Users": {
+      "get": {
         "tags": [
           "Users"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserCreateDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserCreateDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserCreateDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK",
@@ -4253,6 +4405,90 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Users/locked/{id}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LockedUser"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LockedUser"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LockedUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Users/unlock/{id}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnlockUser"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnlockUser"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UnlockUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -4775,6 +5011,25 @@
         },
         "additionalProperties": false
       },
+      "FavoriteHouseCreateDto": {
+        "type": "object",
+        "properties": {
+          "user_Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "house_Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "room_Id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "HouseImageCreateDto": {
         "type": "object",
         "properties": {
@@ -4828,6 +5083,20 @@
         ],
         "type": "integer",
         "format": "int32"
+      },
+      "LockedUser": {
+        "type": "object",
+        "properties": {
+          "lock_Until": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "LoginDto": {
         "type": "object",
@@ -5049,12 +5318,21 @@
             "type": "integer",
             "format": "int32"
           },
+          "reporter_Name": {
+            "type": "string",
+            "nullable": true
+          },
           "reported_Id": {
             "type": "integer",
             "format": "int32"
           },
+          "reported_Title": {
+            "type": "string",
+            "nullable": true
+          },
           "type": {
-            "$ref": "#/components/schemas/ReportType"
+            "type": "string",
+            "nullable": true
           },
           "title": {
             "type": "string",
@@ -5065,7 +5343,8 @@
             "nullable": true
           },
           "status": {
-            "$ref": "#/components/schemas/ReportStatus"
+            "type": "string",
+            "nullable": true
           },
           "created_At": {
             "type": "string",
@@ -5088,7 +5367,8 @@
         "enum": [
           0,
           1,
-          2
+          2,
+          3
         ],
         "type": "integer",
         "format": "int32"
@@ -5515,18 +5795,10 @@
         },
         "additionalProperties": false
       },
-      "UserCreateDto": {
+      "UnlockUser": {
         "type": "object",
         "properties": {
-          "user_Name": {
-            "type": "string",
-            "nullable": true
-          },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
+          "reason": {
             "type": "string",
             "nullable": true
           }
@@ -5583,10 +5855,6 @@
           "update_At": {
             "type": "string",
             "format": "date-time",
-            "nullable": true
-          },
-          "userName": {
-            "type": "string",
             "nullable": true
           }
         },
@@ -5707,6 +5975,15 @@
           },
           "role": {
             "$ref": "#/components/schemas/UserRole"
+          },
+          "lock_Until": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
           },
           "created_At": {
             "type": "string",

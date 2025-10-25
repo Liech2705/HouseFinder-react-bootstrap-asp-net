@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MyApi.Application.DTOs.UserDtos;
-using MyApi.Domain.Entities;
 using MyApi.Domain.Interfaces;
 using MyApi.Infrastructure.Services; // chứa logic hash password
 
@@ -22,17 +21,13 @@ namespace MyApi.API.Controllers
             _passwordHasher = passwordHasher;
         }
 
-        // POST: api/Users/register
-        [HttpPost("register")]
-        public async Task<ActionResult<UserReadDto>> Register(UserCreateDto createDto)
+        // GET: api/Users
+        [HttpGet]
+        public async Task<ActionResult<UserReadDto>> GetAll()
         {
-            var user = _mapper.Map<User>(createDto);
-            user.PasswordHash = _passwordHasher.HashPassword(createDto.Password);
+            var user = await _userRepository.GetAllAsync<UserReadDto>(_mapper.ConfigurationProvider);
 
-            await _userRepository.AddAsync(user);
-            await _userRepository.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetById), new { id = user.User_Id }, _mapper.Map<UserReadDto>(user));
+            return Ok(user);
         }
 
         // GET: api/Users/5
@@ -84,6 +79,26 @@ namespace MyApi.API.Controllers
             await _userRepository.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        //[Authorize(Roles = "Admin")]
+        [HttpPut("locked/{id}")]
+        public async Task<IActionResult> Lock(int id,[FromBody] LockedUser lockedDto)
+        {
+            var user = await _userRepository.LockedAsync(id, lockedDto.Lock_Until, lockedDto.Reason);
+            if (user == null) return NotFound(new { message = "user not found" });
+
+            return Ok(_mapper.Map<LockedUser>(user));
+        }
+
+        //[Authorize(Roles = "Admin")]
+        [HttpPut("unlock/{id}")]
+        public async Task<IActionResult> UnLock(int id, [FromBody] UnlockUser unlockedDto)
+        {
+            var user = await _userRepository.UnLockAsync(id, unlockedDto.Reason);
+            if (user == null) return NotFound(new { message = "user not found" });
+
+            return Ok(_mapper.Map<LockedUser>(user));
         }
     }
 }

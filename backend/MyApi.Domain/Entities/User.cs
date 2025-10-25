@@ -14,6 +14,8 @@ namespace MyApi.Domain.Entities
         public string PasswordHash { get; set; }
 
         public UserRole Role { get; set; } = UserRole.User;
+        public DateTime? Lock_Until { get; set; }
+        public string? Reason { get; set; }
 
         public DateTime? Created_At { get; set; }
 
@@ -34,5 +36,6 @@ namespace MyApi.Domain.Entities
         public ICollection<ChatConversation> HostConversations { get; set; } = new List<ChatConversation>();
 
         public ICollection<Report> Reports { get; set; } = new List<Report>();
+        public ICollection<FavoriteHouse> FavoriteHouses { get; set; } = new List<FavoriteHouse>();
     }
 }

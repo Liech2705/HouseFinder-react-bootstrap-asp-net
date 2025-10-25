@@ -27,5 +27,6 @@ namespace MyApi.Domain.Entities
         public ICollection<Booking> Bookings { get; set; }
         public ICollection<ChatConversation> ChatConversations { get; set; }
         public RoomProperty RoomProperty { get; set; }
+        public ICollection<FavoriteHouse> FavoriteHouse { get; set; } 
     }
 }

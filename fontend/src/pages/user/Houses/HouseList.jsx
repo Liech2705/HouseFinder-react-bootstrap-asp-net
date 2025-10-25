@@ -1,20 +1,16 @@
 import { useMemo, useState, useEffect } from 'react';
-// Giả định component HouseCard nằm cùng cấp với HouseList trong thư mục component/
-import HouseCard from '../../../component/HouseCard.jsx';
-// Giả định API nằm ở ../api/room.jsx (Đường dẫn có thể cần điều chỉnh lại nếu cấu trúc thư mục khác)
+import HouseCard from '../../../components/HouseCard.jsx';
 import { rooms as fetchHouses } from '../../../api/room.jsx';
 
-// ✅ Khắc phục lỗi import CSS và components
-// Giả định CSS file nằm trong thư mục styles cùng cấp với component
 import '../../styles/RoomsList.css';
-// Sử dụng thư viện icon Font Awesome (thay vì bootstrap-icons)
-// Nếu muốn dùng bootstrap-icons, cần đảm bảo thư viện đó đã được cài đặt và cấu hình đúng trong dự án.
 
-import Pagination from '../../../component/Pagination.jsx';
-import Breadcrumbs from '../../../component/Breadcrumbs.jsx';
+import Pagination from '../../../components/Pagination.jsx';
+import Breadcrumbs from '../../../components/Breadcrumbs.jsx';
+
+// Định nghĩa trạng thái hiển thị (Giả định 1 là trạng thái hiển thị công khai)
+const VISIBLE_STATUS = 1; 
 
 export default function HouseList() {
-    // State để lưu dữ liệu và trạng thái tải
     const [houses, setHouses] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -35,7 +31,6 @@ export default function HouseList() {
         priceDesc: 'Giá: cao → thấp'
     };
 
-    // Ánh xạ tên tiện ích từ state (wifi, ac,...) sang key trong roomProperty (snake_case)
     const amenityMap = {
         wifi: 'has_Wifi',
         ac: 'has_AirConditioner',
@@ -56,7 +51,6 @@ export default function HouseList() {
     useEffect(() => {
         const loadHouses = async () => {
             try {
-                // Gọi hàm API (fetchHouses) để lấy dữ liệu
                 const data = await fetchHouses();
                 setHouses(data);
             } catch (error) {
@@ -70,8 +64,11 @@ export default function HouseList() {
     }, []);
 
     const filteredHouses = useMemo(() => {
-        // Sử dụng state houses đã được load
-        let hs = houses.filter((h) => {
+        // LỌC 1: Lọc chỉ những nhà trọ có status = 1 (Visible)
+        let hs = houses.filter((h) => h.status === VISIBLE_STATUS);
+        
+        // Bắt đầu chuỗi lọc logic dựa trên các state
+        hs = hs.filter((h) => {
             // 1. Dữ liệu tìm kiếm (query)
             const hay = (h.house_Name + ' ' + h.province + ' ' + h.commune + ' ' + (h.street || '')).toLowerCase();
             const q = query.trim().toLowerCase();
@@ -301,7 +298,8 @@ export default function HouseList() {
                                 <div className="card p-4 text-center text-muted">Không tìm thấy nhà trọ phù hợp với tiêu chí lọc.</div>
                             ) : (
                                 <>
-                                    <div className={view === 'grid' ? 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2 mb-4' : 'list-view'}>
+                                    {/* KHÔI PHỤC LOGIC HIỂN THỊ LƯỚI/DANH SÁCH */}
+                                    <div className={view === 'grid' ? 'row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2 mb-4' : 'list-view d-flex flex-column gap-3 mb-4'}>
                                         {paginated.map((house) => (
                                             <div key={house.house_Id} className={view === 'grid' ? 'col' : 'col-12'}>
                                                 {/* Truyền view xuống HouseCard để nó tự xử lý layout list/grid */}
