@@ -70,4 +70,16 @@ namespace MyApi.Application.DTOs.BoardingHouseDtos
         public int House_Id { get; set; }
         public HouseStatus Status { get; set; }
     }
+
+    public class SearchHouseResult
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }   
+        public string Address { get; set; }
+        public string Image { get; set; }
+
+        // Các thông tin tổng hợp quan trọng để hiển thị ra ngoài
+        public int AvailableRoomsCount { get; set; } 
+        public decimal MinPrice { get; set; }
+    }
 }

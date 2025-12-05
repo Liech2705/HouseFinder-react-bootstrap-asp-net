@@ -11,10 +11,9 @@ namespace MyApi.Application.DTOs.RoomDtos
         public int Owner_Id { get; set; }
         public int House_Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
-        public string Address { get; set; }
-        public double? Latitude { get; set; }
-        public double? Longitude { get; set; }
+        public string? Description { get; set; }
+        public RoomStatus Status { get; set; }
+        public DateOnly? Check_In_Default { get; set; }
         public int? Price { get; set; }
     }
 
@@ -23,9 +22,9 @@ namespace MyApi.Application.DTOs.RoomDtos
     {
         public string Title { get; set; }
         public string? Description { get; set; }
-        public string? Address { get; set; }
         public int? Price { get; set; }
         public RoomStatus Status { get; set; }
+        public DateOnly? Check_In_Default { get; set; }
     }
 
     // GET: trả dữ liệu cho client
@@ -36,9 +35,9 @@ namespace MyApi.Application.DTOs.RoomDtos
         public int House_Id { get; set; }
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public string? Address { get; set; }
         public int? Price { get; set; }
         public RoomStatus Status { get; set; }
+        public DateOnly? Check_In_Default { get; set; }
         public DateTime? Created_At { get; set; }
 
         // Dữ liệu quan hệ

@@ -23,7 +23,7 @@ namespace MyApi.Infrastructure.Repositories
             return await _dbSet.ProjectTo<TDto>(mapperConfig).ToListAsync();
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public virtual async Task<T?> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
         }

@@ -5,7 +5,7 @@ namespace MyApi.Application.DTOs.ChatConversationDtos
     // POST: khi bắt đầu cuộc trò chuyện
     public class ChatConversationCreateDto
     {
-        public int Room_Id { get; set; }
+        public int? Room_Id { get; set; }
         public int User_Id { get; set; }   // người thuê
         public int Host_Id { get; set; }   // chủ trọ
     }
@@ -20,7 +20,7 @@ namespace MyApi.Application.DTOs.ChatConversationDtos
     public class ChatConversationReadDto
     {
         public int Conversation_Id { get; set; }
-        public int Room_Id { get; set; }
+        public int? Room_Id { get; set; }
         public int User_Id { get; set; }
         public int Host_Id { get; set; }
         public DateTime Last_Message_At { get; set; }

@@ -63,6 +63,12 @@ namespace MyApi.Infrastructure.Configurations
             builder.HasMany(bh => bh.HouseImages)
                    .WithOne(hi => hi.BoardingHouse)
                    .HasForeignKey(hi => hi.House_Id);
+
+            builder.HasMany(bh => bh.FavoriteHouses)
+                   .WithOne(h => h.BoardingHouse)
+                   .HasForeignKey(fh => fh.House_Id)
+                   .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

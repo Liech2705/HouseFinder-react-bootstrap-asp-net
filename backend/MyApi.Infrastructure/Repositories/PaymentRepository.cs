@@ -14,22 +14,22 @@ namespace MyApi.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Payment>> GetByBookingIdAsync(int bookingId)
-        {
-            return await _context.Payments
-                                 .Where(p => p.Booking_Id == bookingId)
-                                 .Include(p => p.Booking)
-                                 .Include(p => p.UserPaymentMethod)
-                                 .ToListAsync();
-        }
+        //public async Task<IEnumerable<Payment>> GetByBookingIdAsync(int bookingId)
+        //{
+        //    return await _context.Payments
+        //                         .Where(p => p.Booking_Id == bookingId)
+        //                         .Include(p => p.Booking)
+        //                         .Include(p => p.UserPaymentMethod)
+        //                         .ToListAsync();
+        //}
 
-        public async Task<IEnumerable<Payment>> GetByMethodIdAsync(int methodId)
-        {
-            return await _context.Payments
-                                 .Where(p => p.Method_Id == methodId)
-                                 .Include(p => p.Booking)
-                                 .Include(p => p.UserPaymentMethod)
-                                 .ToListAsync();
-        }
+        //public async Task<IEnumerable<Payment>> GetByMethodIdAsync(int methodId)
+        //{
+        //    return await _context.Payments
+        //                         .Where(p => p.Method_Id == methodId)
+        //                         .Include(p => p.Booking)
+        //                         .Include(p => p.UserPaymentMethod)
+        //                         .ToListAsync();
+        //}
     }
 }

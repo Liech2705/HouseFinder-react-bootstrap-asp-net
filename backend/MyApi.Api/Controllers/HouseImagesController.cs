@@ -4,6 +4,7 @@ using MyApi.Application.DTOs.CheckBookingDtos;
 using MyApi.Application.DTOs.HouseImageDtos;
 using MyApi.Domain.Entities;
 using MyApi.Domain.Interfaces;
+using MyApi.Infrastructure.Repositories;
 
 namespace MyApi.API.Controllers
 {
@@ -88,6 +89,12 @@ namespace MyApi.API.Controllers
             await _houseImageRepository.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPost("{id}/images/upload")]
+        public async Task ChangeImagesRoom(int id, [FromForm] IFormFileCollection imageHouses)
+        {
+            await _houseImageRepository.ChangeImagesHouse(id, imageHouses);
         }
     }
 }

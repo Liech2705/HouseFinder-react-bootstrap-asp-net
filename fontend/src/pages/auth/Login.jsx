@@ -1,8 +1,14 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { login } from '../../api/auth.jsx';
 
 const Login = () => {
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || "/";
+
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -25,6 +31,13 @@ const Login = () => {
         try {
             const { email, password, rememberMe } = formData;
             const response = await login({ email, password });
+            console.log('Login response:', response);
+            const dateLock = response.data.user.lock_until;
+            if (!!dateLock) {
+                alert(`Tài khoản của bạn đã bị khóa tới ${dateLock}. Vui lòng liên hệ quản trị viên để biết thêm chi tiết.`);
+                navigate('/login');
+                return;
+            };
             const { token, data } = response || {};
 
             if (token) {
@@ -40,7 +53,7 @@ const Login = () => {
             }
             alert(response.message);
             console.log('Login successful:', localStorage.getItem('user'));
-            window.location.href = '/';
+            navigate(from, { replace: true });
 
         } catch (error) {
             console.error('Login error:', error.data);
@@ -50,10 +63,14 @@ const Login = () => {
         }
     };
     const handleGoogleLogin = () => {
-        window.location.href = 'https://localhost:7167/api/Auth/login-google';
+        localStorage.setItem('redirectAfterLogin', from);
+
+        window.location.href = import.meta.env.VITE_URL_API_ROOT + '/Auth/login-google';
     };
     const handleFacebookLogin = () => {
-        window.location.href = 'https://localhost:7167/api/Auth/login-facebook';
+        localStorage.setItem('redirectAfterLogin', from);
+
+        window.location.href = import.meta.env.VITE_URL_API_ROOT + '/Auth/login-facebook';
     };
 
     return (

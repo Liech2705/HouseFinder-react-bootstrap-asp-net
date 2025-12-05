@@ -1,6 +1,4 @@
 ﻿using MyApi.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MyApi.Domain.Entities
 {
@@ -11,12 +9,11 @@ namespace MyApi.Domain.Entities
         public int House_Id { get; set; }
         public string Title { get; set; }
 
-        public string Description { get; set; }
-
-        public string Address { get; set; }
+        public string? Description { get; set; }
 
         public int? Price { get; set; }
         public RoomStatus Status { get; set; } = RoomStatus.visible;
+        public DateOnly? Check_In_Default { get; set; }
         public DateTime? Created_At { get; set; }
 
         // Navigation

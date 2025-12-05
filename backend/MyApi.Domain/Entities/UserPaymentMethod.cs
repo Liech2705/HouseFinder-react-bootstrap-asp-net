@@ -1,8 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-
-namespace MyApi.Domain.Entities
+﻿namespace MyApi.Domain.Entities
 {
     public class UserPaymentMethod
     {
@@ -21,6 +17,6 @@ namespace MyApi.Domain.Entities
 
         // Navigation
         public User User { get; set; }
-        public ICollection<Payment> Payments { get; set; } = new List<Payment>();
+        //public ICollection<Payment> Payments { get; set; } = new List<Payment>();
     }
 }

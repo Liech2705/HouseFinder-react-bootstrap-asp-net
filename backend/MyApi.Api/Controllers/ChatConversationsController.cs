@@ -66,19 +66,6 @@ namespace MyApi.API.Controllers
             return Ok(conversationsDto);
         }
 
-        // POST: api/ChatConversations
-        [HttpPost]
-        public async Task<ActionResult<ChatConversationReadDto>> Create(ChatConversationCreateDto createDto)
-        {
-            var conversation = _mapper.Map<ChatConversation>(createDto);
-
-            await _chatConversationRepository.AddAsync(conversation);
-            await _chatConversationRepository.SaveChangesAsync();
-
-            var conversationDto = _mapper.Map<ChatConversationReadDto>(conversation);
-            return CreatedAtAction(nameof(GetById), new { id = conversation.Conversation_Id }, conversationDto);
-        }
-
         // PUT: api/ChatConversations/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, ChatConversationUpdateDto updateDto)
@@ -105,6 +92,44 @@ namespace MyApi.API.Controllers
             await _chatConversationRepository.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] ChatConversationCreateDto dto)
+        {
+            var exists = await _chatConversationRepository.CreateConversationAsync(dto);
+            
+            return Ok(_mapper.Map<ChatConversationCreateDto>(exists));
+        }
+
+        // Lấy lịch sử tin nhắn
+        [HttpGet("{id}/messages")]
+        public async Task<IActionResult> GetMessages(int id, int limit = 100)
+        {
+            var msgs = await _chatConversationRepository.GetChatConversation(id, limit);
+
+            return Ok(msgs);
+        }
+
+        [HttpGet("{hostId}/{userId}")]
+        public async Task<IActionResult> GetChatConversation(int hostId, int userId)
+        {
+            var conv = await _chatConversationRepository.GetByUserAndHostIdAsync(userId, hostId);
+            if (conv == null)
+            {
+                var newconv = new ChatConversationCreateDto
+                {
+                    User_Id = userId,
+                    Host_Id = hostId,
+                    Room_Id = null
+                };
+
+                await _chatConversationRepository.AddAsync(_mapper.Map<ChatConversation>(newconv));
+                await _chatConversationRepository.SaveChangesAsync();
+                return Ok(_mapper.Map<ChatConversationReadDto>(newconv));
+            };
+
+            return Ok(_mapper.Map<ChatConversationReadDto>(conv));
         }
     }
 }

@@ -17,15 +17,18 @@ namespace MyApi.Infrastructure.Data
 
             builder.HasOne(fh => fh.User)
                    .WithMany(u => u.FavoriteHouses)
-                   .HasForeignKey(fh => fh.User_Id);
+                   .HasForeignKey(fh => fh.User_Id)
+                   .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(fh => fh.BoardingHouse)
                    .WithMany(h => h.FavoriteHouses)
-                   .HasForeignKey(fh => fh.House_Id);
+                   .HasForeignKey(fh => fh.House_Id)
+                   .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(fh => fh.Room)
                    .WithMany(r => r.FavoriteHouse)
-                   .HasForeignKey(fh => fh.Room_Id);
+                   .HasForeignKey(fh => fh.Room_Id)
+                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -7,5 +7,6 @@ namespace MyApi.Domain.Interfaces
     {
         Task<IEnumerable<Review>> GetByUserIdAsync(int userId);
         Task<IEnumerable<Review>> GetByBookingIdAsync(int bookingId);
+        
     }
 }

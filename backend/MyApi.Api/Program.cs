@@ -11,17 +11,23 @@ using MyApi.Domain.Interfaces;
 using MyApi.Infrastructure.Data;
 using MyApi.Infrastructure.Interfaces;
 using MyApi.Infrastructure.Repositories;
-using MyApi.Infrastructure.Seeders;
+//using MyApi.Infrastructure.Seeders;
 using MyApi.Infrastructure.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Dòng này giúp chuyển Enum thành String khi trả về JSON
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    }); ;
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -32,12 +38,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 var jwtSettings = builder.Configuration.GetSection("Jwt");
 builder.Services.AddAuthentication(options =>
 {
-    // Cookie để giữ phiên đăng nhập tạm thời sau khi login Google/Facebook
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    // Mặc định API dùng JWT để xác thực
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+    // Scheme riêng để đăng nhập Google/Facebook (dùng cookie tạm)
     options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    // Khi gọi Challenge() mà không chỉ định scheme => mặc định dùng Google
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
 .AddCookie()
 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -58,33 +64,7 @@ builder.Services.AddAuthentication(options =>
     {
         OnTokenValidated = async context =>
         {
-            // Lấy token đã được parse
-            var jwtToken = context.SecurityToken as JwtSecurityToken;
-            if (jwtToken == null)
-            {
-                context.Fail("Token không hợp lệ");
-                return;
-            }
-
-            // Lấy AppDbContext từ DI container
-            var db = context.HttpContext.RequestServices.GetService<AppDbContext>();
-            if (db == null)
-            {
-                context.Fail("Dữ liệu không có");
-                return;
-            }
-
-            var raw = jwtToken.RawData;
-
-            // Kiểm tra token có tồn tại trong bảng UserTokens hay không
-            var exists = await db.UserTokens.AnyAsync(t => t.Token == raw);
-            if (!exists)
-            {
-                context.Fail("Token không tồn tại");
-                return;
-            }
-
-            // (Tùy chọn) bạn có thể kiểm tra thêm: token hết hạn trong DB, user bị khóa, ...
+            await Task.CompletedTask;
         },
 
         OnAuthenticationFailed = context =>
@@ -134,6 +114,9 @@ builder.Services.AddScoped<IFavoriteHouseRepository, FavoriteHouseRepository>();
 
 builder.Services.AddScoped<IPasswordHasherService, PasswordHasherService>();
 
+builder.Services.AddScoped<IVnPayService, VnPayService>();
+builder.Services.AddTransient<VNPayLibrary>();
+
 // service mapper
 builder.Services.AddSingleton<IMapper>(sp =>
 {
@@ -174,28 +157,39 @@ builder.Services.AddCors(options =>
                     "https://localhost:5173")
                   .AllowAnyHeader()
                   .AllowAnyMethod()
-                  .AllowCredentials();
+                  .AllowCredentials()
+                  .SetIsOriginAllowed(_ => true);
         });
 });
 
-builder.Services.AddScoped<EmailService>();
+builder.Services.AddSignalR();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+});
 
+builder.Services.AddScoped<EmailService>();
+builder.WebHost.UseWebRoot("wwwroot");
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasherService>();
-    DataSeeder.Seed(context, hasher);
-}
+// Cho phép truy cập file trong wwwroot
+app.UseStaticFiles();
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+//    var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasherService>();
+//    DataSeeder.Seed(context, hasher);
+//}
 
 app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseCors("AllowReactApp");
 
-
+app.MapHub<ChatHub>("/chatHub");
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -206,6 +200,8 @@ if (app.Environment.IsDevelopment())
 // use Auth
 app.UseAuthentication();
 app.UseAuthorization();
+
+
 
 app.MapControllers();
 

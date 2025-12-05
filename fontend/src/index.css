@@ -1207,6 +1207,7 @@ card-address {
 }
 
 .sticky-top {
+    z-index: 999;
     position: sticky;
     top: 0;
 }

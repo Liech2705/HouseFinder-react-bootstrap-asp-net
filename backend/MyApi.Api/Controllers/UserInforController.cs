@@ -43,16 +43,12 @@ namespace MyApi.API.Controllers
 
         // PUT: api/UserInfor/5
         [HttpPut("{userId}")]
-        public async Task<IActionResult> Update(int userId, UserInforUpdateDto updateDto)
+        public async Task<IActionResult> Update(int userId, [FromForm] UserInforUpdateDto updateDto)
         {
-            var userInfor = await _userInforRepository.GetByUserIdAsync(userId);
+            var userInfor = await _userInforRepository.UpdateUserInfor(updateDto, userId);
             if (userInfor == null) return NotFound();
 
-            _mapper.Map(updateDto, userInfor);
-            _userInforRepository.Update(userInfor);
-            await _userInforRepository.SaveChangesAsync();
-
-            return NoContent();
+            return Ok(_mapper.Map<UserInforUpdateDto>(userInfor));
         }
 
         // DELETE: api/UserInfor/5
@@ -67,5 +63,6 @@ namespace MyApi.API.Controllers
 
             return NoContent();
         }
+
     }
 }

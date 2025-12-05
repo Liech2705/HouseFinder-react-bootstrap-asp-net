@@ -23,14 +23,9 @@ namespace MyApi.Infrastructure.Configurations
                    .IsRequired();
 
             builder.Property(b => b.Status)
+                   .HasDefaultValue(BookingStatus.Pending)
                    .HasConversion<string>() // enum -> string
                    .HasMaxLength(50)
-                   .IsRequired();
-
-            builder.Property(b => b.Check_In_Date)
-                   .IsRequired();
-
-            builder.Property(b => b.Check_Out_Date)
                    .IsRequired();
 
             builder.Property(b => b.Created_At)

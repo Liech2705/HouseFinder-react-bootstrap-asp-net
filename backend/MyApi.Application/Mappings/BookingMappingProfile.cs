@@ -13,9 +13,11 @@ namespace MyApi.Application.Mappings
             CreateMap<Booking, BookingReadDto>()
                 .ForMember(dest => dest.RoomTitle, opt => opt.MapFrom(src => src.Room.Title))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.User_Name))
+                .ForMember(dest => dest.HouseName, opt => opt.MapFrom(src => src.Room.BoardingHouse.House_Name))
+                .ForMember(dest => dest.HouseAddress, opt => opt.MapFrom(src => src.Room.BoardingHouse.Province + src.Room.BoardingHouse.Commune + src.Room.BoardingHouse.Street))
+                .ForMember(dest => dest.RoomImages, opt => opt.MapFrom(src => src.Room.RoomImages.Select(i => i.Image_Url)))
                 .ForMember(dest => dest.Payments, opt => opt.MapFrom(src => src.Payments))
-                .ForMember(dest => dest.CheckBookings, opt => opt.MapFrom(src => src.CheckBookings))
-                .ForMember(dest => dest.Review, opt => opt.MapFrom(src => src.Review));
+                .ForMember(dest => dest.CheckBookings, opt => opt.MapFrom(src => src.CheckBookings));
 
             // BookingCreateDto -> Booking
             CreateMap<BookingCreateDto, Booking>()

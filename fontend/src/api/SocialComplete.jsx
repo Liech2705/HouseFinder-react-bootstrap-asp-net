@@ -7,6 +7,7 @@ export default function SocialComplete() {
     const navigate = useNavigate();
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get("token");
+
     const [user, setUser] = useState(null);
     const [form, setForm] = useState({
         password: '',
@@ -51,7 +52,18 @@ export default function SocialComplete() {
             console.log('Registration successful:', res);
             localStorage.setItem("token", res.token);
             localStorage.setItem("user", JSON.stringify(res.data.user));
-            navigate('/');
+
+            const redirectUrl = localStorage.getItem("redirectAfterLogin");
+
+            if (redirectUrl) {
+                // Xóa để lần sau không bị nhảy linh tinh
+                localStorage.removeItem("redirectAfterLogin");
+                // Bay về trang checkout
+                navigate(redirectUrl);
+            } else {
+                // Mặc định về trang chủ
+                navigate("/");
+            }
         } catch (error) {
             console.error('Có lỗi xảy ra, thử lại sau', error);
         }

@@ -93,14 +93,14 @@ namespace MyApi.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Booking_Id"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
+                    b.Property<long>("Amount")
+                        .HasColumnType("bigint");
 
-                    b.Property<DateTime>("Check_In_Date")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly?>("Check_In_Date")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("Check_Out_Date")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly?>("Check_Out_Date")
+                        .HasColumnType("date");
 
                     b.Property<DateTime>("Created_At")
                         .ValueGeneratedOnAdd()
@@ -112,8 +112,10 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasDefaultValue("Pending");
 
                     b.Property<int>("User_Id")
                         .HasColumnType("int");
@@ -143,7 +145,7 @@ namespace MyApi.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<int>("Room_Id")
+                    b.Property<int?>("Room_Id")
                         .HasColumnType("int");
 
                     b.Property<int>("User_Id")
@@ -342,13 +344,13 @@ namespace MyApi.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Payment_Id"));
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
                     b.Property<int>("Booking_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("Method_Id")
+                    b.Property<long>("Deposit")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Method_Paid")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Paid_At")
@@ -361,14 +363,13 @@ namespace MyApi.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("Transaction_Id")
-                        .HasColumnType("int");
+                    b.Property<string>("Transaction_Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Payment_Id");
 
                     b.HasIndex("Booking_Id");
-
-                    b.HasIndex("Method_Id");
 
                     b.ToTable("Payments");
                 });
@@ -425,9 +426,8 @@ namespace MyApi.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Room_Id"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateOnly?>("Check_In_Default")
+                        .HasColumnType("date");
 
                     b.Property<DateTime?>("Created_At")
                         .ValueGeneratedOnAdd()
@@ -435,7 +435,6 @@ namespace MyApi.Infrastructure.Migrations
                         .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("House_Id")
@@ -601,11 +600,18 @@ namespace MyApi.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Infor_Id"));
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Avatar")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Dob")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly?>("Dob")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Gender")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
@@ -700,9 +706,6 @@ namespace MyApi.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Review_Id"));
 
-                    b.Property<int>("Booking_Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("Comment")
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
@@ -716,16 +719,13 @@ namespace MyApi.Infrastructure.Migrations
                         .HasColumnType("tinyint")
                         .HasComment("Giá trị từ 1 đến 5");
 
-                    b.Property<int?>("Room_Id")
+                    b.Property<int>("Room_Id")
                         .HasColumnType("int");
 
                     b.Property<int>("User_Id")
                         .HasColumnType("int");
 
                     b.HasKey("Review_Id");
-
-                    b.HasIndex("Booking_Id")
-                        .IsUnique();
 
                     b.HasIndex("Room_Id");
 
@@ -775,8 +775,7 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasOne("MyApi.Domain.Entities.Room", "Room")
                         .WithMany("ChatConversations")
                         .HasForeignKey("Room_Id")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithMany("ChatConversations")
@@ -831,12 +830,13 @@ namespace MyApi.Infrastructure.Migrations
 
                     b.HasOne("MyApi.Domain.Entities.Room", "Room")
                         .WithMany("FavoriteHouse")
-                        .HasForeignKey("Room_Id");
+                        .HasForeignKey("Room_Id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithMany("FavoriteHouses")
                         .HasForeignKey("User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("BoardingHouse");
@@ -876,15 +876,7 @@ namespace MyApi.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MyApi.Domain.Entities.UserPaymentMethod", "UserPaymentMethod")
-                        .WithMany("Payments")
-                        .HasForeignKey("Method_Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("Booking");
-
-                    b.Navigation("UserPaymentMethod");
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.Report", b =>
@@ -903,7 +895,7 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasOne("MyApi.Domain.Entities.BoardingHouse", "BoardingHouse")
                         .WithMany("Rooms")
                         .HasForeignKey("House_Id")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MyApi.Domain.Entities.User", "Owner")
@@ -922,7 +914,7 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasOne("MyApi.Domain.Entities.Room", "Room")
                         .WithMany("RoomImages")
                         .HasForeignKey("Room_Id")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Room");
@@ -933,7 +925,7 @@ namespace MyApi.Infrastructure.Migrations
                     b.HasOne("MyApi.Domain.Entities.Room", "Room")
                         .WithOne("RoomProperty")
                         .HasForeignKey("MyApi.Domain.Entities.RoomProperty", "Room_Id")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Room");
@@ -974,15 +966,11 @@ namespace MyApi.Infrastructure.Migrations
 
             modelBuilder.Entity("Review", b =>
                 {
-                    b.HasOne("MyApi.Domain.Entities.Booking", "Booking")
-                        .WithOne("Review")
-                        .HasForeignKey("Review", "Booking_Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MyApi.Domain.Entities.Room", null)
+                    b.HasOne("MyApi.Domain.Entities.Room", "Room")
                         .WithMany("Reviews")
-                        .HasForeignKey("Room_Id");
+                        .HasForeignKey("Room_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MyApi.Domain.Entities.User", "User")
                         .WithMany("Reviews")
@@ -990,7 +978,7 @@ namespace MyApi.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Booking");
+                    b.Navigation("Room");
 
                     b.Navigation("User");
                 });
@@ -1009,9 +997,6 @@ namespace MyApi.Infrastructure.Migrations
                     b.Navigation("CheckBookings");
 
                     b.Navigation("Payments");
-
-                    b.Navigation("Review")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MyApi.Domain.Entities.ChatConversation", b =>
@@ -1061,11 +1046,6 @@ namespace MyApi.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("chatMessages");
-                });
-
-            modelBuilder.Entity("MyApi.Domain.Entities.UserPaymentMethod", b =>
-                {
-                    b.Navigation("Payments");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,16 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { logout } from '../api/auth.jsx';
 
 function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Check if user is logged in (you can replace this with your actual auth logic)
         const checkAuth = () => {
             const userData = localStorage.getItem('user');
-            if (userData) {
+            const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+            if (userData && token) {
                 setUser(JSON.parse(userData));
                 setIsLoggedIn(true);
             }
@@ -20,11 +22,17 @@ function Header() {
 
 
     const handleLogout = async () => {
-        await logout();
+        try {
+            await logout();
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+
+        // Clear local state and redirect regardless of API success
         setIsLoggedIn(false);
         setUser(null);
-        // Redirect to home page
-        window.location.href = '/';
+        navigate('/');
+        window.location.reload(); // Force a refresh to clear all state
     };
 
     return (
@@ -72,9 +80,12 @@ function Header() {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                <div className="user-avatar">
-                                    <i className="bi bi-person-circle fs-5"></i>
-                                </div>
+                                <img
+                                    src={`${import.meta.env.VITE_URL_ROOT}${user?.avatar}`}
+                                    alt="Avatar"
+                                    className="rounded-circle"
+                                    style={{ width: "32px", height: "32px", objectFit: "cover" }}
+                                />
                                 <span className="d-none d-md-inline">{user?.userName || 'User'}</span>
                             </button>
                             <ul className="dropdown-menu dropdown-menu-end">
@@ -92,9 +103,9 @@ function Header() {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link className="dropdown-item" to="/my-rooms">
+                                    <Link className="dropdown-item" to="/my-bookings">
                                         <i className="bi bi-house me-2"></i>
-                                        Phòng của tôi
+                                        Phòng đã đặt
                                     </Link>
                                 </li>
                                 <li>
@@ -103,17 +114,17 @@ function Header() {
                                         Yêu thích
                                     </Link>
                                 </li>
-                                {user?.role == 2 ? (
+                                {user?.role == "Admin" ? (
                                     <li>
                                         <Link className="dropdown-item" to="/admin">
                                             <i className="bi bi-gear me-2"></i>
-                                            Quản lý
+                                            Quản Trị
                                         </Link>
                                     </li>
                                 ) : null
                                 }
-                                {user?.role == 1 ? (
-                                    <li>
+                                {user?.role == "Host" ? (
+                                    <li>    
                                         <Link className="dropdown-item" to="/manage">
                                             <i className="bi bi-gear me-2"></i>
                                             Quản lý phòng trọ

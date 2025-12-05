@@ -1,15 +1,8 @@
-import axios from 'axios';
+import { api } from "./api";
 
-// In Vite, env vars must be prefixed with VITE_ and accessed via import.meta.env
-const API_BASE_URL = import.meta.env.VITE_URL_API_ROOT;
 
 const login = async ({ email, password }) => {
-    const response = await axios.post(`${API_BASE_URL}/Auth/login`, { email, password }, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        },
-    });
+    const response = await api.post(`/Auth/login`, { email, password });
     return response.data;
 };
 
@@ -33,32 +26,25 @@ const register = async ({ firstName, lastName, email, phone, password, userType 
         phone,
         role: roleValue,
     };
-    const response = await axios.post(`${API_BASE_URL}/Auth/register`, payload, {
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        },
-    });
+    const response = await api.post(`/Auth/register`, payload);
 
     console.log('Register response:', response);
     return response.data;
 };
 
 const logout = async () => {
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    console.log('Logging out with token:', token);
-    if (!token) return;
     try {
-        await axios.post(`${API_BASE_URL}/Auth/logout`, null, {
-            headers: { Authorization: `Bearer ${token}` }
-        });
+        await api.post(`/Auth/logout`, null);
+        console.log("Server logout successful.");
+    } catch (error) {
+        console.error("Logout API error:", error.response?.data || error.message);
+    } finally {
+        // Always clear local session information
         localStorage.removeItem('token');
         sessionStorage.removeItem('token');
         localStorage.removeItem('user');
-    } catch (error) {
-        console.error("Logout error:", error.response?.data || error.message);
+        console.log("Local session cleared.");
     }
-
 }
 
 export { login, register, logout };

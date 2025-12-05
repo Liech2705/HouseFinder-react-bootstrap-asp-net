@@ -1,5 +1,40 @@
+import { useState, useEffect } from "react";
+import { fetchRoomCount, usersFetch, api, fetchReport } from "../../api/api.jsx";
+
 
 export default function Dashboard() {
+    const [RoomCount, setRoomCount] = useState(0);
+    const [UserCount, setUserCount] = useState(0);
+    const [ReportCount, setReportCount] = useState(0);
+
+    useEffect(() => async () => {
+        // Fetch room count
+        const loadDashboardData = async () => {
+            try {
+                const response = await fetchRoomCount();
+                setRoomCount(response);
+            } catch (error) {
+                console.error("Error fetching room count:", error);
+            }
+
+            try {
+                const response = await usersFetch();
+                setUserCount(response.length);
+            } catch (error) {
+                console.error("Error fetching user count:", error);
+            }
+            // Fetch report count
+            try {
+                const response = await fetchReport();
+                setReportCount(response.length);
+            } catch (error) {
+                console.error("Error fetching report count:", error);
+            }
+        };
+
+        loadDashboardData();
+    }, []);
+
     return (
         <div className="dashboard-main container-fluid px-0">
             <div className="row justify-content-center mb-4">
@@ -30,7 +65,7 @@ export default function Dashboard() {
                             <i className="bi bi-house-door text-white fs-2"></i>
                         </div>
                         <h6 className="fw-semibold text-info mb-1">Phòng hoạt động</h6>
-                        <div className="fs-3 fw-bold text-dark">120</div>
+                        <div className="fs-3 fw-bold text-dark">{RoomCount}</div>
                         <div className="text-muted small">Đang cho thuê</div>
                     </div>
                 </div>
@@ -40,7 +75,7 @@ export default function Dashboard() {
                             <i className="bi bi-person text-white fs-2"></i>
                         </div>
                         <h6 className="fw-semibold text-success mb-1">Người dùng</h6>
-                        <div className="fs-3 fw-bold text-dark">210</div>
+                        <div className="fs-3 fw-bold text-dark">{UserCount}</div>
                         <div className="text-muted small">Đã đăng ký</div>
                     </div>
                 </div>
@@ -50,7 +85,7 @@ export default function Dashboard() {
                             <i className="bi bi-exclamation-triangle text-white fs-2"></i>
                         </div>
                         <h6 className="fw-semibold text-danger mb-1">Báo cáo vi phạm</h6>
-                        <div className="fs-3 fw-bold text-dark">5</div>
+                        <div className="fs-3 fw-bold text-dark">{ReportCount}</div>
                         <div className="text-muted small">Trong tháng này</div>
                     </div>
                 </div>

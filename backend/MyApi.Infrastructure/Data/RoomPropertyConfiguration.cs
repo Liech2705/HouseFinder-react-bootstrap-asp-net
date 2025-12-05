@@ -43,7 +43,7 @@ namespace MyApi.Infrastructure.Configurations
             builder.HasOne(rp => rp.Room)
                 .WithOne(r => r.RoomProperty) // cần thêm RoomProperty trong Room
                 .HasForeignKey<RoomProperty>(rp => rp.Room_Id)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

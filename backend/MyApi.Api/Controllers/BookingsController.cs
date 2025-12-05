@@ -1,9 +1,11 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using MyApi.Application.DTOs.BoardingHouseDtos;
 using MyApi.Application.DTOs.BookingDtos;
 using MyApi.Domain.Entities;
 using MyApi.Domain.Interfaces;
+using MyApi.Infrastructure.Services;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace MyApi.API.Controllers
 {
@@ -13,11 +15,15 @@ namespace MyApi.API.Controllers
     {
         private readonly IBookingRepository _bookingRepository;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _config;
+        private readonly IVnPayService _vnPayService;
 
-        public BookingsController(IBookingRepository bookingRepository, IMapper mapper)
+        public BookingsController(IBookingRepository bookingRepository, IMapper mapper, IConfiguration config, IVnPayService vnPayService)
         {
             _bookingRepository = bookingRepository;
             _mapper = mapper;
+            _config = config;
+            _vnPayService = vnPayService;
         }
 
         // GET: api/Bookings
@@ -44,6 +50,27 @@ namespace MyApi.API.Controllers
         [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<BookingReadDto>>> GetByUserId(int userId)
         {
+            var bookings = await _bookingRepository.GetByUserIdAsync(userId);
+            var bookingsDto = _mapper.Map<IEnumerable<BookingReadDto>>(bookings);
+            return Ok(bookingsDto);
+        }
+
+        // GET: api/Bookings/my-bookings
+        [Authorize]
+        [HttpGet("my-bookings")]
+        public async Task<ActionResult<IEnumerable<BookingReadDto>>> GetMyBookings()
+        {
+            var userIdString = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdString))
+            {
+                return Unauthorized();
+            }
+
+            if (!int.TryParse(userIdString, out var userId))
+            {
+                return BadRequest("Invalid user ID format.");
+            }
+
             var bookings = await _bookingRepository.GetByUserIdAsync(userId);
             var bookingsDto = _mapper.Map<IEnumerable<BookingReadDto>>(bookings);
             return Ok(bookingsDto);
@@ -97,6 +124,51 @@ namespace MyApi.API.Controllers
             await _bookingRepository.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpGet("CheckRoom/{roomId}")]
+        public async Task<IActionResult> CheckRoom(int roomId)
+        {
+            return Ok(await _bookingRepository.CheckBookingByRoomIdAsync(roomId));
+        }
+
+
+        [HttpPost("vnpay/pay")]
+        public async Task<IActionResult> CreatePaymentUrlVnpayAsync(VNPayRequest model)
+        {
+            model.BookingId = await _bookingRepository.GetIdByRoomIdAsync(model);
+            if (model.BookingId == -1) return BadRequest();
+
+            var url = _vnPayService.CreatePaymentUrl(model, HttpContext);
+
+            return Ok(new { paymentUrl = url });
+        }
+        [HttpGet("vnpay/return")]
+        public async Task<IActionResult> PaymentCallbackVnpay()
+        {
+            var response = _vnPayService.PaymentExecute(Request.Query);
+
+            await _bookingRepository.SavePaymentAsync(response);
+
+            string returnUrl = "";
+
+            if (response.Success && response.VnPayResponseCode == "00")
+            {
+                returnUrl = $"http://localhost:5173/payment-success";
+            } else
+            {
+                returnUrl = $"http://localhost:5173/payment-failed";
+            }
+
+            return Redirect(returnUrl);
+        }
+
+        [HttpGet("ispayment/{user_Id}/{room_Id}")]
+        public async Task<IActionResult> IsPaymentBooking(int user_Id, int room_Id)
+        {
+            bool isPaymentBooking = await _bookingRepository.CheckIsPayMent(user_Id, room_Id);
+
+            return Ok(isPaymentBooking);
         }
     }
 }

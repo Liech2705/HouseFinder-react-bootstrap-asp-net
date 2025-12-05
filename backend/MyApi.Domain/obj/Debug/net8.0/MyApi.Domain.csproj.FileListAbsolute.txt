@@ -24,6 +24,7 @@ D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\ref
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\bin\Debug\net8.0\MyApi.Domain.deps.json
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\bin\Debug\net8.0\MyApi.Domain.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\bin\Debug\net8.0\MyApi.Domain.pdb
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.csproj.AssemblyReference.cache
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.AssemblyInfoInputs.cache
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.AssemblyInfo.cs
@@ -33,4 +34,3 @@ D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\bac
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\refint\MyApi.Domain.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.pdb
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\ref\MyApi.Domain.dll
-D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Domain\obj\Debug\net8.0\MyApi.Domain.csproj.AssemblyReference.cache

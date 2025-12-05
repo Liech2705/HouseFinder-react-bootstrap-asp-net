@@ -1,7 +1,4 @@
 ﻿using MyApi.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace MyApi.Domain.Entities
 {
     public class BoardingHouse
@@ -15,7 +12,6 @@ namespace MyApi.Domain.Entities
         public int Water_Cost { get; set; }
         public string Province { get; set; }
         public string Commune { get; set; }
-
         public string Street { get; set; }
         public double? Latitude { get; set; }
 

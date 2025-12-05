@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
+﻿using MyApi.Domain.Enums;
 namespace MyApi.Domain.Entities
 {
     public class UserInfor
@@ -9,10 +7,12 @@ namespace MyApi.Domain.Entities
 
         public int User_Id { get; set; }
 
-        public DateTime? Dob { get; set; }
+        public DateOnly? Dob { get; set; }
 
         public string? Phone { get; set; }
         public string? Avatar { get; set; }
+        public InforGender? Gender { get; set; }
+        public string? Address { get; set; }
 
         public DateTime? Update_At { get; set; }
 

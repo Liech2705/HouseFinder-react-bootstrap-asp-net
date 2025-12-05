@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Table, Button, Modal, Badge, Spinner } from "react-bootstrap";
 import { Eye, CheckCircle, XCircle } from "lucide-react"; // 🧩 Gói icon cực đẹp
+import { fetchReport } from "../../api/api.jsx";
 import axios from "axios";
 
 const ReportsPage = () => {
@@ -12,8 +13,8 @@ const ReportsPage = () => {
     const fetchReports = async () => {
         try {
             setLoading(true);
-            const res = await axios.get("https://localhost:7167/api/Reports");
-            setReports(res.data);
+            const res = await fetchReport();
+            setReports(res);
         } catch (err) {
             console.error("Error loading reports", err);
         } finally {

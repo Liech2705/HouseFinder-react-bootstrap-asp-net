@@ -22,6 +22,10 @@ namespace MyApi.Infrastructure.Data
             b.Property(u => u.Infor_Id)
              .ValueGeneratedOnAdd();
 
+            b.Property(u => u.Gender)
+                .HasConversion<string>()
+                .HasMaxLength(20);
+
             // Mối quan hệ
             b.HasOne(ui => ui.User)
              .WithOne(u => u.UserInfor)

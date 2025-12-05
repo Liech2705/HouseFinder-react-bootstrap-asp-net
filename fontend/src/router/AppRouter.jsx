@@ -17,9 +17,17 @@ import AccountManagement from '../pages/admin/AccountManager.jsx';
 import ReportsPage from '../pages/admin/ReportsPage.jsx';
 import FavoriteHouses from '../pages/user/Favorite/FavoriteHouses.jsx';
 import UserProfile from '../pages/user/Profile/UserProfile.jsx';
+import ChatBox from '../pages/user/ChatBox.jsx';
+import BookingPage from '../pages/user/Booking/Booking.jsx';
+import MyBookingsPage from '../pages/user/Booking/MyBookingsPage.jsx';
+import HostRoomManager from '../pages/host/HostRoomManager.jsx';
+import PaymentSuccess from '../pages/user/Booking/PaymentSuccess.jsx';
+import PaymentFail from '../pages/user/Booking/PaymentFail.jsx';
+import MapPage from '../pages/user/Maps/MapPage.jsx';
 
 
 const AppRouter = () => {
+
     return (
         <Router>
             <Routes>
@@ -28,9 +36,14 @@ const AppRouter = () => {
                 <Route path="/houses" element={<MainLayout><HouseList /></MainLayout>} />
                 <Route path="/favorite" element={<MainLayout><FavoriteHouses /></MainLayout>} />
                 <Route path="/profile" element={<MainLayout><UserProfile /></MainLayout>} />
+                <Route path="/my-bookings" element={<MainLayout><MyBookingsPage /></MainLayout>} />
                 <Route path="/houses/:id" element={<MainLayout><HouseDetail /></MainLayout>} />
                 <Route path="/houses/:houseId/rooms/:roomId" element={<MainLayout><RoomDetail /></MainLayout>} />
-
+                <Route path="/chat/:hostId/:userId" element={<MainLayout><ChatBox /></MainLayout>} />
+                <Route path="/booking/:token" element={<MainLayout><BookingPage /></MainLayout>} />
+                <Route path="/manage" element={<MainLayout><HostRoomManager /></MainLayout>} />
+                <Route path="/payment-success" element={<MainLayout><PaymentSuccess /></MainLayout>} />
+                <Route path="/payment-failed" element={<MainLayout><PaymentFail /></MainLayout>} />
 
                 <Route path="/admin" element={<AdminLayout />}>
                     <Route index element={<Dashboard />} />
@@ -41,10 +54,11 @@ const AppRouter = () => {
                 </Route>
 
                 {/* Auth pages without header/footer */}
+                <Route path="/map-view" element={<MapPage />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/auth/callback" element={<SocialComplete />} />
                 <Route path="/auth-re/callback" element={<AuthCallback />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/register/" element={<Register />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
             </Routes>
         </Router>

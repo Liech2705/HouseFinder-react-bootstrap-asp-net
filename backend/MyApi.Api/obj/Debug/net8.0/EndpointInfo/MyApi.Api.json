@@ -411,6 +411,27 @@
         }
       }
     },
+    "/api/BoardingHouse/search": {
+      "get": {
+        "tags": [
+          "BoardingHouse"
+        ],
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Bookings": {
       "get": {
         "tags": [
@@ -645,6 +666,44 @@
         }
       }
     },
+    "/api/Bookings/my-bookings": {
+      "get": {
+        "tags": [
+          "Bookings"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BookingReadDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BookingReadDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BookingReadDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Bookings/room/{roomId}": {
       "get": {
         "tags": [
@@ -690,6 +749,104 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Bookings/CheckRoom/{roomId}": {
+      "get": {
+        "tags": [
+          "Bookings"
+        ],
+        "parameters": [
+          {
+            "name": "roomId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Bookings/vnpay/pay": {
+      "post": {
+        "tags": [
+          "Bookings"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VNPayRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VNPayRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VNPayRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Bookings/vnpay/return": {
+      "get": {
+        "tags": [
+          "Bookings"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Bookings/ispayment/{user_Id}/{room_Id}": {
+      "get": {
+        "tags": [
+          "Bookings"
+        ],
+        "parameters": [
+          {
+            "name": "user_Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "room_Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -756,24 +913,7 @@
         },
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChatConversationReadDto"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChatConversationReadDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ChatConversationReadDto"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -1022,6 +1162,70 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/ChatConversations/{id}/messages": {
+      "get": {
+        "tags": [
+          "ChatConversations"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ChatConversations/{hostId}/{userId}": {
+      "get": {
+        "tags": [
+          "ChatConversations"
+        ],
+        "parameters": [
+          {
+            "name": "hostId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -1957,6 +2161,52 @@
         }
       }
     },
+    "/api/HouseImages/{id}/images/upload": {
+      "post": {
+        "tags": [
+          "HouseImages"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imageHouses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "imageHouses": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Notifications": {
       "get": {
         "tags": [
@@ -2372,104 +2622,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Payments/booking/{bookingId}": {
-      "get": {
-        "tags": [
-          "Payments"
-        ],
-        "parameters": [
-          {
-            "name": "bookingId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PaymentReadDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PaymentReadDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PaymentReadDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Payments/method/{methodId}": {
-      "get": {
-        "tags": [
-          "Payments"
-        ],
-        "parameters": [
-          {
-            "name": "methodId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PaymentReadDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PaymentReadDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/PaymentReadDto"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -3266,23 +3418,31 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "Image_Url",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/RoomImageUpdateDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RoomImageUpdateDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RoomImageUpdateDto"
+                "type": "object",
+                "properties": {
+                  "imageRoom": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "imageRoom": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -3360,6 +3520,52 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/RoomImages/{id}/images/upload": {
+      "post": {
+        "tags": [
+          "RoomImages"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "imageRooms": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "imageRooms": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -3846,49 +4052,67 @@
         }
       }
     },
-    "/api/Rooms/search": {
+    "/api/Rooms/{id}/status": {
+      "patch": {
+        "tags": [
+          "Rooms"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rooms/available_room/{houseId}": {
       "get": {
         "tags": [
           "Rooms"
         ],
         "parameters": [
           {
-            "name": "keyword",
-            "in": "query",
+            "name": "houseId",
+            "in": "path",
+            "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RoomReadDto"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RoomReadDto"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/RoomReadDto"
-                  }
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -3949,19 +4173,71 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/UserInforUpdateDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserInforUpdateDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/UserInforUpdateDto"
+                "type": "object",
+                "properties": {
+                  "Infor_Id": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Dob": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "Phone": {
+                    "type": "string"
+                  },
+                  "Avatar": {
+                    "type": "string"
+                  },
+                  "userName": {
+                    "type": "string"
+                  },
+                  "Gender": {
+                    "$ref": "#/components/schemas/InforGender"
+                  },
+                  "Address": {
+                    "type": "string"
+                  },
+                  "Update_At": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "AvatarFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Infor_Id": {
+                  "style": "form"
+                },
+                "Dob": {
+                  "style": "form"
+                },
+                "Phone": {
+                  "style": "form"
+                },
+                "Avatar": {
+                  "style": "form"
+                },
+                "userName": {
+                  "style": "form"
+                },
+                "Gender": {
+                  "style": "form"
+                },
+                "Address": {
+                  "style": "form"
+                },
+                "Update_At": {
+                  "style": "form"
+                },
+                "AvatarFile": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -4706,15 +4982,17 @@
           },
           "amount": {
             "type": "integer",
-            "format": "int32"
+            "format": "int64"
           },
           "check_In_Date": {
             "type": "string",
-            "format": "date-time"
+            "format": "date",
+            "nullable": true
           },
           "check_Out_Date": {
             "type": "string",
-            "format": "date-time"
+            "format": "date",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -4736,18 +5014,20 @@
           },
           "amount": {
             "type": "integer",
-            "format": "int32"
+            "format": "int64"
           },
           "status": {
             "$ref": "#/components/schemas/BookingStatus"
           },
           "check_In_Date": {
             "type": "string",
-            "format": "date-time"
+            "format": "date",
+            "nullable": true
           },
           "check_Out_Date": {
             "type": "string",
-            "format": "date-time"
+            "format": "date",
+            "nullable": true
           },
           "created_At": {
             "type": "string",
@@ -4759,6 +5039,21 @@
           },
           "userName": {
             "type": "string",
+            "nullable": true
+          },
+          "houseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "houseAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "roomImages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
             "nullable": true
           },
           "payments": {
@@ -4783,12 +5078,11 @@
       },
       "BookingStatus": {
         "enum": [
-          0,
-          1,
-          2
+          "Pending",
+          "Confirmed",
+          "Cancelled"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "BookingUpdateDto": {
         "type": "object",
@@ -4798,17 +5092,17 @@
           },
           "check_In_Date": {
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           },
           "check_Out_Date": {
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           },
           "amount": {
             "type": "integer",
-            "format": "int32",
+            "format": "int64",
             "nullable": true
           }
         },
@@ -4819,7 +5113,8 @@
         "properties": {
           "room_Id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "user_Id": {
             "type": "integer",
@@ -4841,7 +5136,8 @@
           },
           "room_Id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "user_Id": {
             "type": "integer",
@@ -5078,11 +5374,18 @@
       },
       "HouseStatus": {
         "enum": [
-          0,
-          1
+          "hidden",
+          "visible"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
+      },
+      "InforGender": {
+        "enum": [
+          "Male",
+          "Female",
+          "Other"
+        ],
+        "type": "string"
       },
       "LockedUser": {
         "type": "object",
@@ -5111,6 +5414,14 @@
           }
         },
         "additionalProperties": false
+      },
+      "MethodPayment": {
+        "enum": [
+          "cod",
+          "vnpay",
+          "metamask"
+        ],
+        "type": "string"
       },
       "NotificationCreateDto": {
         "type": "object",
@@ -5167,13 +5478,12 @@
       },
       "NotificationType": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "General",
+          "Booking",
+          "Payment",
+          "Report"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "NotificationUpdateDto": {
         "type": "object",
@@ -5192,16 +5502,15 @@
             "format": "int32"
           },
           "transaction_Id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
-          "method_Id": {
-            "type": "integer",
-            "format": "int32"
+          "method_Paid": {
+            "$ref": "#/components/schemas/MethodPayment"
           },
-          "amount": {
+          "deposit": {
             "type": "integer",
-            "format": "int32"
+            "format": "int64"
           }
         },
         "additionalProperties": false
@@ -5218,16 +5527,15 @@
             "format": "int32"
           },
           "transaction_Id": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "nullable": true
           },
-          "method_Id": {
-            "type": "integer",
-            "format": "int32"
+          "method_Paid": {
+            "$ref": "#/components/schemas/MethodPayment"
           },
-          "amount": {
+          "deposit": {
             "type": "integer",
-            "format": "int32"
+            "format": "int64"
           },
           "status": {
             "$ref": "#/components/schemas/PaymentStatus"
@@ -5241,12 +5549,11 @@
       },
       "PaymentStatus": {
         "enum": [
-          0,
-          1,
-          2
+          "Success",
+          "Reject",
+          "Pending"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "PaymentUpdateDto": {
         "type": "object",
@@ -5355,23 +5662,21 @@
       },
       "ReportStatus": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "Pending",
+          "Reviewed",
+          "Resolved",
+          "Rejected"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "ReportType": {
         "enum": [
-          0,
-          1,
-          2,
-          3
+          "User",
+          "House",
+          "Message",
+          "Review"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "ReportUpdateDto": {
         "type": "object",
@@ -5407,7 +5712,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "booking_Id": {
+          "room_Id": {
             "type": "integer",
             "format": "int32"
           },
@@ -5433,7 +5738,11 @@
             "type": "integer",
             "format": "int32"
           },
-          "booking_Id": {
+          "user_Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "room_Id": {
             "type": "integer",
             "format": "int32"
           },
@@ -5485,18 +5794,12 @@
             "type": "string",
             "nullable": true
           },
-          "address": {
+          "status": {
+            "$ref": "#/components/schemas/RoomStatus"
+          },
+          "check_In_Default": {
             "type": "string",
-            "nullable": true
-          },
-          "latitude": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "longitude": {
-            "type": "number",
-            "format": "double",
+            "format": "date",
             "nullable": true
           },
           "price": {
@@ -5539,16 +5842,6 @@
           "uploaded_At": {
             "type": "string",
             "format": "date-time"
-          }
-        },
-        "additionalProperties": false
-      },
-      "RoomImageUpdateDto": {
-        "type": "object",
-        "properties": {
-          "image_Url": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5706,10 +5999,6 @@
             "type": "string",
             "nullable": true
           },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
           "price": {
             "type": "integer",
             "format": "int32",
@@ -5717,6 +6006,11 @@
           },
           "status": {
             "$ref": "#/components/schemas/RoomStatus"
+          },
+          "check_In_Default": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
           },
           "created_At": {
             "type": "string",
@@ -5753,11 +6047,10 @@
       },
       "RoomStatus": {
         "enum": [
-          0,
-          1
+          "hidden",
+          "visible"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "RoomUpdateDto": {
         "type": "object",
@@ -5770,10 +6063,6 @@
             "type": "string",
             "nullable": true
           },
-          "address": {
-            "type": "string",
-            "nullable": true
-          },
           "price": {
             "type": "integer",
             "format": "int32",
@@ -5781,6 +6070,11 @@
           },
           "status": {
             "$ref": "#/components/schemas/RoomStatus"
+          },
+          "check_In_Default": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -5814,7 +6108,7 @@
           },
           "dob": {
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           },
           "phone": {
@@ -5822,6 +6116,13 @@
             "nullable": true
           },
           "avatar": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "$ref": "#/components/schemas/InforGender"
+          },
+          "address": {
             "type": "string",
             "nullable": true
           }
@@ -5841,7 +6142,7 @@
           },
           "dob": {
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           },
           "phone": {
@@ -5849,31 +6150,19 @@
             "nullable": true
           },
           "avatar": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "$ref": "#/components/schemas/InforGender"
+          },
+          "address": {
             "type": "string",
             "nullable": true
           },
           "update_At": {
             "type": "string",
             "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "UserInforUpdateDto": {
-        "type": "object",
-        "properties": {
-          "dob": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "phone": {
-            "type": "string",
-            "nullable": true
-          },
-          "avatar": {
-            "type": "string",
             "nullable": true
           }
         },
@@ -6005,12 +6294,11 @@
       },
       "UserRole": {
         "enum": [
-          0,
-          1,
-          2
+          "User",
+          "Host",
+          "Admin"
         ],
-        "type": "integer",
-        "format": "int32"
+        "type": "string"
       },
       "UserUpdateDto": {
         "type": "object",
@@ -6029,6 +6317,42 @@
           },
           "role": {
             "$ref": "#/components/schemas/UserRole"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VNPayRequest": {
+        "type": "object",
+        "properties": {
+          "bookingId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roomId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "check_In_Date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "check_Out_Date": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "payment_Method": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

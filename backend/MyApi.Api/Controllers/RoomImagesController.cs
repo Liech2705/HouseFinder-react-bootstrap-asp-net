@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using MyApi.Application.DTOs.RoomImageDtos;
 using MyApi.Domain.Entities;
@@ -74,13 +75,16 @@ namespace MyApi.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var image = await _roomImageRepository.GetByIdAsync(id);
-            if (image == null) return NotFound();
-
-            _roomImageRepository.Remove(image);
-            await _roomImageRepository.SaveChangesAsync();
+            var image = await _roomImageRepository.DeleteRoomImageAsync(id);
+            if (!image) return NotFound();
 
             return NoContent();
+        }
+
+        [HttpPost("{id}/images/upload")]
+        public async Task ChangeImagesRoom(int id, [FromForm] IFormFileCollection imageRooms)
+        {
+            await _roomImageRepository.ChangeImagesRoom(id, imageRooms);
         }
     }
 }

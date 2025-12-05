@@ -1,19 +1,20 @@
 import { useMemo, useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { rooms as fetchHouses, getFavorite, postFavorite } from '../../../api/api.jsx';
+import { house as fetchHouses, getFavorite, postFavorite, getAndPostConversations, checkBooking } from '../../../api/api.jsx';
 import StarRating from '../../../components/StarRating.jsx';
 import Breadcrumbs from '../../../components/Breadcrumbs.jsx';
+import HostelMap from '../Maps/HostelMap.jsx';
 
 function HouseDetail() {
     // Đổi tên biến: id trong URL giờ là houseId
     const { id: houseId } = useParams();
     const navigate = useNavigate();
     const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : null;
-
+    const [showLargeMap, setShowLargeMap] = useState(false);
     const [housesData, setHousesData] = useState([]);
     const [isFavorite, setIsFavorite] = useState(false);
     const [loading, setLoading] = useState(true);
-    const placeholder = 'https://s3.tech12h.com/sites/default/files/styles/inbody400/public/field/image/no-image-available.jpg';
+    const placeholder = 'https://surl.li/drynzt'; // Ảnh placeholder nếu không có ảnh
 
     // 1. Fetch dữ liệu House (Hook 1)
     useEffect(() => {
@@ -56,10 +57,19 @@ function HouseDetail() {
         return housesData.find((h) => String(h.house_Id) === String(houseId));
     }, [housesData, houseId]);
 
+    const convertImagesToDisplay = (imageUrl) => {
+        return import.meta.env.VITE_URL_ROOT + imageUrl;
+    }
     // 3. Tính toán dữ liệu hiển thị
     const rooms = house?.rooms || [];
+    const roomsfiltered = house?.rooms.filter(r => r.status === "visible") || [];
     const mainRoom = rooms[0];
-    const images = mainRoom?.roomImages?.map(img => img.imageUrl) || [placeholder];
+    // Use house-level images for the gallery (fallback to main room images if houseImages not present)
+    const images = useMemo(() => {
+        const houseImgs = house?.houseImages?.map(img => convertImagesToDisplay(img.image_Url));
+        if (houseImgs && houseImgs.length > 0) return houseImgs;
+        return (mainRoom?.roomImages?.map(img => convertImagesToDisplay(img.image_Url)) || [placeholder]);
+    }, [house?.houseImages, mainRoom?.roomImages]);
 
     // Tính rating trung bình của TẤT CẢ các phòng trong nhà trọ
     const allReviews = rooms.flatMap(r => r.reviews || []);
@@ -88,7 +98,7 @@ function HouseDetail() {
         'has_Mezzanine': 'Gác xép', 'has_Hot_Water': 'Nước nóng', 'has_Pet': 'Thú cưng',
         'has_Fridge': 'Tủ lạnh', 'has_Window': 'Cửa sổ'
     };
-    rooms.forEach(room => {
+    roomsfiltered.forEach(room => {
         const props = room.roomProperty;
         if (props) {
             Object.keys(featureMap).forEach(key => {
@@ -104,20 +114,64 @@ function HouseDetail() {
 
     // Lấy ảnh đại diện và trạng thái ảnh
     // Dùng useState để lưu ảnh được chọn
-    const [selected, setSelected] = useState(images[0]);
+    const [selected, setSelected] = useState(null);
+    // Booking statuses fetched from API: { [roomId]: boolean }
+    const [bookingStatuses, setBookingStatuses] = useState({});
 
-    // Trạng thái (Giả định nhà trọ còn phòng trống nếu availableRooms > 0)
-    const availableRoomsCount = rooms.filter(r => r.status === 1).length;
+    // When rooms load, check booking status for each room (async)
+    useEffect(() => {
+        if (!rooms || rooms.length === 0) return;
+        // Reset statuses for current house rooms
+        setBookingStatuses({});
+        rooms.forEach(async (r) => {
+            try {
+                const isBooked = await checkBooking(r.room_Id);
+                setBookingStatuses(prev => ({ ...prev, [r.room_Id]: isBooked }));
+            } catch (err) {
+                console.error('Error checking booking for room', r.room_Id, err);
+            }
+        });
+    }, [rooms]);
+
+    // Trạng thái (tính lại dựa trên bookingStatuses)
+    // Nếu một phòng chưa có status (undefined) nó sẽ được tính là "không thuê" (available) until API responds.
+    const availableRoomsCount = rooms.filter(r => !bookingStatuses[r.room_Id]).length;
     const houseStatus = availableRoomsCount > 0 ? 'Còn phòng' : 'Đã hết';
     const statusColor = availableRoomsCount > 0 ? 'success' : 'secondary';
+
+
 
     // ✅ ĐÃ SỬA VỊ TRÍ HOOK: Đảm bảo Hook này được gọi ở đầu, trước mọi lệnh return điều kiện.
     // Cập nhật selected image nếu images thay đổi (ví dụ: sau khi load data)
     useEffect(() => {
-        if (images.length > 0 && selected !== images[0]) {
+        // Only set initial selected image when images change and there's no selection yet.
+        if (images.length > 0 && !selected) {
             setSelected(images[0]);
         }
-    }, [images, selected]);
+    }, [images]);
+
+    const openChatWithHost = async (hostid) => {
+        try {
+            let userid = JSON.parse(localStorage.getItem('user'))?.id;
+            // tạo hoặc lấy conversation (API sẽ trả id nếu chưa có)
+            const response = await getAndPostConversations(hostid, userid);
+
+            const convId = response.conversation_Id;
+            // phát event để ChatWidget mở popup và chọn conversation
+            window.dispatchEvent(new CustomEvent('openChat', {
+                detail: { conversationId: convId, hostId: hostid }
+            }));
+        } catch (err) {
+            console.error('Lỗi khi mở chat:', err);
+            // fallback: phát event với hostId để ChatWidget tự tạo conversation
+            window.dispatchEvent(new CustomEvent('openChat', { detail: { hostId: hostid } }));
+        }
+    };
+
+    const handleOpenMapPage = () => {
+        // Chuyển hướng sang /map-view và gửi kèm object 'house'
+        navigate('/map-view', { state: { house: house } });
+    };
 
     // --- CÁC ĐIỀU KIỆN RETURN SỚM ---
 
@@ -145,7 +199,7 @@ function HouseDetail() {
             </main>
         );
     }
-
+    console.log(house);
     // --- RENDER CHÍNH ---
 
     return (
@@ -184,8 +238,6 @@ function HouseDetail() {
                                 ></i>
                             </div>
                         </div>
-
-
                         {images.length > 1 && (
                             <>
                                 <div className="thumb-break mx-3" />
@@ -254,17 +306,49 @@ function HouseDetail() {
                     {/* Danh sách các phòng trong nhà trọ */}
                     <article className="card shadow-sm mb-4">
                         <div className="card-body">
-                            <h2 className="h6 fw-bold mb-3">Các phòng hiện có ({rooms.length})</h2>
-                            <div className="row g-3">
-                                {rooms.map((room) => (
+                            <h2 className="h6 fw-bold mb-3">Các phòng hiện có ({roomsfiltered.length})</h2>
+                            <div className="row g-2">
+                                {roomsfiltered.map((room) => {
+                                    const isBooked = bookingStatuses[room.room_Id];
                                     // Bọc phòng bằng HouseCard/RoomCard để liên kết đến trang chi tiết phòng
-                                    <Link to={`/houses/${house.house_Id}/rooms/${room.room_Id}`} key={room.room_Id} className="room-link text-decoration-none col-12 col-md-6 col-lg-4">
-                                        {/* Lưu ý: HouseCard được dùng ở đây cần được tùy chỉnh để hiển thị Room */}
-                                        <p className="fw-semibold mb-1">{room.title}</p>
-                                        <p className="text-secondary small">Giá: {new Intl.NumberFormat('vi-VN').format(room.price)} ₫</p>
-                                    </Link>
-                                ))}
-                                {rooms.length === 0 && <p className="text-muted m-0">Nhà trọ này hiện chưa có phòng nào được đăng.</p>}
+                                    return (
+                                        <Link
+                                            to={`/houses/${house.house_Id}/rooms/${room.room_Id}`}
+                                            key={room.room_Id}
+                                            className="room-link text-decoration-none col-12 col-md-6 col-lg-4"
+                                            // Tùy chọn: Nếu muốn chặn click hoàn toàn khi đã thuê thì bỏ comment dòng dưới
+                                            // style={{ pointerEvents: isBooked ? 'none' : 'auto' }}
+                                        >
+                                            {/* Thêm class border và background để làm nổi bật thẻ */}
+                                            <div className={`p-3 border rounded h-100 ${isBooked ? 'bg-light opacity-75' : 'bg-white shadow-sm-hover'}`}>
+                                                <div className="d-flex justify-content-between align-items-start mb-2">
+                                                    <p className={`fw-semibold mb-0 ${isBooked ? 'text-muted' : 'text-dark'}`}>
+                                                        {room.title}
+                                                    </p>
+
+                                                    {/* 2. Hiển thị Badge trạng thái */}
+                                                    {isBooked ? (
+                                                        <span className="badge bg-secondary ms-2">Đã thuê</span>
+                                                    ) : (
+                                                        <span className="badge bg-success ms-2">Còn trống</span>
+                                                    )}
+                                                </div>
+
+                                                <p className="text-secondary small mb-0">
+                                                    Giá: {new Intl.NumberFormat('vi-VN').format(room.price)} ₫
+                                                </p>
+
+                                                {/* Dòng thông báo nhỏ nếu cần */}
+                                                {!isBooked && (
+                                                    <small className="text-primary fst-italic mt-1 d-block">
+                                                        Có thể đặt cọc
+                                                    </small>
+                                                )}
+                                            </div>
+                                        </Link>
+                                    )
+                                })}
+                                {roomsfiltered.length === 0 && <p className="text-muted m-0">Nhà trọ này hiện chưa có phòng nào được đăng.</p>}
                             </div>
                         </div>
                     </article>
@@ -280,11 +364,10 @@ function HouseDetail() {
                                     {allReviews.map((rv, index) => (
                                         <div key={index} className="py-2 border-bottom">
                                             <div className="d-flex align-items-center mb-1">
-                                                <strong className="me-2">{rv.user || 'Người dùng ẩn danh'}</strong>
+                                                <strong className="me-2">{rv.user_Name || 'Người dùng ẩn danh'}</strong>
                                                 <StarRating rating={rv.rating} small />
-                                                <span className="text-secondary ms-2 fs-8">{rv.rating}/5</span>
                                             </div>
-                                            <div className="text-secondary">{rv.comment || 'Không có bình luận.'}</div>
+                                            <div>{rv.comment || 'Không có bình luận.'}</div>
                                         </div>
                                     ))}
                                 </div>
@@ -305,26 +388,15 @@ function HouseDetail() {
                                     Giá: {priceFormatted}
                                 </div>
                                 <div className="d-grid gap-2 mt-3">
-                                    <button className="btn btn-primary btn-lg">Liên hệ thuê phòng</button>
-                                    <button
-                                        className="btn btn-outline-secondary"
-                                        onClick={() => {
-                                            const q = encodeURIComponent(`${house.street}, ${house.commune}, ${house.province}`);
-                                            window.open(
-                                                `https://www.google.com/maps/search/?api=1&query=${q}`,
-                                                '_blank',
-                                                'noopener,noreferrer'
-                                            );
-                                        }}
-                                    >
-                                        Xem trên bản đồ
+                                    <button className="btn btn-outline-secondary" onClick={handleOpenMapPage}>
+                                        Xem bản đồ lớn
                                     </button>
                                 </div>
                             </div>
                         </div>
 
                         {/* Chủ trọ */}
-                        {house.userName && (
+                        {house.user_Id !== (JSON.parse(localStorage.getItem('user'))?.id) && (
                             <div className="card shadow-sm mb-4">
                                 <div className="card-body d-flex align-items-center gap-3">
                                     <img
@@ -339,29 +411,25 @@ function HouseDetail() {
                                         <div className="fw-semibold">{house.userName}</div>
                                         <div className="text-secondary fs-8">Chủ trọ</div>
                                     </div>
+                                    <button
+                                        className="btn btn-primary btn-small"
+                                        onClick={() => openChatWithHost(house.user_Id)}
+                                    >
+                                        Liên hệ chủ trọ
+                                    </button>
                                 </div>
                             </div>
                         )}
 
                         {/* Bản đồ */}
 
-                        <div className="card shadow-sm">
-                            <div className="card-body">
-                                <h3 className="h6 fw-bold mb-2">Vị trí trên bản đồ</h3>
-                                <div className="ratio ratio-4x3">
-                                    <iframe
-                                        title="Bản đồ vị trí"
-                                        style={{ border: 0 }}
-                                        loading="lazy"
-                                        allowFullScreen
-                                        src={
-                                            house.latitude && house.longitude
-                                                ? `https://maps.google.com/maps?q=${house.latitude},${house.longitude}&hl=vi&z=16&output=embed`
-                                                : `https://maps.google.com/maps?q=${encodeURIComponent(
-                                                    house.address || house.title
-                                                )}&hl=vi&z=16&output=embed`
-                                        }
-                                    />
+                        <div id="map-section" className="card shadow-sm">
+                            <div className="card-body p-0">
+                                <h3 className="h6 fw-bold m-3">Vị trí trên bản đồ</h3>
+                                <div style={{ height: '300px', width: '100%' }}>
+                                    {/* Sử dụng HostelMap thay thế iframe */}
+                                    {/* Truyền house vào mảng hostels, map sẽ tự vẽ đường nếu lấy được vị trí user */}
+                                    <HostelMap hostels={[house]} />
                                 </div>
                             </div>
                         </div>

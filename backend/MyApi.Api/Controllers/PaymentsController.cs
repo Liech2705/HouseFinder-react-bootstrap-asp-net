@@ -41,22 +41,22 @@ namespace MyApi.API.Controllers
         }
 
         // GET: api/Payments/booking/5
-        [HttpGet("booking/{bookingId}")]
-        public async Task<ActionResult<IEnumerable<PaymentReadDto>>> GetByBookingId(int bookingId)
-        {
-            var payments = await _paymentRepository.GetByBookingIdAsync(bookingId);
-            var paymentsDto = _mapper.Map<IEnumerable<PaymentReadDto>>(payments);
-            return Ok(paymentsDto);
-        }
+        //[HttpGet("booking/{bookingId}")]
+        //public async Task<ActionResult<IEnumerable<PaymentReadDto>>> GetByBookingId(int bookingId)
+        //{
+        //    var payments = await _paymentRepository.GetByBookingIdAsync(bookingId);
+        //    var paymentsDto = _mapper.Map<IEnumerable<PaymentReadDto>>(payments);
+        //    return Ok(paymentsDto);
+        //}
 
-        // GET: api/Payments/method/5
-        [HttpGet("method/{methodId}")]
-        public async Task<ActionResult<IEnumerable<PaymentReadDto>>> GetByMethodId(int methodId)
-        {
-            var payments = await _paymentRepository.GetByMethodIdAsync(methodId);
-            var paymentsDto = _mapper.Map<IEnumerable<PaymentReadDto>>(payments);
-            return Ok(paymentsDto);
-        }
+        //// GET: api/Payments/method/5
+        //[HttpGet("method/{methodId}")]
+        //public async Task<ActionResult<IEnumerable<PaymentReadDto>>> GetByMethodId(int methodId)
+        //{
+        //    var payments = await _paymentRepository.GetByMethodIdAsync(methodId);
+        //    var paymentsDto = _mapper.Map<IEnumerable<PaymentReadDto>>(payments);
+        //    return Ok(paymentsDto);
+        //}
 
         // POST: api/Payments
         [HttpPost]

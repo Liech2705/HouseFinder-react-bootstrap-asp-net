@@ -1,4 +1,5 @@
-﻿using MyApi.Domain.Entities;
+﻿using MyApi.Application.DTOs.BoardingHouseDtos;
+using MyApi.Domain.Entities;
 using MyApi.Infrastructure.Interfaces;
 
 namespace MyApi.Domain.Interfaces
@@ -9,5 +10,7 @@ namespace MyApi.Domain.Interfaces
         Task<IEnumerable<BoardingHouse>> GetByUserIdAsync(int userId);
         Task<BoardingHouse> HidenHouseAsync(int houseId);
         Task<BoardingHouse> VisibleHouseAsync(int houseId);
+        Task<List<SearchHouseResult>> SearchHouseAsync(string keyword);
+        
     }
 }

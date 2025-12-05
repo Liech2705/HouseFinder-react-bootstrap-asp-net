@@ -10,7 +10,7 @@ namespace MyApi.Infrastructure.Configurations
         {
             builder.HasKey(p => p.Payment_Id);
 
-            builder.Property(p => p.Amount)
+            builder.Property(p => p.Deposit)
                 .IsRequired();
 
             builder.Property(p => p.Status)
@@ -27,10 +27,10 @@ namespace MyApi.Infrastructure.Configurations
                 .OnDelete(DeleteBehavior.Restrict);
 
             // Quan hệ với UserPaymentMethod
-            builder.HasOne(p => p.UserPaymentMethod)
-                .WithMany(upm => upm.Payments)
-                .HasForeignKey(p => p.Method_Id)
-                .OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(p => p.UserPaymentMethod)
+            //    .WithMany(upm => upm.Payments)
+            //    .HasForeignKey(p => p.Method_Id)
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

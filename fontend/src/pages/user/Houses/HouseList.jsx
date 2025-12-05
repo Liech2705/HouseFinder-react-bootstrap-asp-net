@@ -1,28 +1,30 @@
 import { useMemo, useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import HouseCard from '../../../components/HouseCard.jsx';
-import { rooms as fetchHouses } from '../../../api/room.jsx';
+import { house as fetchHouses } from '../../../api/api.jsx';
 
 import '../../styles/RoomsList.css';
-
+import HostelMap from '../Maps/HostelMap.jsx';
 import Pagination from '../../../components/Pagination.jsx';
 import Breadcrumbs from '../../../components/Breadcrumbs.jsx';
 
 // Định nghĩa trạng thái hiển thị (Giả định 1 là trạng thái hiển thị công khai)
-const VISIBLE_STATUS = 1; 
+const VISIBLE_STATUS = "visible";
 
 export default function HouseList() {
     const [houses, setHouses] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const [searchParams] = useSearchParams();
     // Filter/Sort States
-    const [query, setQuery] = useState('');
-    const [priceMin, setPriceMin] = useState('');
-    const [priceMax, setPriceMax] = useState('');
+    const [query, setQuery] = useState(searchParams.get('query') || '');
+    const [priceMin, setPriceMin] = useState(searchParams.get('priceMin') || '');
+    const [priceMax, setPriceMax] = useState(searchParams.get('priceMax') || '');
     const [onlyAvailable, setOnlyAvailable] = useState(false);
     const [view, setView] = useState('grid');
     const [sort, setSort] = useState('relevance');
     const [page, setPage] = useState(1);
     const [amenities, setAmenities] = useState([]);
+    const [debouncedQuery, setDebouncedQuery] = useState(query);
     const perPage = 9;
 
     const sortLabelMap = {
@@ -63,15 +65,30 @@ export default function HouseList() {
         loadHouses();
     }, []);
 
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedQuery(query);
+        }, 300); // delay 300ms
+
+        return () => clearTimeout(handler);
+    }, [query]);
+
+    useEffect(() => {
+        const queryParam = searchParams.get('query');
+        if (queryParam !== null) setQuery(queryParam);
+
+        // Tương tự với các params khác nếu cần đồng bộ chặt chẽ
+    }, [searchParams]);
+
     const filteredHouses = useMemo(() => {
         // LỌC 1: Lọc chỉ những nhà trọ có status = 1 (Visible)
         let hs = houses.filter((h) => h.status === VISIBLE_STATUS);
-        
+
         // Bắt đầu chuỗi lọc logic dựa trên các state
         hs = hs.filter((h) => {
             // 1. Dữ liệu tìm kiếm (query)
             const hay = (h.house_Name + ' ' + h.province + ' ' + h.commune + ' ' + (h.street || '')).toLowerCase();
-            const q = query.trim().toLowerCase();
+            const q = debouncedQuery.trim().toLowerCase();
             const matchesQuery = q ? hay.includes(q) : true;
 
             // 2. Dữ liệu giá (Cần tìm giá thấp nhất trong nhà trọ)
@@ -82,7 +99,7 @@ export default function HouseList() {
             const matchesMax = priceMax ? minPrice !== null && minPrice <= Number(priceMax) : true;
 
             // 3. Dữ liệu khả dụng (Còn phòng trống - status = 1)
-            const availableRoomsCount = h.rooms?.filter(r => r.status === 1).length || 0;
+            const availableRoomsCount = h.rooms?.filter(r => r.status === "visible").length || 0;
             const matchesAvailable = onlyAvailable ? availableRoomsCount > 0 : true;
 
             // 4. Lọc theo tiện ích
@@ -100,28 +117,38 @@ export default function HouseList() {
         // 5. Sắp xếp (Sắp xếp theo giá thấp nhất)
         if (sort === 'priceAsc') {
             hs = hs.sort((a, b) => {
-                const aPrice = Math.min(...(a.rooms?.map(r => r.price) || []));
-                const bPrice = Math.min(...(b.rooms?.map(r => r.price) || []));
-                return (aPrice || Infinity) - (bPrice || Infinity);
+                const aPrices = a.rooms?.map(r => r.price).filter(p => Number.isFinite(p)) || [];
+                const bPrices = b.rooms?.map(r => r.price).filter(p => Number.isFinite(p)) || [];
+
+                const aMin = aPrices.length ? Math.min(...aPrices) : Infinity;
+                const bMin = bPrices.length ? Math.min(...bPrices) : Infinity;
+
+                return aMin - bMin;
             });
         }
+
         if (sort === 'priceDesc') {
             hs = hs.sort((a, b) => {
-                const aPrice = Math.min(...(a.rooms?.map(r => r.price) || []));
-                const bPrice = Math.min(...(b.rooms?.map(r => r.price) || []));
-                return (bPrice || 0) - (aPrice || 0);
+                const aPrices = a.rooms?.map(r => r.price).filter(p => Number.isFinite(p)) || [];
+                const bPrices = b.rooms?.map(r => r.price).filter(p => Number.isFinite(p)) || [];
+
+                const aMin = aPrices.length ? Math.min(...aPrices) : -Infinity;
+                const bMin = bPrices.length ? Math.min(...bPrices) : -Infinity;
+
+                return bMin - aMin;
             });
         }
+
         return hs;
-    }, [houses, query, priceMin, priceMax, onlyAvailable, sort, amenities]);
+    }, [houses, query, priceMin, debouncedQuery, priceMax, onlyAvailable, sort, amenities]);
 
     const totalPages = Math.max(1, Math.ceil(filteredHouses.length / perPage));
     const paginated = filteredHouses.slice((page - 1) * perPage, page * perPage);
 
     const resetFilters = () => {
-        setQuery('');
-        setPriceMin('');
-        setPriceMax('');
+        setQuery(setSearchParams({}));
+        setPriceMin(setSearchParams({}));
+        setPriceMax(setSearchParams({}));
         setOnlyAvailable(false);
         setSort('relevance');
         setAmenities([]);
@@ -282,15 +309,9 @@ export default function HouseList() {
                     {loading ? (
                         <div className="card p-4 text-center text-muted">Đang tải dữ liệu nhà trọ...</div>
                     ) : view === 'map' ? (
-                        <div className="card shadow-sm mb-4">
-                            <div className="ratio ratio-16x9">
-                                <iframe
-                                    title="Bản đồ"
-                                    src={`https://www.google.com/maps/embed/v1/search?key=YOUR_KEY&q=${encodeURIComponent('Nhà trọ gần đây')}`}
-                                    allowFullScreen
-                                    loading="lazy"
-                                />
-                            </div>
+                        <div className="card shadow-sm mb-4" style={{ height: '600px', padding: '10px' }}>
+                            {/* Truyền filteredHouses để map hiển thị tất cả kết quả đang lọc được */}
+                            <HostelMap hostels={filteredHouses} />
                         </div>
                     ) : (
                         <>

@@ -365,6 +365,7 @@ D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Micros
 D:\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\appsettings.Development.json
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\appsettings.json
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\MyApi.Api.staticwebassets.runtime.json
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\MyApi.Api.staticwebassets.endpoints.json
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\MyApi.Api.exe
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\MyApi.Api.deps.json
@@ -404,11 +405,14 @@ D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\bac
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Abstractions.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.FileProviders.Physical.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.FileSystemGlobbing.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Identity.Client.dll
@@ -424,6 +428,7 @@ D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\bac
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\MimeKit.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Mono.TextTemplating.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -441,6 +446,7 @@ D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\bac
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\System.IO.Pipelines.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\System.Memory.Data.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\System.Runtime.Caching.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll

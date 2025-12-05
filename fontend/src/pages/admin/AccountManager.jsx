@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { usersFetch, lockUser, unlockUser } from "../../api/api.jsx";
+import { usersFetch, lockUser, unlockUser, getAndPostConversations } from "../../api/api.jsx";
 import { Button, Table, Form, Modal } from "react-bootstrap";
 import LockUserModal from "../../components/admin/LockUserModal.jsx";
 
@@ -46,6 +46,24 @@ const AdminUserManagement = () => {
             fetchUsers();
         } catch (err) {
             console.error("Lỗi khi khóa tài khoản:", err);
+        }
+    };
+
+    const openChatWithHost = async (hostid) => {
+        try {
+            let userid = JSON.parse(localStorage.getItem('user'))?.id;
+            if (!userid) {
+                alert("Vui lòng đăng nhập để chat với chủ trọ");
+                return;
+            }
+            const response = await getAndPostConversations(hostid, userid);
+            const convId = response.conversation_Id;
+            window.dispatchEvent(new CustomEvent('openChat', {
+                detail: { conversationId: convId, hostId: hostid }
+            }));
+        } catch (err) {
+            console.error('Lỗi khi mở chat:', err);
+            window.dispatchEvent(new CustomEvent('openChat', { detail: { hostId: hostid } }));
         }
     };
 
@@ -128,7 +146,7 @@ const AdminUserManagement = () => {
                                     variant="info"
                                     size="sm"
                                     className="ms-2"
-                                    onClick={() => handleSendMessage(u)}
+                                    onClick={() => openChatWithHost(u.user_Id)}
                                 >
                                     Nhắn tin
                                 </Button>

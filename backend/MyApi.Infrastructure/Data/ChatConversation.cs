@@ -18,7 +18,7 @@ namespace MyApi.Infrastructure.Configurations
             builder.HasOne(cc => cc.Room)
                    .WithMany(r => r.ChatConversations)
                    .HasForeignKey(cc => cc.Room_Id)
-                   .OnDelete(DeleteBehavior.Restrict);
+                   .OnDelete(DeleteBehavior.Cascade);
 
             // User (Renter)
             builder.HasOne(cc => cc.User)

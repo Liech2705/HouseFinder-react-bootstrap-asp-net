@@ -1,12 +1,10 @@
 ﻿using MyApi.Domain.Entities;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 public class Review
 {
     public int Review_Id { get; set; }
     public int User_Id { get; set; }
-    public int Booking_Id { get; set; }
+    public int Room_Id { get; set; }
 
     public byte Rating { get; set; }
     public string? Comment { get; set; }
@@ -14,5 +12,5 @@ public class Review
 
     // Navigation
     public User User { get; set; }
-    public Booking Booking { get; set; }
+    public Room Room { get; set; }
 }

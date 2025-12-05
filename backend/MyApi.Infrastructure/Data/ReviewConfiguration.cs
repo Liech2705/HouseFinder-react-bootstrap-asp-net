@@ -24,13 +24,12 @@ namespace MyApi.Infrastructure.Configurations
             builder.HasOne(r => r.User)
                 .WithMany(u => u.Reviews)  // cần ICollection<Review> Reviews trong User
                 .HasForeignKey(r => r.User_Id)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Quan hệ với Booking
-            builder.HasOne(r => r.Booking)
-                .WithOne(b => b.Review)   // mỗi booking chỉ có 1 review
-                .HasForeignKey<Review>(r => r.Booking_Id)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
+            
+            builder.HasOne(rv => rv.Room)
+                   .WithMany(r => r.Reviews)
+                   .HasForeignKey(r => r.Room_Id)
+                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

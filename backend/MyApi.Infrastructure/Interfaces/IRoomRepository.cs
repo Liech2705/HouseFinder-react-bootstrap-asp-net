@@ -9,6 +9,7 @@ namespace MyApi.Domain.Interfaces
         Task<IEnumerable<Room>> GetByOwnerIdAsync(int ownerId);
         Task<IEnumerable<Room>> GetByHouseIdAsync(int houseId);
         Task<IEnumerable<Room>> GetByStatusAsync(RoomStatus status);
-        Task<IEnumerable<Room>> SearchByTitleOrAddressAsync(string keyword);
+        Task<List<Room>> GetAvailableRoomAsync(int houseId);
+        Task ChangeStatusRoomAsync(int id, string roomStatus);
     }
 }

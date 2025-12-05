@@ -9,7 +9,8 @@ namespace MyApi.Application.Mappings
         public ReviewMappingProfile()
         {
             // Review -> ReviewReadDto
-            CreateMap<Review, ReviewReadDto>();
+            CreateMap<Review, ReviewReadDto>()
+                .ForMember(dest => dest.User_Name, opt => opt.MapFrom(src => src.User.User_Name));
 
             // ReviewCreateDto -> Review
             CreateMap<ReviewCreateDto, Review>()

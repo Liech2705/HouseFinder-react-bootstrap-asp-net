@@ -29,7 +29,7 @@ namespace MyApi.Infrastructure.Configurations
             builder.HasOne(ri => ri.Room)
                    .WithMany(r => r.RoomImages)   // Room có nhiều RoomImage
                    .HasForeignKey(ri => ri.Room_Id)
-                   .OnDelete(DeleteBehavior.NoAction);
+                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

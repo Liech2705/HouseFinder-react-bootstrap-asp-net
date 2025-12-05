@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import Header from "../components/Header.jsx";
+import ChatWidget from "../pages/user/Chatwidget.jsx";
 
 const menu = [
     { label: "Tổng quan", icon: "bi bi-speedometer2", to: "/admin" },
@@ -19,7 +20,7 @@ export default function AdminLayout() {
     useEffect(() => {
         try {
             const user = JSON.parse(localStorage.getItem("user"));
-            if (!user || user.role !== 2) {
+            if (!user || user.role !== "Admin") {
                 setAuthorized(false);
                 navigate("/");
             } else {
@@ -104,6 +105,7 @@ export default function AdminLayout() {
                 >
                     <Outlet />
                 </main>
+                <ChatWidget />
 
                 {/* Sidebar CSS */}
                 <style>{`

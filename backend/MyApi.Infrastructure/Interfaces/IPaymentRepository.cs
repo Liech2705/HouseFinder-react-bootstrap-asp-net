@@ -5,7 +5,7 @@ namespace MyApi.Domain.Interfaces
 {
     public interface IPaymentRepository : IGenericRepository<Payment>
     {
-        Task<IEnumerable<Payment>> GetByBookingIdAsync(int bookingId);
-        Task<IEnumerable<Payment>> GetByMethodIdAsync(int methodId);
+        //Task<IEnumerable<Payment>> GetByBookingIdAsync(int bookingId);
+        //Task<IEnumerable<Payment>> GetByMethodIdAsync(int methodId);
     }
 }

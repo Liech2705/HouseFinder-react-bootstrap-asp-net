@@ -222,6 +222,22 @@
   },
   {
     "ContainingType": "MyApi.Api.Controllers.BoardingHouseController",
+    "Method": "SearchHostels",
+    "RelativePath": "api/BoardingHouse/search",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "keyword",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.Api.Controllers.BoardingHouseController",
     "Method": "GetByUser",
     "RelativePath": "api/BoardingHouse/user/{userId}",
     "HttpMethod": "GET",
@@ -363,6 +379,63 @@
   },
   {
     "ContainingType": "MyApi.API.Controllers.BookingsController",
+    "Method": "CheckRoom",
+    "RelativePath": "api/Bookings/CheckRoom/{roomId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.BookingsController",
+    "Method": "IsPaymentBooking",
+    "RelativePath": "api/Bookings/ispayment/{user_Id}/{room_Id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user_Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "room_Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.BookingsController",
+    "Method": "GetMyBookings",
+    "RelativePath": "api/Bookings/my-bookings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[MyApi.Application.DTOs.BookingDtos.BookingReadDto, MyApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.BookingsController",
     "Method": "GetByRoomId",
     "RelativePath": "api/Bookings/room/{roomId}",
     "HttpMethod": "GET",
@@ -414,6 +487,32 @@
     ]
   },
   {
+    "ContainingType": "MyApi.API.Controllers.BookingsController",
+    "Method": "CreatePaymentUrlVnpayAsync",
+    "RelativePath": "api/Bookings/vnpay/pay",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "MyApi.Application.DTOs.BookingDtos.VNPayRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.BookingsController",
+    "Method": "PaymentCallbackVnpay",
+    "RelativePath": "api/Bookings/vnpay/return",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MyApi.API.Controllers.ChatConversationsController",
     "Method": "GetAll",
     "RelativePath": "api/ChatConversations",
@@ -442,22 +541,33 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "createDto",
+        "Name": "dto",
         "Type": "MyApi.Application.DTOs.ChatConversationDtos.ChatConversationCreateDto",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.ChatConversationsController",
+    "Method": "GetChatConversation",
+    "RelativePath": "api/ChatConversations/{hostId}/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Type": "MyApi.Application.DTOs.ChatConversationDtos.ChatConversationReadDto",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
+        "Name": "hostId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
-    ]
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "MyApi.API.Controllers.ChatConversationsController",
@@ -518,6 +628,27 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.ChatConversationsController",
+    "Method": "GetMessages",
+    "RelativePath": "api/ChatConversations/{id}/messages",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "limit",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1107,6 +1238,33 @@
   },
   {
     "ContainingType": "MyApi.API.Controllers.HouseImagesController",
+    "Method": "ChangeImagesRoom",
+    "RelativePath": "api/HouseImages/{id}/images/upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "imageHouses",
+        "Type": "Microsoft.AspNetCore.Http.IFormFileCollection",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.HouseImagesController",
     "Method": "GetByHouseId",
     "RelativePath": "api/HouseImages/house/{houseId}",
     "HttpMethod": "GET",
@@ -1374,58 +1532,6 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "MyApi.API.Controllers.PaymentsController",
-    "Method": "GetByBookingId",
-    "RelativePath": "api/Payments/booking/{bookingId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "bookingId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[MyApi.Application.DTOs.PaymentDtos.PaymentReadDto, MyApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "MyApi.API.Controllers.PaymentsController",
-    "Method": "GetByMethodId",
-    "RelativePath": "api/Payments/method/{methodId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "methodId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[MyApi.Application.DTOs.PaymentDtos.PaymentReadDto, MyApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   },
   {
     "ContainingType": "MyApi.API.Controllers.ReportsController",
@@ -1882,9 +1988,14 @@
         "IsRequired": true
       },
       {
-        "Name": "updateDto",
-        "Type": "MyApi.Application.DTOs.RoomImageDtos.RoomImageUpdateDto",
-        "IsRequired": true
+        "Name": "Image_Url",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "imageRoom",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1904,6 +2015,33 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.RoomImagesController",
+    "Method": "ChangeImagesRoom",
+    "RelativePath": "api/RoomImages/{id}/images/upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "imageRooms",
+        "Type": "Microsoft.AspNetCore.Http.IFormFileCollection",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "MyApi.API.Controllers.RoomImagesController",
@@ -2131,6 +2269,43 @@
   },
   {
     "ContainingType": "MyApi.API.Controllers.RoomsController",
+    "Method": "ChangeStatus",
+    "RelativePath": "api/Rooms/{id}/status",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "newstatus",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.RoomsController",
+    "Method": "AvailableRooms",
+    "RelativePath": "api/Rooms/available_room/{houseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "houseId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.RoomsController",
     "Method": "GetByHouse",
     "RelativePath": "api/Rooms/house/{houseId}",
     "HttpMethod": "GET",
@@ -2167,32 +2342,6 @@
         "Name": "ownerId",
         "Type": "System.Int32",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[MyApi.Application.DTOs.RoomDtos.RoomReadDto, MyApi.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "MyApi.API.Controllers.RoomsController",
-    "Method": "Search",
-    "RelativePath": "api/Rooms/search",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "keyword",
-        "Type": "System.String",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -2299,9 +2448,49 @@
         "IsRequired": true
       },
       {
-        "Name": "updateDto",
-        "Type": "MyApi.Application.DTOs.UserInforDtos.UserInforUpdateDto",
-        "IsRequired": true
+        "Name": "Infor_Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Dob",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Avatar",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "userName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Gender",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Address",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Update_At",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "AvatarFile",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

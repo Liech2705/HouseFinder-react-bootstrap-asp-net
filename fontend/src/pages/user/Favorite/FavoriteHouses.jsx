@@ -45,7 +45,7 @@ const FavoriteHouses = () => {
                         if (!house) return null;
 
                         const imageUrl =
-                            house.houseImages?.[0]?.imageUrl || "https://s3.tech12h.com/sites/default/files/styles/inbody400/public/field/image/no-image-available.jpg";
+                            house.houseImages?.[0]?.imageUrl || "https://surl.li/drynzt";
 
                         return (
                             <div

@@ -1,11 +1,11 @@
 import { useEffect, useState, useMemo } from "react";
 import HouseCard from "./HouseCard.jsx";
 // Giả định rooms API trả về dữ liệu Houses (Đổi tên alias)
-import { rooms as housesData } from "../api/room.jsx";
+import { house as housesData } from "../api/api.jsx";
 import { Link } from "react-router-dom";
 
 // Định nghĩa trạng thái hiển thị (Giả định 1 là trạng thái hiển thị công khai)
-const VISIBLE_STATUS = 1;
+const VISIBLE_STATUS = "visible";
 
 // ✅ Component hiển thị danh sách Nhà trọ dưới dạng lưới
 function HouseGrid({ housesOverride }) {
@@ -15,7 +15,6 @@ function HouseGrid({ housesOverride }) {
     // ✅ Thêm state để lưu trữ dữ liệu sau khi được load (nếu housesData là async function)
     const [list, setList] = useState(Array.isArray(rawList) ? rawList : []);
     const [loading, setLoading] = useState(!Array.isArray(rawList));
-
     // Logic để fetch data nếu housesData là async function
     useEffect(() => {
         if (!Array.isArray(rawList) && typeof rawList === 'function') {
@@ -36,8 +35,8 @@ function HouseGrid({ housesOverride }) {
     // ✅ LOGIC ĐÃ SỬA: Lọc chỉ những nhà trọ có status = VISIBLE_STATUS
     const popularHouses = useMemo(() => {
         // 1. Lọc: Chỉ lấy những nhà trọ có status là visible (1)
-        let visibleHouses = list.filter(house => house.status === VISIBLE_STATUS);
-        
+        let visibleHouses = list.filter(house => house.status == VISIBLE_STATUS);
+
         // 2. Lọc tiếp: Loại bỏ những nhà trọ không có phòng
         let filtered = visibleHouses.filter(house => house.rooms && house.rooms.length > 0);
 
@@ -45,7 +44,7 @@ function HouseGrid({ housesOverride }) {
         const sorted = filtered.map(house => ({
             ...house,
             // Thêm trường calculatedPopularity: số lượng phòng còn trống
-            calculatedPopularity: house.rooms.filter(r => r.status === VISIBLE_STATUS).length
+            calculatedPopularity: house.rooms.filter(r => r.status == VISIBLE_STATUS).length
         })).sort((a, b) => b.calculatedPopularity - a.calculatedPopularity); // Sắp xếp giảm dần
 
         return sorted.slice(0, 5); // Lấy 5 kết quả hàng đầu

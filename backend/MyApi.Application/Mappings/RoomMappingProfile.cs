@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MyApi.Domain.Entities;
 using MyApi.Application.DTOs.RoomDtos;
+using MyApi.Domain.Enums;
 
 namespace MyApi.Application.Mappings
 {
@@ -19,7 +20,7 @@ namespace MyApi.Application.Mappings
             // RoomCreateDto -> Room
             CreateMap<RoomCreateDto, Room>()
                 .ForMember(dest => dest.Created_At, opt => opt.MapFrom(_ => DateTime.UtcNow))
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(_ => MyApi.Domain.Enums.RoomStatus.visible));
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(_ => RoomStatus.visible));
 
             // RoomUpdateDto -> Room
             CreateMap<RoomUpdateDto, Room>()

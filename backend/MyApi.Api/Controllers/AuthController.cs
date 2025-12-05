@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MyApi.Application.DTOs;
 using MyApi.Domain.Entities;
+using MyApi.Domain.Enums;
 using MyApi.Infrastructure.Data;
 using MyApi.Infrastructure.Services;
 using System.Collections.Concurrent;
@@ -91,8 +93,10 @@ namespace MyApi.API.Controllers
                         id = user.User_Id,
                         email = user.Email, 
                         userName = user.User_Name, 
+                        avatar = "",
                         role = user.Role,
                         lock_until = user.Lock_Until
+
                     }
                 },
                 token = jwt,
@@ -107,6 +111,8 @@ namespace MyApi.API.Controllers
         {
             var user = _context.Users.FirstOrDefault(u => u.Email == dto.Email);
             if (user == null) return Unauthorized("Sai Email hoặc Password");
+
+            var userInfor = _context.UserInfors.FirstOrDefault(u => u.User_Id == user.User_Id);
 
             if (!_passwordHasher.VerifyPassword(dto.Password, user.PasswordHash))
             {
@@ -125,21 +131,23 @@ namespace MyApi.API.Controllers
             _context.UserTokens.Add(userToken);
             _context.SaveChanges();
 
-            return Ok(new 
-            { 
-                message = "Đăng nhập thành công! Chào mừng " + user.User_Name, 
-                data = new 
-                { 
-                    user = new 
-                    { 
+            return Ok(new
+            {
+                message = "Đăng nhập thành công! Chào mừng " + user.User_Name,
+                data = new
+                {
+                    user = new
+                    {
                         id = user.User_Id,
-                        email = user.Email, 
-                        userName = user.User_Name, 
+                        email = user.Email,
+                        userName = user.User_Name,
+                        avatar = userInfor.Avatar,
                         role = user.Role,
                         lock_until = user.Lock_Until
-                    } 
-                }, 
-                token = jwt, 
+
+                    }
+                },
+                token = jwt,
             });
         }
 
@@ -179,57 +187,57 @@ namespace MyApi.API.Controllers
         [HttpGet("external-response")]
         public async Task<IActionResult> ExternalResponse([FromQuery] string scheme)
         {
-            var authScheme = scheme == "Facebook" ? FacebookDefaults.AuthenticationScheme : GoogleDefaults.AuthenticationScheme;
-
-            var authResult = await HttpContext.AuthenticateAsync(authScheme);
+            // 1. Authenticate với Cookie tạm để lấy thông tin từ Google/FB
+            var authResult = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             if (!authResult.Succeeded)
-                return BadRequest("Không thể xác thực ");
+                return BadRequest("Không thể xác thực từ phía Google/Facebook.");
 
             var claims = authResult.Principal.Identities.FirstOrDefault()?.Claims;
             var email = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
             var name = claims?.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
-            var picture = claims?.FirstOrDefault(c => c.Type == "picture")?.Value;
 
-            if (string.IsNullOrEmpty(email))
-                return BadRequest("Không lấy được email từ " + scheme);
+            if (string.IsNullOrEmpty(email)) return BadRequest("Không lấy được email.");
 
-            // ==== CHECK USER TRONG DB ====
+            // 2. Kiểm tra User trong DB
             var user = _context.Users.FirstOrDefault(u => u.Email == email);
 
-
-            // Tạo JWT có chứa email, name, picture
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_config["Jwt:Key"]);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            // 3. Xử lý logic tạo mới nếu chưa có (Auto-Register)
+            if (user == null)
             {
-                Subject = new ClaimsIdentity(new[]
+                user = new User
                 {
-                    new Claim(ClaimTypes.Email, email ?? ""),
-                    new Claim(ClaimTypes.Name, name ?? ""),
-                    new Claim("picture", picture ?? "")
-                }),
+                    Email = email,
+                    User_Name = name ?? "Unknown",
+                    PasswordHash = "", // User này không có pass
+                    Role = UserRole.User, // Role mặc định
+                    Lock_Until = null
+                };
+                _context.Users.Add(user);
+                _context.SaveChanges();
 
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256Signature
-                ),
-                Issuer = _config["Jwt:Issuer"],
-                Audience = _config["Jwt:Audience"]
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var jwt = tokenHandler.WriteToken(token);
-
-            // Lưu token vào DB
-
-            string? aut = "";
-            if (user != null)
-            {
-                aut = "-re";
+                // Tạo UserInfo dummy để tránh lỗi null sau này
+                _context.UserInfors.Add(new UserInfor { User_Id = user.User_Id, Update_At = DateTime.Now });
+                _context.SaveChanges();
             }
-            // Redirect về frontend với JWT
-            var redirectUrl = $"http://localhost:5173/auth" + aut + $"/callback?token={Uri.EscapeDataString(jwt)}";
+
+            // 4. Generate Token (Dùng hàm chung để đảm bảo claim giống hệt Login thường)
+            var jwt = GenerateJwtToken(user);
+
+            // 5. Lưu Token vào DB
+            var userToken = new UserToken
+            {
+                UserId = user.User_Id,
+                Token = jwt,
+            };
+            _context.UserTokens.Add(userToken);
+            _context.SaveChanges();
+
+            // 6. Xóa Cookie tạm (quan trọng để dọn dẹp)
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // 7. Redirect về Frontend
+            var redirectUrl = $"http://localhost:5173/auth-re/callback?token={Uri.EscapeDataString(jwt)}";
             return Redirect(redirectUrl);
         }
 

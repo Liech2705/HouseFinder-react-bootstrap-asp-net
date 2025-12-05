@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MyApi.Domain.Entities;
-using MyApi.Domain.Enums;
 
 namespace MyApi.Infrastructure.Configurations
 {
@@ -26,9 +25,6 @@ namespace MyApi.Infrastructure.Configurations
             builder.Property(r => r.Description)
                    .HasColumnType("nvarchar(max)");
 
-            builder.Property(r => r.Address)
-                   .HasColumnType("nvarchar(max)");
-
             builder.Property(r => r.Price)
                    .HasColumnType("int");
 
@@ -44,29 +40,32 @@ namespace MyApi.Infrastructure.Configurations
             builder.HasOne(r => r.Owner)
                    .WithMany(u => u.Rooms)
                    .HasForeignKey(r => r.Owner_Id)
-                   .OnDelete(DeleteBehavior.NoAction);
+                   .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(r => r.BoardingHouse)
                    .WithMany(bh => bh.Rooms)
                    .HasForeignKey(r => r.House_Id)
-                   .OnDelete(DeleteBehavior.NoAction); // Giữ nguyên
+                   .OnDelete(DeleteBehavior.Cascade); // Giữ nguyên
 
             builder.HasMany(r => r.RoomImages)
                    .WithOne(i => i.Room)
                    .HasForeignKey(r => r.Room_Id)
-                   .OnDelete(DeleteBehavior.NoAction); // ✅ OK
+                   .OnDelete(DeleteBehavior.Cascade); // ✅ OK
 
             builder.HasMany(r => r.ChatConversations)
                    .WithOne(cc => cc.Room)
                    .HasForeignKey(cc => cc.Room_Id)
-                   .OnDelete(DeleteBehavior.NoAction); // ⚠️ sửa lại dòng này
+                   .OnDelete(DeleteBehavior.Cascade); // ⚠️ sửa lại dòng này
 
             builder.HasOne(r => r.RoomProperty)
                    .WithOne(rp => rp.Room)
                    .HasForeignKey<RoomProperty>(rp => rp.Room_Id)
-                   .OnDelete(DeleteBehavior.NoAction);
+                   .OnDelete(DeleteBehavior.Cascade);
 
-
+            builder.HasMany(r => r.Reviews)
+                   .WithOne(rv => rv.Room)
+                   .HasForeignKey(rv => rv.Room_Id)
+                   .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

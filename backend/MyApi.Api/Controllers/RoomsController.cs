@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyApi.Application.DTOs.RoomDtos;
 using MyApi.Domain.Entities;
@@ -62,13 +63,24 @@ namespace MyApi.API.Controllers
             return Ok(_mapper.Map<IEnumerable<RoomReadDto>>(rooms));
         }
 
-        // GET: api/Rooms/search?keyword=abc
-        [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<RoomReadDto>>> Search([FromQuery] string keyword)
+        [Authorize(Roles = "Host, Admin")]
+        [HttpPatch("{id}/status")]
+        public async Task<IActionResult> ChangeStatus(int id,[FromBody] string newstatus)
         {
-            var rooms = await _roomRepository.SearchByTitleOrAddressAsync(keyword);
-            return Ok(_mapper.Map<IEnumerable<RoomReadDto>>(rooms));
+            try
+            {
+                await _roomRepository.ChangeStatusRoomAsync(id, newstatus);
+                return Ok(new
+                {
+                    message = "success"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+
 
         // POST: api/Rooms
         [HttpPost]
@@ -107,5 +119,14 @@ namespace MyApi.API.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("available_room/{houseId}")]
+        public async Task<IActionResult> AvailableRooms(int houseId)
+        {
+            var rooms = await _roomRepository.GetAvailableRoomAsync(houseId);
+            return Ok(rooms);
+        }
+
+
     }
 }

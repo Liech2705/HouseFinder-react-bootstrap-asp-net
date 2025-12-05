@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using MyApi.Application.DTOs.BoardingHouseDtos;
 using MyApi.Domain.Entities;
+using MyApi.Domain.Enums;
 using MyApi.Domain.Interfaces;
 
 namespace MyApi.Api.Controllers
@@ -29,7 +30,6 @@ namespace MyApi.Api.Controllers
         public async Task<IActionResult> GetAll()
         {
             var houses = await _boardingHouseRepository.GetAllAsync<BoardingHouseReadDto>(_mapper.ConfigurationProvider);
-
             return Ok(houses);
         }
         [AllowAnonymous]
@@ -50,7 +50,7 @@ namespace MyApi.Api.Controllers
             var houses = await _boardingHouseRepository.GetByUserIdAsync(userId);
             return Ok(_mapper.Map<IEnumerable<BoardingHouseReadDto>>(houses));
         }
-        [Authorize(Roles = "Admin,Host")]
+        //[Authorize(Roles = "Admin,Host")]
         // POST: api/BoardingHouse
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] BoardingHouseCreateDto dto)
@@ -80,7 +80,6 @@ namespace MyApi.Api.Controllers
         }
 
         // DELETE: api/BoardingHouse/{id}
-        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -111,6 +110,15 @@ namespace MyApi.Api.Controllers
             if (house == null) return NotFound(new { message = "Boarding house not found" });
 
             return Ok(_mapper.Map<BoardingHouseReadDto>(house));
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchHostels([FromQuery] string? keyword)
+        {
+            var result = await _boardingHouseRepository.SearchHouseAsync(keyword);
+
+            if (result == null) return NotFound();
+            return Ok(result);
         }
     }
 }

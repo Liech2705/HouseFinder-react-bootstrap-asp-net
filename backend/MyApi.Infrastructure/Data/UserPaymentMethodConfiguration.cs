@@ -43,9 +43,9 @@ namespace MyApi.Infrastructure.Configurations
                    .HasForeignKey(pm => pm.User_Id)
                    .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasMany(pm => pm.Payments)
-                   .WithOne(p => p.UserPaymentMethod)
-                   .HasForeignKey(p => p.Method_Id);
+            //builder.HasMany(pm => pm.Payments)
+            //       .WithOne(p => p.UserPaymentMethod)
+            //       .HasForeignKey(p => p.Method_Id);
         }
     }
 }

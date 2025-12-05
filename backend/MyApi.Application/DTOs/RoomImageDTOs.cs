@@ -1,4 +1,6 @@
-﻿namespace MyApi.Application.DTOs.RoomImageDtos
+﻿using Microsoft.AspNetCore.Http;
+
+namespace MyApi.Application.DTOs.RoomImageDtos
 {
     // DTO trả dữ liệu cho client
     public class RoomImageReadDto
@@ -20,5 +22,6 @@
     public class RoomImageUpdateDto
     {
         public string? Image_Url { get; set; }
+        public IFormFile? imageRoom { get; set; }
     }
 }
