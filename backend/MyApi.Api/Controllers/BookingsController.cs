@@ -148,12 +148,11 @@ namespace MyApi.API.Controllers
         {
             var response = _vnPayService.PaymentExecute(Request.Query);
 
-            await _bookingRepository.SavePaymentAsync(response);
-
             string returnUrl = "";
 
             if (response.Success && response.VnPayResponseCode == "00")
             {
+                await _bookingRepository.SavePaymentAsync(response);
                 returnUrl = $"http://localhost:5173/payment-success";
             } else
             {
@@ -166,7 +165,15 @@ namespace MyApi.API.Controllers
         [HttpGet("ispayment/{user_Id}/{room_Id}")]
         public async Task<IActionResult> IsPaymentBooking(int user_Id, int room_Id)
         {
-            bool isPaymentBooking = await _bookingRepository.CheckIsPayMent(user_Id, room_Id);
+            var isPaymentBooking = await _bookingRepository.CheckIsPayMent(user_Id, room_Id);
+
+            return Ok(isPaymentBooking);
+        }
+
+        [HttpGet("ispaymentforhost/{room_Id}")]
+        public async Task<IActionResult> IsPaymentBookingForHost(int room_Id)
+        {
+            var isPaymentBooking = await _bookingRepository.CheckIsPayMentForHost(room_Id);
 
             return Ok(isPaymentBooking);
         }

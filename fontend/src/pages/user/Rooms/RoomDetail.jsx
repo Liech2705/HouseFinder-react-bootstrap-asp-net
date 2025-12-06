@@ -78,7 +78,8 @@ function RoomDetail() {
                 try {
                     const result = await isPaymentCompleted(userId, roomId);
                     // result trả về true nếu đã thanh toán
-                    setCanReview(result);
+
+                    setCanReview(result == 'confirmed' ? true : false);
                 } catch (error) {
                     console.error("Lỗi kiểm tra quyền đánh giá:", error);
                 }
@@ -177,6 +178,24 @@ function RoomDetail() {
                 ))}
             </div>
         );
+    };
+    useEffect(() => {
+        if (location.hash) {
+            const element = document.getElementById(location.hash.substring(1));
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        }
+    }, [location.hash, reviews]);
+    // Xử lý khi bấm nút Báo cáo bình luận
+    const handleReportReview = (reviewId) => {
+        if (!isLogin) {
+            alert("Vui lòng đăng nhập để báo cáo vi phạm.");
+            navigate('/login', { state: { from: location } });
+            return;
+        }
+        // Chuyển hướng sang trang báo cáo với ID của review
+        navigate(`/report/review/${reviewId}`);
     };
 
     // Các tiện ích
@@ -352,22 +371,43 @@ function RoomDetail() {
                                 </div>
                             )}
                             {/* ------------------------------------------- */}
-
                             {reviews.length ? (
                                 <div className="d-flex flex-column gap-3">
                                     {reviews.map((rv, index) => (
-                                        <div key={index} className="py-2 border-bottom">
-                                            <div className="d-flex align-items-center mb-1">
-                                                <strong className="me-2">{rv.user_Name || 'Người dùng ẩn danh'}</strong>
-                                                <StarRating rating={rv.rating} small />
+                                        <div key={index} id={rv.review_Id} className="py-2 border-bottom">
+                                            <div className="d-flex justify-content-between align-items-start">
+                                                {/* Thông tin người dùng & Rating */}
+                                                <div className="d-flex align-items-center mb-1">
+                                                    <strong className="me-2">{rv.user_Name || 'Người dùng ẩn danh'}</strong>
+                                                    <StarRating rating={rv.rating} small />
+                                                </div>
+
+                                                {/* Nút Báo cáo (Chỉ hiện nếu không phải review của chính mình) */}
+                                                {currentUser?.id !== rv.user_Id && (
+                                                    <button
+                                                        className="btn btn-link text-muted p-0 text-decoration-none fs-9"
+                                                        onClick={() => handleReportReview(rv.review_Id || rv.id)} // Lưu ý kiểm tra đúng tên trường ID trong API trả về
+                                                        title="Báo cáo vi phạm"
+                                                    >
+                                                        <i className="bi bi-flag me-1"></i> Báo cáo
+                                                    </button>
+                                                )}
                                             </div>
+
+                                            {/* Nội dung bình luận */}
                                             <div className="text-dark">{rv.comment || 'Không có bình luận.'}</div>
-                                            {/* Hiển thị ngày tạo nếu có */}
-                                            {rv.created_At && <div className="text-muted fs-9 mt-1">{new Date(rv.created_At).toLocaleDateString('vi-VN')}</div>}
+
+                                            {/* Ngày tạo */}
+                                            {rv.created_At && (
+                                                <div className="text-muted fs-9 mt-1">
+                                                    {new Date(rv.created_At).toLocaleDateString('vi-VN')}
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>
                             ) : (
+                                /* ... code cũ ... */
                                 <p className="text-secondary m-0">Chưa có đánh giá nào cho phòng này.</p>
                             )}
                         </div>

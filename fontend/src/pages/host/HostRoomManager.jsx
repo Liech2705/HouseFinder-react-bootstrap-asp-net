@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { house, checkBooking, api, fetchRoomsByHouseId } from '../../api/api';
+import { house, checkBooking, api, fetchRoomsByHouseId, isPaymentCompletedForHost } from '../../api/api';
 import AddHouseModal from '../../components/host/AddHostelModal.jsx';
 import EditHouseModal from '../../components/host/EditHostelModal.jsx';
 import EditRoomModal from '../../components/host/EditRoomModal.jsx';
@@ -62,14 +62,16 @@ export default function HostRoomManager() {
             if (rooms.length === 0) return;
 
             const statuses = {};
-            // Chạy song song tất cả các request kiểm tra booking
             await Promise.all(rooms.map(async (room) => {
                 try {
-                    const isBooked = await checkBooking(room.room_Id);
-                    statuses[room.room_Id] = isBooked;
+                    // Giả sử API trả về chuỗi "confirmed", "pending" hoặc "none" (hoặc null)
+                    const status = await isPaymentCompletedForHost(room.room_Id);
+
+                    // Đảm bảo gán giá trị mặc định là 'none' nếu API trả về null/undefined/false
+                    statuses[room.room_Id] = status || 'none';
                 } catch (error) {
                     console.error(`Lỗi check booking phòng ${room.room_Id}`, error);
-                    statuses[room.room_Id] = false; // Mặc định là false nếu lỗi
+                    statuses[room.room_Id] = 'none'; // Lỗi thì coi như chưa ai thuê
                 }
             }));
             setBookingStatuses(statuses);
@@ -129,13 +131,19 @@ export default function HostRoomManager() {
 
     // 4. LOGIC HIỂN THỊ TRẠNG THÁI
     const getRoomStatus = (room) => {
-        // Nếu DB là hidden -> UI là Bảo trì
+        // Nếu DB ẩn -> Bảo trì
         if (room.status === DB_STATUS.HIDDEN) {
             return UI_STATUS.MAINTENANCE;
         }
-        // Nếu DB là visible -> Check xem có khách thuê không
+        // Nếu DB hiện -> Check booking status
         else if (room.status === DB_STATUS.VISIBLE) {
-            return bookingStatuses[room.room_Id] ? UI_STATUS.OCCUPIED : UI_STATUS.AVAILABLE;
+            const bStatus = bookingStatuses[room.room_Id];
+            // Nếu là confirmed hoặc pending -> Đã thuê
+            if (bStatus === 'confirmed' || bStatus === 'pending') {
+                return UI_STATUS.OCCUPIED;
+            }
+            // Nếu là 'none' -> Còn trống
+            return UI_STATUS.AVAILABLE;
         }
         return UI_STATUS.AVAILABLE;
     }
@@ -157,17 +165,18 @@ export default function HostRoomManager() {
     // Logic quyền sửa/xóa (Giữ nguyên)
     const canEditHouse = (house) => {
         const rooms = house.rooms || [];
-        return rooms.every(room => !bookingStatuses[room.room_Id]);
+        return rooms.every(room => bookingStatuses[room.room_Id] === 'none');
     };
 
     const canDeleteHouse = (house) => {
         const rooms = house.rooms || [];
-        let isDelete = rooms.length === 0 || rooms.every(room => !bookingStatuses[room.room_Id]);
-        if (!isDelete) { /* Alert logic here */ }
-        return isDelete;
+        // Cho phép xóa nếu không có phòng hoặc tất cả phòng đều 'none'
+        return rooms.length === 0 || rooms.every(room => bookingStatuses[room.room_Id] === 'none');
     };
-    const canEditRoom = (room) => !bookingStatuses[room.room_Id];
-    const canDeleteRoom = (room) => !bookingStatuses[room.room_Id];
+
+    // Chỉ sửa/xóa phòng khi chưa có ai thuê (status === 'none')
+    const canEditRoom = (room) => bookingStatuses[room.room_Id] === 'none';
+    const canDeleteRoom = (room) => bookingStatuses[room.room_Id] === 'none';
 
     // Modals handling...
     const openEditHouseModal = (room) => { setEditingHouse(room); setShowEditHouseModal(true); };
@@ -177,7 +186,6 @@ export default function HostRoomManager() {
     const convertImagesToDisplay = (room) => {
         return import.meta.env.VITE_URL_ROOT + room.image_Url;
     }
-    console.log()
     return (
         <div className="container py-4">
             {/* Header & Sidebar giữ nguyên... */}
@@ -274,33 +282,50 @@ export default function HostRoomManager() {
                                     <div className="position-relative" style={{ height: '180px', overflow: 'hidden' }}>
                                         <img src={room.roomImages?.[0] ? convertImagesToDisplay(room.roomImages[0]) : (room.image_Url || 'https://placehold.co/600x400')} className="card-img-top" style={{ height: '100%', objectFit: 'cover' }} />
 
-                                        {/* 5. SỬA LỖI LOGIC CHANGE STATUS */}
-                                        <div className="position-absolute top-0 end-0 p-2">
+                                        {/* ... Bên trong filteredRooms.map ... */}
+
+                                        <div className="position-absolute top-0 end-0 p-2 d-flex flex-column align-items-end">
                                             <select
-                                                className="form-select form-select-sm"
-                                                value={getRoomStatus(room)} // Hiển thị theo UI (available/occupied/maintenance)
+                                                className="form-select form-select-sm shadow-sm"
+                                                value={getRoomStatus(room)}
                                                 onChange={async (e) => {
                                                     const uiValue = e.target.value;
+                                                    const currentBStatus = bookingStatuses[room.room_Id];
 
-                                                    // Nếu phòng đang có khách, không cho phép chọn lại chính nó (tránh lỗi logic)
-                                                    if (bookingStatuses[room.room_Id] && uiValue === UI_STATUS.OCCUPIED) return;
+                                                    // Nếu đang có booking (pending/confirmed), không cho đổi trạng thái qua select
+                                                    if (currentBStatus !== 'none' && uiValue === UI_STATUS.OCCUPIED) return;
 
-                                                    // CHUYỂN ĐỔI UI -> DB TRƯỚC KHI GỬI
                                                     const dbStatus = mapUiToDbStatus(uiValue);
-
                                                     await handleStatusChange(room.room_Id, dbStatus);
                                                 }}
                                                 style={{ maxWidth: '120px' }}
-                                                disabled={bookingStatuses[room.room_Id]}
+                                                // Disable nếu trạng thái KHÁC 'none' (tức là đang pending hoặc confirmed)
+                                                disabled={bookingStatuses[room.room_Id] !== 'none'}
                                             >
                                                 <option value={UI_STATUS.AVAILABLE}>Còn trống</option>
-                                                {/* Nếu đã thuê thì disable tùy chọn này để tránh người dùng chọn nhầm, 
-                                                    nhưng nếu đang là 'occupied' thì nó vẫn hiện ra nhờ value={getRoomStatus} */}
-                                                <option value={UI_STATUS.OCCUPIED} disabled={!bookingStatuses[room.room_Id]}>
+
+                                                {/* Option Đã thuê chỉ hiển thị/active khi thực sự có booking */}
+                                                <option value={UI_STATUS.OCCUPIED} disabled={bookingStatuses[room.room_Id] === 'none'}>
                                                     Đã thuê
                                                 </option>
+
                                                 <option value={UI_STATUS.MAINTENANCE}>Sửa chữa</option>
                                             </select>
+
+                                            {/* LOGIC HIỂN THỊ BADGE THANH TOÁN */}
+                                            <div className="mt-1">
+                                                {bookingStatuses[room.room_Id] === 'confirmed' && (
+                                                    <span className="badge bg-success shadow-sm border border-white">
+                                                        <i className="bi bi-check-circle-fill me-1"></i>Đã thanh toán
+                                                    </span>
+                                                )}
+
+                                                {bookingStatuses[room.room_Id] === 'pending' && (
+                                                    <span className="badge bg-warning text-dark shadow-sm border border-white">
+                                                        <i className="bi bi-hourglass-split me-1"></i>Chưa thanh toán
+                                                    </span>
+                                                )}
+                                            </div>
                                         </div>
                                     </div>
 

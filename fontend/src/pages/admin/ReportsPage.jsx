@@ -67,7 +67,27 @@ const ReportsPage = () => {
 
                 case "Review": {
                     // 🔹 Gọi API lấy danh sách nhà trọ, tìm house chứa room này
-                    alert("Comming soon: Chức năng tìm nhà trọ từ đánh giá.");
+                    const reviewRes = await axios.get(`https://localhost:7167/api/Reviews/${id}`);
+                    const roomId = reviewRes.data.room_Id;
+
+                    if (!roomId) {
+                        alert("Không tìm thấy thông tin phòng của đánh giá này.");
+                        return;
+                    }
+
+                    // 2. Gọi API lấy thông tin Room để có HouseId
+                    // Giả sử API trả về object có trường house_Id
+                    const roomRes = await axios.get(`https://localhost:7167/api/Rooms/${roomId}`);
+                    const houseId = roomRes.data.house_Id;
+
+                    if (!houseId) {
+                        alert("Không tìm thấy thông tin nhà trọ.");
+                        return;
+                    }
+
+                    // 3. Chuyển hướng và cuộn tới review
+                    // URL format: /houses/:houseId/rooms/:roomId#review-:reviewId
+                    window.location.href = `/houses/${houseId}/rooms/${roomId}#${id}`;
                     break;
                 }
                 case "Message":

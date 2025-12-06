@@ -3,20 +3,136 @@
   "WorkspaceRootPath": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205061735_fixnew1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MyApi.Infrastructure\\Migrations\\20251205061735_fixnew1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\chatconversationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\chatconversationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.application\\dtos\\roomdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|solutionrelative:myapi.application\\dtos\\roomdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.domain\\entities\\chatconversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|solutionrelative:myapi.domain\\entities\\chatconversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\chatconversationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\chatconversationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\data\\chatconversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\data\\chatconversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.domain\\entities\\boardinghouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|solutionrelative:myapi.domain\\entities\\boardinghouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\userreponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\userreponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\bookingreponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\bookingreponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\houseimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\houseimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.domain\\entities\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|solutionrelative:myapi.domain\\entities\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205060734_fixnew.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MyApi.Infrastructure\\Migrations\\20251205060734_fixnew.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.domain\\entities\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|solutionrelative:myapi.domain\\entities\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.application\\dtos\\roomdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|solutionrelative:myapi.application\\dtos\\roomdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.application\\dtos\\bookingdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|solutionrelative:myapi.application\\dtos\\bookingdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\interfaces\\ibookingreponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\interfaces\\ibookingreponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\chatmessagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\chatmessagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\boardinghousecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\boardinghousecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.domain\\entities\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|solutionrelative:myapi.domain\\entities\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.application\\dtos\\reportdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|solutionrelative:myapi.application\\dtos\\reportdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\boardinghouserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\boardinghouserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\roomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\roomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.domain\\entities\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|solutionrelative:myapi.domain\\entities\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\data\\houseimageconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\data\\houseimageconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\roomimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\roomimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\interfaces\\iroomimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\interfaces\\iroomimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\data\\roomimageconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\data\\roomimageconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\roomimagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\roomimagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\interfaces\\ihouseimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\interfaces\\ihouseimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\houseimagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\houseimagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\migrations\\20251205061735_fixnew1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\migrations\\20251205061735_fixnew1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\data\\favoritehouseconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,20 +143,12 @@
       "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\data\\boardinghouseconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205060326_fix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MyApi.Infrastructure\\Migrations\\20251205060326_fix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\data\\bookingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\data\\bookingconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\interfaces\\iboardinghousereponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\interfaces\\iboardinghousereponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\boardinghouserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\boardinghouserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -51,20 +159,12 @@
       "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\vnpaylibrary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\data\\appdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\data\\appdbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205055721_fixnew.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MyApi.Infrastructure\\Migrations\\20251205055721_fixnew.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.domain\\entities\\boardinghouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|solutionrelative:myapi.domain\\entities\\boardinghouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205055413_fix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -83,64 +183,12 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MyApi.Infrastructure\\Migrations\\20251205054206_fix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\boardinghousecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\boardinghousecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.application\\mappings\\boardinghousemappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|solutionrelative:myapi.application\\mappings\\boardinghousemappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\roomimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\roomimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\roomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\roomrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\houseimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\houseimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\interfaces\\ihouseimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\interfaces\\ihouseimagerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\houseimagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\houseimagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\roomimagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\roomimagescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\seeders\\dataseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\seeders\\dataseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\bookingreponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\repositories\\bookingreponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.domain\\entities\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|solutionrelative:myapi.domain\\entities\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.api\\controllers\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F983895A-E65D-A494-9FE6-EB7016AD47B3}|MyApi.Api\\MyApi.Api.csproj|solutionrelative:myapi.api\\controllers\\bookingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.application\\dtos\\bookingdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AFA88B96-1AD5-62FA-49E9-0B184BE014D4}|MyApi.Application\\MyApi.Application.csproj|solutionrelative:myapi.application\\dtos\\bookingdtos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\interfaces\\ibookingreponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\interfaces\\ibookingreponsitory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\repositories\\reviewrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -161,6 +209,18 @@
     {
       "AbsoluteMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.domain\\entities\\reviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2EA51D22-CCA8-5B46-0212-5BFA55C3A040}|MyApi.Domain\\MyApi.Domain.csproj|solutionrelative:myapi.domain\\entities\\reviews.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\migrations\\20251205060734_fixnew.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\migrations\\20251205060734_fixnew.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\migrations\\20251205060326_fix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\migrations\\20251205060326_fix.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|d:\\university\\semester viii\\project it 4\\housefinder-react-bootstrap-asp-net\\backend\\myapi.infrastructure\\migrations\\20251206045031_add-null-report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1C63AE3C-DBD2-67FD-7783-69FC6F745525}|MyApi.Infrastructure\\MyApi.Infrastructure.csproj|solutionrelative:myapi.infrastructure\\migrations\\20251206045031_add-null-report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -170,141 +230,180 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20251205061735_fixnew1.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205061735_fixnew1.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205061735_fixnew1.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205061735_fixnew1.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205061735_fixnew1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ChatConversation.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\ChatConversation.cs",
+              "RelativeDocumentMoniker": "MyApi.Domain\\Entities\\ChatConversation.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\ChatConversation.cs",
+              "RelativeToolTip": "MyApi.Domain\\Entities\\ChatConversation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T06:17:35.149Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-06T07:09:42.456Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "20251205060734_fixnew.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205060734_fixnew.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205060734_fixnew.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205060734_fixnew.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205060734_fixnew.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
+              "Title": "ChatConversationRepository.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\ChatConversationRepository.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\ChatConversationRepository.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\ChatConversationRepository.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\ChatConversationRepository.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAcwEYAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T06:07:34.846Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-06T07:08:54.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChatConversation.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\ChatConversation.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\ChatConversation.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\ChatConversation.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Data\\ChatConversation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T07:08:49.728Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "20251205060326_fix.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205060326_fix.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205060326_fix.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205060326_fix.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205060326_fix.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "UserReponsitory.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\UserReponsitory.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\UserReponsitory.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\UserReponsitory.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\UserReponsitory.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAIwEYAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T06:03:26.711Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-06T07:03:14.407Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "BoardingHouseConfiguration.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\BoardingHouseConfiguration.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\BoardingHouseConfiguration.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\BoardingHouseConfiguration.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Data\\BoardingHouseConfiguration.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAgwDgAAAA0AAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "MyApi.Api\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAmwFcAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T06:03:13.623Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-06T07:02:30.182Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BookingReponsitory.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\BookingReponsitory.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\BookingReponsitory.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\BookingReponsitory.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\BookingReponsitory.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAIwBkAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T11:59:21.809Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "BookingsController.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\BookingsController.cs",
+              "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\BookingsController.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\BookingsController.cs",
+              "RelativeToolTip": "MyApi.Api\\Controllers\\BookingsController.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAwwEoAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:32:15.465Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "VNPayLibrary.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\VNPayLibrary.cs",
-              "RelativeDocumentMoniker": "MyApi.Api\\VNPayLibrary.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\VNPayLibrary.cs",
-              "RelativeToolTip": "MyApi.Api\\VNPayLibrary.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Booking.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Booking.cs",
+              "RelativeDocumentMoniker": "MyApi.Domain\\Entities\\Booking.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Booking.cs",
+              "RelativeToolTip": "MyApi.Domain\\Entities\\Booking.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAgwBEAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:58:41.552Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\AppDbContext.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAA4wCQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:58:09.875Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "AppDbContextFactory.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\AppDbContextFactory.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\AppDbContextFactory.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\AppDbContextFactory.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Data\\AppDbContextFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:58:08.186Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-04T12:09:06.354Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Program.cs",
-              "RelativeDocumentMoniker": "MyApi.Api\\Program.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Program.cs",
-              "RelativeToolTip": "MyApi.Api\\Program.cs",
-              "ViewState": "AgIAAKoAAAAAAAAAAAAowNAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T13:03:53.399Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "BoardingHouseRepository.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\BoardingHouseRepository.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\BoardingHouseRepository.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\BoardingHouseRepository.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\BoardingHouseRepository.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T12:34:32.8Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "Room.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Room.cs",
               "RelativeDocumentMoniker": "MyApi.Domain\\Entities\\Room.cs",
               "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Room.cs",
               "RelativeToolTip": "MyApi.Domain\\Entities\\Room.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAhwBQAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T12:50:23.733Z",
+              "WhenOpened": "2025-12-03T12:50:23.733Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ChatConversationsController.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\ChatConversationsController.cs",
+              "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\ChatConversationsController.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\ChatConversationsController.cs",
+              "RelativeToolTip": "MyApi.Api\\Controllers\\ChatConversationsController.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAYwHoAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T04:59:57.929Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 15,
+              "Title": "IBookingReponsitory.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IBookingReponsitory.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Interfaces\\IBookingReponsitory.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IBookingReponsitory.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Interfaces\\IBookingReponsitory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:00:00.22Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\AppDbContext.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAA5wBAAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:58:09.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "MyApi.Api\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAowEAAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:29:44.242Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "BookingDTOs.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\DTOs\\BookingDTOs.cs",
+              "RelativeDocumentMoniker": "MyApi.Application\\DTOs\\BookingDTOs.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\DTOs\\BookingDTOs.cs",
+              "RelativeToolTip": "MyApi.Application\\DTOs\\BookingDTOs.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAnwCoAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:23:24.726Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "RoomDTOs.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\DTOs\\RoomDTOs.cs",
               "RelativeDocumentMoniker": "MyApi.Application\\DTOs\\RoomDTOs.cs",
@@ -312,228 +411,167 @@
               "RelativeToolTip": "MyApi.Application\\DTOs\\RoomDTOs.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-03T12:54:51.527Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-03T12:54:51.527Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "20251205055721_fixnew.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205055721_fixnew.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205055721_fixnew.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205055721_fixnew.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205055721_fixnew.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:57:22.028Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FavoriteHouseConfiguration.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\FavoriteHouseConfiguration.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\FavoriteHouseConfiguration.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\FavoriteHouseConfiguration.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Data\\FavoriteHouseConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:40:30.296Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 5,
               "Title": "BoardingHouse.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\BoardingHouse.cs",
               "RelativeDocumentMoniker": "MyApi.Domain\\Entities\\BoardingHouse.cs",
               "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\BoardingHouse.cs",
               "RelativeToolTip": "MyApi.Domain\\Entities\\BoardingHouse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAQwAUAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:57:01.988Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IBoardingHouseReponsitory.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IBoardingHouseReponsitory.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Interfaces\\IBoardingHouseReponsitory.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IBoardingHouseReponsitory.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Interfaces\\IBoardingHouseReponsitory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:11:38.546Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "BookingConfiguration.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\BookingConfiguration.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\BookingConfiguration.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\BookingConfiguration.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Data\\BookingConfiguration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:45:13.325Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "20251205055413_fix.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205055413_fix.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205055413_fix.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205055413_fix.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205055413_fix.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:54:13.927Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-05T05:57:01.988Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 17,
-              "Title": "RoomPropertyConfiguration.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\RoomPropertyConfiguration.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\RoomPropertyConfiguration.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\RoomPropertyConfiguration.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Data\\RoomPropertyConfiguration.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:45:07.516Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "20251205054446_fixnew.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205054446_fixnew.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205054446_fixnew.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205054446_fixnew.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205054446_fixnew.cs",
+              "Title": "ChatMessagesController.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\ChatMessagesController.cs",
+              "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\ChatMessagesController.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\ChatMessagesController.cs",
+              "RelativeToolTip": "MyApi.Api\\Controllers\\ChatMessagesController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:44:47.013Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-06T04:59:59.337Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "20251205054206_fix.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205054206_fix.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205054206_fix.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205054206_fix.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205054206_fix.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:42:06.896Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "BoardingHouseMappingProfile.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\Mappings\\BoardingHouseMappingProfile.cs",
-              "RelativeDocumentMoniker": "MyApi.Application\\Mappings\\BoardingHouseMappingProfile.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\Mappings\\BoardingHouseMappingProfile.cs",
-              "RelativeToolTip": "MyApi.Application\\Mappings\\BoardingHouseMappingProfile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:32:32.895Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\AuthController.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "MyApi.Api\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:29:44.242Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 9,
               "Title": "HouseImageRepository.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\HouseImageRepository.cs",
               "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\HouseImageRepository.cs",
               "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\HouseImageRepository.cs",
               "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\HouseImageRepository.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwDUAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowEUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-05T05:12:05.29Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "RoomImageRepository.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\RoomImageRepository.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\RoomImageRepository.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\RoomImageRepository.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\RoomImageRepository.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAowDkAAABIAAAAAAAAAA==",
+              "DocumentIndex": 19,
+              "Title": "Report.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Report.cs",
+              "RelativeDocumentMoniker": "MyApi.Domain\\Entities\\Report.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Report.cs",
+              "RelativeToolTip": "MyApi.Domain\\Entities\\Report.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:09:59.283Z"
+              "WhenOpened": "2025-12-05T13:24:49.744Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "RoomImagesController.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\RoomImagesController.cs",
-              "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\RoomImagesController.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\RoomImagesController.cs",
-              "RelativeToolTip": "MyApi.Api\\Controllers\\RoomImagesController.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAcwFMAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 54,
+              "Title": "20251206045031_add-null-report.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251206045031_add-null-report.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251206045031_add-null-report.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251206045031_add-null-report.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251206045031_add-null-report.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:09:35.062Z"
+              "WhenOpened": "2025-12-06T04:50:31.244Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 20,
+              "Title": "ReportDTOs.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\DTOs\\ReportDTOs.cs",
+              "RelativeDocumentMoniker": "MyApi.Application\\DTOs\\ReportDTOs.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\DTOs\\ReportDTOs.cs",
+              "RelativeToolTip": "MyApi.Application\\DTOs\\ReportDTOs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-06T04:48:53.996Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "RoomRepository.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\RoomRepository.cs",
               "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\RoomRepository.cs",
               "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\RoomRepository.cs",
               "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\RoomRepository.cs",
-              "ViewState": "AgIAACcAAAAAAAAAAAAowAgAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-03T13:16:48.722Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
+              "Title": "BoardingHouseRepository.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\BoardingHouseRepository.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\BoardingHouseRepository.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\BoardingHouseRepository.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\BoardingHouseRepository.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAADgvxQAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-04T12:34:32.8Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
               "Title": "BoardingHouseController.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\BoardingHouseController.cs",
               "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\BoardingHouseController.cs",
               "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\BoardingHouseController.cs",
               "RelativeToolTip": "MyApi.Api\\Controllers\\BoardingHouseController.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB8AAABDAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwB8AAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:27:18.84Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-05T05:27:18.84Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "HouseImageConfiguration.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\HouseImageConfiguration.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\HouseImageConfiguration.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\HouseImageConfiguration.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Data\\HouseImageConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T11:22:44.948Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Payment.cs",
+              "RelativeDocumentMoniker": "MyApi.Domain\\Entities\\Payment.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Payment.cs",
+              "RelativeToolTip": "MyApi.Domain\\Entities\\Payment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T11:57:19.825Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 26,
-              "Title": "IHouseImageRepository.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IHouseImageRepository.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Interfaces\\IHouseImageRepository.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IHouseImageRepository.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Interfaces\\IHouseImageRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAANAAAAAAAAAA==",
+              "Title": "IRoomImageRepository.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IRoomImageRepository.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Interfaces\\IRoomImageRepository.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IRoomImageRepository.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Interfaces\\IRoomImageRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:12:10.635Z"
+              "WhenOpened": "2025-12-05T11:19:44.592Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 27,
+              "Title": "RoomImageConfiguration.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\RoomImageConfiguration.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\RoomImageConfiguration.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\RoomImageConfiguration.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Data\\RoomImageConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T11:19:40.362Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
               "Title": "HouseImagesController.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\HouseImagesController.cs",
               "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\HouseImagesController.cs",
@@ -545,19 +583,247 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "BookingsController.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\BookingsController.cs",
-              "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\BookingsController.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\BookingsController.cs",
-              "RelativeToolTip": "MyApi.Api\\Controllers\\BookingsController.cs",
-              "ViewState": "AgIAAH8AAAAAAAAAAAAYwIoAAABCAAAAAAAAAA==",
+              "DocumentIndex": 31,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\GenericRepository.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\GenericRepository.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\GenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T12:32:15.465Z"
+              "WhenOpened": "2025-12-05T11:13:26.206Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "RoomImageRepository.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\RoomImageRepository.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\RoomImageRepository.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\RoomImageRepository.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\RoomImageRepository.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowDwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:09:59.283Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "20251205061735_fixnew1.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205061735_fixnew1.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205061735_fixnew1.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205061735_fixnew1.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205061735_fixnew1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T06:17:35.149Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "IHouseImageRepository.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IHouseImageRepository.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Interfaces\\IHouseImageRepository.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IHouseImageRepository.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Interfaces\\IHouseImageRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:12:10.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "RoomImagesController.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\RoomImagesController.cs",
+              "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\RoomImagesController.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\RoomImagesController.cs",
+              "RelativeToolTip": "MyApi.Api\\Controllers\\RoomImagesController.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAA0wFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:09:35.062Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Program.cs",
+              "RelativeDocumentMoniker": "MyApi.Api\\Program.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Program.cs",
+              "RelativeToolTip": "MyApi.Api\\Program.cs",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAowNAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T13:03:53.399Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "AppDbContextFactory.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\AppDbContextFactory.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\AppDbContextFactory.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\AppDbContextFactory.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Data\\AppDbContextFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:58:08.186Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "VNPayLibrary.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\VNPayLibrary.cs",
+              "RelativeDocumentMoniker": "MyApi.Api\\VNPayLibrary.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\VNPayLibrary.cs",
+              "RelativeToolTip": "MyApi.Api\\VNPayLibrary.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:58:41.552Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "BoardingHouseConfiguration.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\BoardingHouseConfiguration.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\BoardingHouseConfiguration.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\BoardingHouseConfiguration.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Data\\BoardingHouseConfiguration.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAgwDgAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T06:03:13.623Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "20251205060326_fix.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205060326_fix.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205060326_fix.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205060326_fix.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205060326_fix.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T06:03:26.711Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "20251205060734_fixnew.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205060734_fixnew.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205060734_fixnew.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205060734_fixnew.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205060734_fixnew.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T06:07:34.846Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "20251205055721_fixnew.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205055721_fixnew.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205055721_fixnew.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205055721_fixnew.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205055721_fixnew.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:57:22.028Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "FavoriteHouseConfiguration.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\FavoriteHouseConfiguration.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\FavoriteHouseConfiguration.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\FavoriteHouseConfiguration.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Data\\FavoriteHouseConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:40:30.296Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "IBoardingHouseReponsitory.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IBoardingHouseReponsitory.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Interfaces\\IBoardingHouseReponsitory.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IBoardingHouseReponsitory.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Interfaces\\IBoardingHouseReponsitory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:11:38.546Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 35,
+              "Title": "BookingConfiguration.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\BookingConfiguration.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\BookingConfiguration.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\BookingConfiguration.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Data\\BookingConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:45:13.325Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "20251205055413_fix.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205055413_fix.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205055413_fix.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205055413_fix.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205055413_fix.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:54:13.927Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "RoomPropertyConfiguration.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\RoomPropertyConfiguration.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\RoomPropertyConfiguration.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\RoomPropertyConfiguration.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Data\\RoomPropertyConfiguration.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:45:07.516Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "20251205054446_fixnew.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205054446_fixnew.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205054446_fixnew.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205054446_fixnew.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205054446_fixnew.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:44:47.013Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "20251205054206_fix.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205054206_fix.cs",
+              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Migrations\\20251205054206_fix.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Migrations\\20251205054206_fix.cs",
+              "RelativeToolTip": "MyApi.Infrastructure\\Migrations\\20251205054206_fix.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:42:06.896Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "BoardingHouseMappingProfile.cs",
+              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\Mappings\\BoardingHouseMappingProfile.cs",
+              "RelativeDocumentMoniker": "MyApi.Application\\Mappings\\BoardingHouseMappingProfile.cs",
+              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\Mappings\\BoardingHouseMappingProfile.cs",
+              "RelativeToolTip": "MyApi.Application\\Mappings\\BoardingHouseMappingProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T05:32:32.895Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
               "Title": "ReviewRepository.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\ReviewRepository.cs",
               "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\ReviewRepository.cs",
@@ -569,7 +835,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 46,
               "Title": "DataSeeder.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Seeders\\DataSeeder.cs",
               "RelativeDocumentMoniker": "MyApi.Infrastructure\\Seeders\\DataSeeder.cs",
@@ -581,55 +847,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "BookingDTOs.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\DTOs\\BookingDTOs.cs",
-              "RelativeDocumentMoniker": "MyApi.Application\\DTOs\\BookingDTOs.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\DTOs\\BookingDTOs.cs",
-              "RelativeToolTip": "MyApi.Application\\DTOs\\BookingDTOs.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAvwDsAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T12:23:24.726Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "Booking.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Booking.cs",
-              "RelativeDocumentMoniker": "MyApi.Domain\\Entities\\Booking.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Booking.cs",
-              "RelativeToolTip": "MyApi.Domain\\Entities\\Booking.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T12:09:06.354Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "IBookingReponsitory.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IBookingReponsitory.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Interfaces\\IBookingReponsitory.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Interfaces\\IBookingReponsitory.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Interfaces\\IBookingReponsitory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T12:00:00.22Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "BookingReponsitory.cs",
-              "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\BookingReponsitory.cs",
-              "RelativeDocumentMoniker": "MyApi.Infrastructure\\Repositories\\BookingReponsitory.cs",
-              "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Repositories\\BookingReponsitory.cs",
-              "RelativeToolTip": "MyApi.Infrastructure\\Repositories\\BookingReponsitory.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAmwB0AAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-04T11:59:21.809Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 48,
               "Title": "RoomPropertiesController.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\Controllers\\RoomPropertiesController.cs",
               "RelativeDocumentMoniker": "MyApi.Api\\Controllers\\RoomPropertiesController.cs",
@@ -641,7 +859,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 49,
               "Title": "RoomPropertyDTOs.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Application\\DTOs\\RoomPropertyDTOs.cs",
               "RelativeDocumentMoniker": "MyApi.Application\\DTOs\\RoomPropertyDTOs.cs",
@@ -653,7 +871,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 50,
               "Title": "RoomConfiguration.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Infrastructure\\Data\\RoomConfiguration.cs",
               "RelativeDocumentMoniker": "MyApi.Infrastructure\\Data\\RoomConfiguration.cs",
@@ -665,7 +883,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 51,
               "Title": "Reviews.cs",
               "DocumentMoniker": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Domain\\Entities\\Reviews.cs",
               "RelativeDocumentMoniker": "MyApi.Domain\\Entities\\Reviews.cs",

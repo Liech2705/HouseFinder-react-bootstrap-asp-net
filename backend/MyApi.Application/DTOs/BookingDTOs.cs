@@ -77,4 +77,9 @@ namespace MyApi.Application.DTOs.BookingDtos
         public int RoomId { get; set; }
         public int UserId { get; set; }
     }
+
+    public class CheckIsPaymentResponse
+    {
+        public string result { get; set; }
+    }
 }

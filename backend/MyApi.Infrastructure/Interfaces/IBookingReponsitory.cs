@@ -11,7 +11,7 @@ namespace MyApi.Domain.Interfaces
         Task<int> GetIdByRoomIdAsync(VNPayRequest model);
         Task<bool> CheckBookingByRoomIdAsync(int roomId);
         Task SavePaymentAsync(VnPayResponse res);
-        Task<bool> CheckIsPayMent(int user_Id, int room_Id);
-        Task<bool> CheckIsBooking(int user_Id, int room_Id);
+        Task<CheckIsPaymentResponse> CheckIsPayMent(int user_Id, int room_Id);
+        Task<CheckIsPaymentResponse> CheckIsPayMentForHost(int room_Id);
     }
 }

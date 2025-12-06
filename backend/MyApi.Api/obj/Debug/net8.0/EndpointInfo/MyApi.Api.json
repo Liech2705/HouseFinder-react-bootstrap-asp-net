@@ -851,6 +851,29 @@
         }
       }
     },
+    "/api/Bookings/ispaymentforhost/{room_Id}": {
+      "get": {
+        "tags": [
+          "Bookings"
+        ],
+        "parameters": [
+          {
+            "name": "room_Id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/ChatConversations": {
       "get": {
         "tags": [
@@ -5598,7 +5621,8 @@
           },
           "reported_Id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "type": {
             "$ref": "#/components/schemas/ReportType"
@@ -5631,7 +5655,8 @@
           },
           "reported_Id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "reported_Title": {
             "type": "string",

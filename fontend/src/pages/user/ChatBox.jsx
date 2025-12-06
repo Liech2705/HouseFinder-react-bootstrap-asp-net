@@ -22,12 +22,10 @@ export default function ChatBox({ hostId, userId, conversationId }) {
             try {
                 const res = await getConversationById(conversationId);
                 setConversation(res);
-                // try set messages here only if backend returns chatMessages inside conversation
-                setMessages(res.chatMessages || []);
             } catch (error) {
                 console.error("Lỗi lấy conversation:", error);
             }
-        };
+        };  
         fetchConversation();
     }, [conversationId]);
 
@@ -46,7 +44,16 @@ export default function ChatBox({ hostId, userId, conversationId }) {
                     .build();
 
                 conn.on("ReceiveMessage", (msg) => {
-                    setMessages((prev) => [...prev, msg]);
+                    setMessages((prev) => {
+                        // 1. Kiểm tra xem tin nhắn này đã có trong danh sách chưa (dựa vào ID)
+                        const isExist = prev.some((m) => m.message_Id === msg.message_Id);
+
+                        // 2. Nếu có rồi thì không thêm nữa, trả về danh sách cũ
+                        if (isExist) return prev;
+
+                        // 3. Nếu chưa có thì mới thêm vào
+                        return [...prev, msg];
+                    });
                 });
 
                 await conn.start();
@@ -155,7 +162,6 @@ export default function ChatBox({ hostId, userId, conversationId }) {
             cursor: "pointer"
         }
     };
-    console.log("Rendering ChatBox for conversationId:", conversationId, "with messages:", messages);
     return (
         <div style={styles.container}>
 

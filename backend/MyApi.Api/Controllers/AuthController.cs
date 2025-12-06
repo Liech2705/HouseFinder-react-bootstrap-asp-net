@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -37,75 +38,104 @@ namespace MyApi.API.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterDto dto)
         {
+
+            var emailRegex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+            if (!emailRegex.IsMatch(dto.Email))
+            {
+                return BadRequest(new { success = false, message = "Định dạng email không hợp lệ!" });
+            }
+
             // Check user tồn tại
             if (_context.Users.Any(u => u.Email == dto.Email))
             {
                 return BadRequest("Email đã tồn tại!");
             }
-
-            var user = new User
+            // 3. Check số điện thoại tồn tại (trong bảng UserInfors)
+            // Giả sử dto.Phone không được để trống
+            if (!string.IsNullOrEmpty(dto.Phone) && _context.UserInfors.Any(ui => ui.Phone == dto.Phone))
             {
-                User_Name = dto.UserName,
-                Email = dto.Email,
-                PasswordHash = _passwordHasher.HashPassword(dto.Password),
-                Role = dto.Role // mặc định User
-            };
+                return BadRequest(new { success = false, message = "Số điện thoại đã được sử dụng!" });
+            }
 
-            _context.Users.Add(user);
-            _context.SaveChanges();
-
-            int newUserId = user.User_Id;
-
-            var userInfor = new UserInfor
+            // Sử dụng Transaction để đảm bảo tính toàn vẹn dữ liệu
+            using (var transaction = _context.Database.BeginTransaction())
             {
-                User_Id = newUserId,
-                Dob = null,
-                Phone = dto.Phone,
-                Avatar = "",
-                Update_At = DateTime.Now
-            };
-
-            _context.UserInfors.Add(userInfor);
-            _context.SaveChanges();
-
-            // Generate JWT
-            var jwt = GenerateJwtToken(user);
-
-            // Lưu token vào DB
-            var userToken = new UserToken
-            {
-                UserId = user.User_Id,
-                Token = jwt,
-            };
-            _context.UserTokens.Add(userToken);
-            _context.SaveChanges();
-
-
-
-            return Ok(new 
-            { 
-                success = true, 
-                message = "Đăng ký thành công",
-                data = new
+                try
                 {
-                    user = new
+                    // --- Tạo User ---
+                    var user = new User
                     {
-                        id = user.User_Id,
-                        email = user.Email, 
-                        userName = user.User_Name, 
-                        avatar = "",
-                        role = user.Role,
-                        lock_until = user.Lock_Until
+                        User_Name = dto.UserName,
+                        Email = dto.Email,
+                        PasswordHash = _passwordHasher.HashPassword(dto.Password),
+                        Role = dto.Role // mặc định User
+                    };
 
-                    }
-                },
-                token = jwt,
-            });
+                    _context.Users.Add(user);
+                    _context.SaveChanges(); // Lưu để lấy User_Id
 
+                    int newUserId = user.User_Id;
+
+                    // --- Tạo UserInfo ---
+                    var userInfor = new UserInfor
+                    {
+                        User_Id = newUserId,
+                        Dob = null,
+                        Phone = dto.Phone,
+                        Avatar = "",
+                        Update_At = DateTime.Now
+                    };
+
+                    _context.UserInfors.Add(userInfor);
+                    // Không cần SaveChanges ngay ở đây nếu không cần ID của UserInfor ngay lập tức, 
+                    // nhưng để an toàn cứ để cuối cùng save 1 lần cũng được, hoặc save từng bước.
+
+                    // --- Generate JWT ---
+                    var jwt = GenerateJwtToken(user);
+
+                    // --- Lưu token vào DB ---
+                    var userToken = new UserToken
+                    {
+                        UserId = user.User_Id,
+                        Token = jwt,
+                    };
+                    _context.UserTokens.Add(userToken);
+
+                    // Lưu tất cả các thay đổi còn lại
+                    _context.SaveChanges();
+
+                    // Commit transaction (xác nhận thành công)
+                    transaction.Commit();
+
+                    return Ok(new
+                    {
+                        success = true,
+                        message = "Đăng ký thành công",
+                        data = new
+                        {
+                            user = new
+                            {
+                                id = user.User_Id,
+                                email = user.Email,
+                                userName = user.User_Name,
+                                avatar = "",
+                                role = user.Role,
+                                lock_until = user.Lock_Until
+                            }
+                        },
+                        token = jwt,
+                    });
+                }
+                catch (Exception ex)
+                {
+                    // Nếu có lỗi, rollback lại toàn bộ (không tạo user rác)
+                    transaction.Rollback();
+                    return StatusCode(500, new { success = false, message = "Lỗi hệ thống: " + ex.Message });
+                }
+            }
         }
 
         // POST: api/Auth/login
-        // ================== LOGIN ==================
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto dto)
         {
@@ -326,7 +356,7 @@ namespace MyApi.API.Controllers
             // ✅ TODO: update mật khẩu trong DB (hash bằng BCrypt)
             var user = _context.Users.FirstOrDefault(u => u.Email == dto.Email);
             if (user == null) return NotFound("Không tìm thấy email người dùng");
-            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.NewPassword);
+            user.PasswordHash = _passwordHasher.HashPassword(dto.NewPassword);
             _context.SaveChanges();
 
             _otpStore.TryRemove(dto.Email, out _);

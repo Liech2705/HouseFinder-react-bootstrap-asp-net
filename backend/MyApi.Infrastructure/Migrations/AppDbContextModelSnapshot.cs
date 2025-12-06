@@ -392,7 +392,7 @@ namespace MyApi.Infrastructure.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<int>("Reported_Id")
+                    b.Property<int?>("Reported_Id")
                         .HasColumnType("int");
 
                     b.Property<int>("Reporter_Id")

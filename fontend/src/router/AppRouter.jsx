@@ -24,6 +24,7 @@ import HostRoomManager from '../pages/host/HostRoomManager.jsx';
 import PaymentSuccess from '../pages/user/Booking/PaymentSuccess.jsx';
 import PaymentFail from '../pages/user/Booking/PaymentFail.jsx';
 import MapPage from '../pages/user/Maps/MapPage.jsx';
+import ReportHouse from '../pages/user/ReportHouse.jsx';
 
 
 const AppRouter = () => {
@@ -44,6 +45,8 @@ const AppRouter = () => {
                 <Route path="/manage" element={<MainLayout><HostRoomManager /></MainLayout>} />
                 <Route path="/payment-success" element={<MainLayout><PaymentSuccess /></MainLayout>} />
                 <Route path="/payment-failed" element={<MainLayout><PaymentFail /></MainLayout>} />
+                <Route path="/report/house/:houseId" element={<MainLayout><ReportHouse /></MainLayout>} />
+                <Route path="/report/review/:reviewId" element={<MainLayout><ReportHouse /></MainLayout>} />
 
                 <Route path="/admin" element={<AdminLayout />}>
                     <Route index element={<Dashboard />} />

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'; // Import Link
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { checkBooking } from '../api/api.jsx';
 function HouseCard({ house, view }) { // Nhận thêm prop 'view' từ HouseList
     if (!house || house.status !== "visible" || !Array.isArray(house.rooms) || house.rooms.length === 0) {
@@ -58,17 +58,21 @@ function HouseCard({ house, view }) { // Nhận thêm prop 'view' từ HouseList
     const totalRooms = houseData.rooms?.length || 0;
     // Available rooms = rooms that are NOT booked (filter from bookingStatuses)
     const availableRooms = houseData.rooms?.filter(r => !bookingStatuses[r.room_Id]).length || 0;
-
+    const rooms = house?.rooms || [];
+    const mainRoom = rooms[0];
     // Lấy tên chủ trọ (lấy từ trường userName của house)
     const hostName = houseData.userName || 'Chủ trọ ẩn danh';
     const convertImagesToDisplay = (imageUrl) => {
         return import.meta.env.VITE_URL_ROOT + imageUrl;
     }
-    // Lấy ảnh đại diện (Lấy ảnh đầu tiên của houseImages, fallback to placeholder)
-    console.log(houseData);
-    const imageUrl = houseData?.houseImages?.[0]
-        ? convertImagesToDisplay(houseData.houseImages[0].image_Url)
-        : placeholder;
+
+    const imageUrl = useMemo(() => {
+        const houseImgs = houseData?.houseImages?.map(img => convertImagesToDisplay(img.image_Url));
+        if (houseImgs && houseImgs.length > 0) return houseImgs;
+        const roomImage = mainRoom?.roomImages[0].image_Url;
+        return (convertImagesToDisplay(roomImage) || [placeholder]);
+    }, [house?.houseImages, mainRoom?.roomImages]);
+
     const imageHost = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAADACAMAAAB/Pny7AAAAIVBMVEXU1NS2trazs7O6urrX19e9vb3Ly8vQ0NDHx8fExMTAwMDjuXZ+AAAEY0lEQVR4nO2d25akIAxFVW7q/3/wgLZV5XiXhBNd2U/9WHtFIARIV5WiKIqiKIqiKIqiKIqiKIqiKIqiKIqiKNzYCPo3ZBMVgu+63kX6rvOheqxU8L2pm0g9MPxlel89zieE1kwWc5rGtSGgf98FgndrHl+cf4pOCsq+S4yPaR+gY6PKkclI1JE+eo4+sPnHhv61e9jgToblLzhObnCsv6Qy6HihNvbsaJnZtDJt+usqiR79u5fY6sLIn+PE5QThtku0EbbkBHe4Tm7TCLO5OV4mRI2bLiMuQ2w6tMEHm+uSbIRMAtZnu0QbKatnvkoCbTFgMwf/RC8gNNbTuNS1gA8t3EjI1jH41aajcqlr+PxMFxgBoSEMDDw0lIGBh6aldKnrFiqTkywvaRzShWyNmUDWa/IzzDnQ7Dlje7kO8DujSJfnNLjvrKWXwc1nPb0MbgNNumKOGJRLIA9MDA0qCXiVDPmSWeOmM0uaMU8yoDIN1eZ/DqgUYMnX/4QDVQJ4ZDAuHMsMbKGxPDKgMfMqmVdNADxTM8blXesMcWlmBHWUTr/RBG41X5U1E50yzUG5cOQzuPIMddkMWjh7VamJ9gwgATwHCNS1pqYHHmpQVwGBNUD67wx72kRc04CeA9JdAhgBXwWgnAKAheaBGxdmt8FfpSVMaaAnmgnC0OADQ7h5lnC3kWqtgV82GaBJN4Ep5gyK6Rk9LX/JdxFyqzGRXwzAbf2XZGc1QgbMSKaNKJfMu1rYm1krZNiIc4k2NxdPI9Dl2kPAL1KfBN6ob0ArGAdcrQoKemqyJG4ILug0EpL+Xdr1x+YrKtC60llOVmwkf2G/dIeztHmKSsI7sylkjNTpeAsb2j692v4dQelv43r5T+eXxF/s2y4afXB91/pK3HvZk6ReJsF/CNVzu5t8eUXfGUVRFEUUaWEJacVsP6R1M1RPSwGGvmZjKrPIMVNK85w+Z/F3+s7ttQYyznX+GT6+i/E42G02MUad9H2ADcf7sp8IdYI3A/Zy8xmpnaesvdV7pok68nxCf7Ys85+NvDpgaI/G/I5OLamlXpyLr9T+VnSMmIaUturvh2UKTi/ExlO8o28klJ9sdaLR5Ckb06KDYymfasA/NdKXGuCLDW9qO0EzXH5sYO+0baB2STagZI3BZbCByLA8BgR9afRtGv5sAHMa/XOTj03pUzWex3MTZR/RkV5nXlL2SD2wPNH8UnS/xjdgRkoOG47mGf9RbkNAm5GtUS5Lo+9qtGJT6i4K60w2USgR4B79I4XmgBIqiQIqBP2Mz1GknU4hl2jDrmJLTGV/Muwpmi2lkuCWKbD4f2FOA3iagGzB3RykyII5wbtw8u7JlrBOATxNgLZhbQ9E381gH9a6U+GvjPU1CksXwF04U5qiE3OCsYaW809m7sH4z1x4C0xrGL4k4O5LrAwZvhmg+PjnfMvBVSvfhrGKzl9iWsiwlZzKT2aM01npZCbBldAwl/43ZJgOBFRGZe7K/AMP3jg3/bxeIgAAAABJRU5ErkJggg==';
     // Xử lý địa chỉ
     const fullAddress = `${houseData.street || ''}, ${houseData.commune || ''}, ${houseData.province || ''}`;

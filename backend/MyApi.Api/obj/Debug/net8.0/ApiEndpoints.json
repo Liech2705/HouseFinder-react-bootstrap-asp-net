@@ -416,6 +416,22 @@
   },
   {
     "ContainingType": "MyApi.API.Controllers.BookingsController",
+    "Method": "IsPaymentBookingForHost",
+    "RelativePath": "api/Bookings/ispaymentforhost/{room_Id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "room_Id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.API.Controllers.BookingsController",
     "Method": "GetMyBookings",
     "RelativePath": "api/Bookings/my-bookings",
     "HttpMethod": "GET",

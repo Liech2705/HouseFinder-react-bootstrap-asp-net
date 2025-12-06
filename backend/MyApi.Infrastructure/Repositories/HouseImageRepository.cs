@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using MyApi.Domain.Entities;
@@ -64,5 +66,10 @@ namespace MyApi.Infrastructure.Repositories
                                  .Include(h => h.BoardingHouse)
                                  .ToListAsync();
         }
+
+        //public virtual async Task<IEnumerable<TDto>> GetAllAsync<TDto>(IConfigurationProvider mapperConfig)
+        //{
+        //    return await _dbSet.Include().ProjectTo<TDto>(mapperConfig).ToListAsync();
+        //}
     }
 }

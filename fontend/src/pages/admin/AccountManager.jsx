@@ -123,7 +123,7 @@ const AdminUserManagement = () => {
                             <td>{i + 1}</td>
                             <td>{u.user_Name}</td>
                             <td>{u.email}</td>
-                            <td>{u.role === 0 ? "Người dùng" : "Chủ trọ"}</td>
+                            <td>{u.role === "User" ? "Người dùng" : "Chủ trọ"}</td>
                             <td>
                                 {u.lock_Until ? new Date(u.lock_Until).getFullYear() == 9999 ? "Vĩnh viễn" : `Bị khóa đến ${new Date(u.lock_Until).toLocaleDateString()}`
                                     : "Hoạt động"}

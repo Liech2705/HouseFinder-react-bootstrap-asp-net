@@ -23,6 +23,7 @@ namespace MyApi.Infrastructure.Repositories
             return await _context.Bookings
                                  .Where(b => b.User_Id == userId)
                                  .Include(b => b.Room)
+                                    .ThenInclude(b => b.RoomImages)
                                  .Include(b => b.User)
                                  .ToListAsync();
         }
@@ -92,24 +93,74 @@ namespace MyApi.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> CheckIsPayMent(int user_Id, int room_Id)
+        public async Task<CheckIsPaymentResponse> CheckIsPayMent(int user_Id, int room_Id)
         {
-            var isPayment = await _dbSet.Where(b => b.User_Id == user_Id && b.Room_Id == room_Id)
-                                        .OrderByDescending(b => b.Created_At)
-                                        .FirstOrDefaultAsync();
-            if (isPayment == null) return false;
-            return isPayment.Status == BookingStatus.Confirmed;
+            // 1. Tìm booking GẦN NHẤT của User này tại Phòng này
+            // (Chỉ quan tâm booking của user này thôi, không quét toàn bộ DB)
+            var myBooking = await _dbSet
+                .Where(b => b.Room_Id == room_Id && b.User_Id == user_Id)
+                .OrderByDescending(b => b.Created_At) // Lấy đơn mới nhất
+                .FirstOrDefaultAsync();
+
+            // 2. Nếu chưa từng đặt phòng này -> none
+            if (myBooking == null)
+            {
+                return new CheckIsPaymentResponse { result = "none" };
+            }
+
+            var today = DateOnly.FromDateTime(DateTime.Now);
+
+            if (myBooking.Check_Out_Date < today)
+            {
+                if (myBooking.Status == BookingStatus.Confirmed)
+                {
+                    myBooking.Status = BookingStatus.Pending;
+                    myBooking.Check_In_Date = today; // Cân nhắc kỹ dòng này, nó làm sai lệch ngày vào thực tế
+
+                    await _context.SaveChangesAsync(); // Lưu thay đổi
+                    return new CheckIsPaymentResponse { result = "pending" };
+                }
+            }
+
+            // 4. Trả về kết quả dựa trên trạng thái (Confirmed/Pending)
+            string res = myBooking.Status == BookingStatus.Confirmed ? "confirmed" : "pending";
+
+            return new CheckIsPaymentResponse { result = res };
         }
 
-        public async Task<bool> CheckIsBooking(int user_Id, int room_Id)
+         public async Task<CheckIsPaymentResponse> CheckIsPayMentForHost(int room_Id)
         {
-            var isPayment = await _dbSet.Where(b => b.User_Id == user_Id && b.Room_Id == room_Id)
-                                        .OrderByDescending(b => b.Created_At)
-                                        .FirstOrDefaultAsync();
+            // 1. Tìm booking GẦN NHẤT của User này tại Phòng này
+            // (Chỉ quan tâm booking của user này thôi, không quét toàn bộ DB)
+            var myBooking = await _dbSet
+                .Where(b => b.Room_Id == room_Id)
+                .OrderByDescending(b => b.Created_At) // Lấy đơn mới nhất
+                .FirstOrDefaultAsync();
 
-            if (isPayment == null) return false;
+            // 2. Nếu chưa từng đặt phòng này -> none
+            if (myBooking == null)
+            {
+                return new CheckIsPaymentResponse { result = "none" };
+            }
 
-            return true;
+            var today = DateOnly.FromDateTime(DateTime.Now);
+
+            if (myBooking.Check_Out_Date < today)
+            {
+                if (myBooking.Status == BookingStatus.Confirmed)
+                {
+                    myBooking.Status = BookingStatus.Pending;
+                    myBooking.Check_In_Date = today; // Cân nhắc kỹ dòng này, nó làm sai lệch ngày vào thực tế
+
+                    await _context.SaveChangesAsync(); // Lưu thay đổi
+                    return new CheckIsPaymentResponse { result = "pending" };
+                }
+            }
+
+            // 4. Trả về kết quả dựa trên trạng thái (Confirmed/Pending)
+            string res = myBooking.Status == BookingStatus.Confirmed ? "confirmed" : "pending";
+
+            return new CheckIsPaymentResponse { result = res };
         }
     }
 }

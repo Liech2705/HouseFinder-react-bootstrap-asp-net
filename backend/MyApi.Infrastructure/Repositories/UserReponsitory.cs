@@ -39,6 +39,17 @@ namespace MyApi.Infrastructure.Repositories
         {
             var user = await _dbSet.FirstOrDefaultAsync(u => u.User_Id == userId);
             if (user == null) { return null; }
+
+            var houses = await _context.BoardingHouses.Where(h => h.User_Id == userId).ToListAsync();
+            if (houses.Any())
+            {
+                foreach (var house in houses)
+                {
+                    house.Status = HouseStatus.hidden;
+                }
+                await _context.SaveChangesAsync();
+            }
+
             user.Lock_Until = timeLock;
             user.Reason = reasonLock;
             _dbSet.Update(user);
@@ -51,6 +62,16 @@ namespace MyApi.Infrastructure.Repositories
         {
             var user = await _dbSet.FirstOrDefaultAsync(u => u.User_Id == userId);
             if (user == null) { return null; }
+
+            var houses = await _context.BoardingHouses.Where(h => h.User_Id == userId).ToListAsync();
+            if (houses.Any())
+            {
+                foreach (var house in houses)
+                {
+                    house.Status = HouseStatus.visible;
+                }
+                await _context.SaveChangesAsync();
+            }
 
             user.Lock_Until = null;
             user.Reason = resonUnlock;

@@ -22,7 +22,6 @@ export default function ChatWidget() {
                 if (!convId && hostId) {
                     // tạo hoặc lấy conversation nếu caller không trả id
                     const res = await getAndPostConversations(hostId, userId);
-                    console.log("Tạo/lấy conversation:", res);
                 }
                 if (convId) {
                     // set selected conv object so ChatBox receives props
@@ -44,7 +43,6 @@ export default function ChatWidget() {
         const fetchData = async () => {
             try {
                 const res = await getConversationByUserId(userId);
-                console.log("Danh sách hội thoại:", res);
                 setConversations(res || []);
             } catch (err) {
                 console.error("Lỗi tải danh sách hội thoại:", err);

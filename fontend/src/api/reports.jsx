@@ -11,4 +11,14 @@ const fetchReport = async () => {
     }
 };
 
-export { fetchReport };
+const createReport = async (reportData) => {
+    try {
+        const response = await api.post('/Reports', reportData);
+        return response.data;
+    } catch (error) {
+        console.error("Error creating report:", error.message);
+        throw error;
+    }
+};
+
+export { fetchReport, createReport };

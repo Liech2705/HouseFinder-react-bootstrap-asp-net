@@ -41,6 +41,8 @@ function HouseDetail() {
         loadData();
     }, [houseId]);
 
+
+
     // Hàm toggle yêu thích
     const toggleFavorite = async () => {
         try {
@@ -144,9 +146,11 @@ function HouseDetail() {
     // ✅ ĐÃ SỬA VỊ TRÍ HOOK: Đảm bảo Hook này được gọi ở đầu, trước mọi lệnh return điều kiện.
     // Cập nhật selected image nếu images thay đổi (ví dụ: sau khi load data)
     useEffect(() => {
-        // Only set initial selected image when images change and there's no selection yet.
-        if (images.length > 0 && !selected) {
-            setSelected(images[0]);
+        if (images.length > 0) {
+            // SỬA: Cập nhật nếu chưa chọn (null) HOẶC nếu đang hiển thị placeholder
+            if (!selected || selected === placeholder) {
+                setSelected(images[0]);
+            }
         }
     }, [images]);
 
@@ -171,6 +175,14 @@ function HouseDetail() {
     const handleOpenMapPage = () => {
         // Chuyển hướng sang /map-view và gửi kèm object 'house'
         navigate('/map-view', { state: { house: house } });
+    };
+
+    const handleReport = () => {
+        if (!userId) {
+            alert("Vui lòng đăng nhập để sử dụng tính năng này!");
+            return;
+        }
+        navigate(`/report/house/${houseId}`);
     };
 
     // --- CÁC ĐIỀU KIỆN RETURN SỚM ---
@@ -199,7 +211,6 @@ function HouseDetail() {
             </main>
         );
     }
-    console.log(house);
     // --- RENDER CHÍNH ---
 
     return (
@@ -236,9 +247,17 @@ function HouseDetail() {
                                     onClick={toggleFavorite}
                                     title={isFavorite ? 'Bỏ yêu thích' : 'Thêm vào yêu thích'}
                                 ></i>
+
+                                {/* Icon báo cáo */}
+                                <i
+                                    className="fas fa-flag fs-3 text-warning cursor-pointer"
+                                    onClick={handleReport}
+
+                                    title="Báo cáo nhà trọ"
+                                ></i>
                             </div>
                         </div>
-                        {images.length > 1 && (
+                        {images.length >= 1 && (
                             <>
                                 <div className="thumb-break mx-3" />
 
@@ -316,8 +335,8 @@ function HouseDetail() {
                                             to={`/houses/${house.house_Id}/rooms/${room.room_Id}`}
                                             key={room.room_Id}
                                             className="room-link text-decoration-none col-12 col-md-6 col-lg-4"
-                                            // Tùy chọn: Nếu muốn chặn click hoàn toàn khi đã thuê thì bỏ comment dòng dưới
-                                            // style={{ pointerEvents: isBooked ? 'none' : 'auto' }}
+                                        // Tùy chọn: Nếu muốn chặn click hoàn toàn khi đã thuê thì bỏ comment dòng dưới
+                                        // style={{ pointerEvents: isBooked ? 'none' : 'auto' }}
                                         >
                                             {/* Thêm class border và background để làm nổi bật thẻ */}
                                             <div className={`p-3 border rounded h-100 ${isBooked ? 'bg-light opacity-75' : 'bg-white shadow-sm-hover'}`}>
