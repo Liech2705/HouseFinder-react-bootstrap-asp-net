@@ -246,8 +246,7 @@
               "RelativeToolTip": "MyApi.Api\\Services\\RAG\\Vector\\QdrantHttpClient.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwDsAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T06:18:41.98Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T06:18:41.98Z"
             },
             {
               "$type": "Document",
@@ -281,7 +280,7 @@
               "RelativeDocumentMoniker": "MyApi.Api\\appsettings.json",
               "ToolTip": "D:\\University\\Semester VIII\\Project IT 4\\HouseFinder-react-bootstrap-asp-net\\backend\\MyApi.Api\\appsettings.json",
               "RelativeToolTip": "MyApi.Api\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-12-08T06:32:42.408Z",
               "EditorCaption": ""
