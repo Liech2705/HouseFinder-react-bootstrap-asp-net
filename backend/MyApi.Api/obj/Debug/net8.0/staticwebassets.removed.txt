@@ -1,3 +1,0 @@
-D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\wwwroot\uploads\rooms\4012\2dc1bf7f-6520-4b0f-b97c-f0c82308fc27.jpg
-D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\wwwroot\uploads\rooms\4012\3337fb0e-4a38-4c72-bb35-46310c0d0433.jpg
-D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\wwwroot\uploads\rooms\4012\643f50ac-8b5a-4520-9f71-2cb9ed4c88ab.jpg
