@@ -8,5 +8,11 @@ const postReview = async (data) => {
         console.log("Lỗi tạo comment : " + error)
     }
 }
-
-export { postReview }
+const deleteReview = async (reviewId) => {
+    try {
+        await api.delete(`/Reviews/${reviewId}`)
+    } catch (err) {
+        console.log("lỗi xóa comment" + err)
+    }
+}
+export { postReview, deleteReview }

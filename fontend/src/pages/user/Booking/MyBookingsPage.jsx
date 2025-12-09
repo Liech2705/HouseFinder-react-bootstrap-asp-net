@@ -9,6 +9,7 @@ const MyBookingsPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isLogin, setIsLogin] = useState(false);
+    const placeholder = 'https://surl.li/drynzt';
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -109,7 +110,7 @@ const MyBookingsPage = () => {
                             <Card className="h-100 shadow-sm border-0 rounded-3">
                                 <Card.Img
                                     variant="top"
-                                    src={convertImagesToDisplay(booking.roomImages?.[0]) || "https://via.placeholder.com/300x200"}
+                                    src={convertImagesToDisplay(booking.roomImages?.[0]) || placeholder}
                                     alt={booking.roomTitle}
                                     style={{ height: "200px", objectFit: "cover" }}
                                 />

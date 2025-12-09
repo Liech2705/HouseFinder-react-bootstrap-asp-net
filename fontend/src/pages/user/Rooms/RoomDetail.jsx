@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { getAndPostConversations, fetchHouseById as fetchHouses, checkBooking, fetchRoomsById, isPaymentCompleted, postReview } from '../../../api/api.jsx';
+import { getAndPostConversations, fetchHouseById as fetchHouses, checkBooking, fetchRoomsById, isPaymentCompleted, postReview, deleteReview } from '../../../api/api.jsx';
 import { encodeBookingParams } from '../../../utils/encrypt.js';
 import StarRating from '../../../components/StarRating.jsx';
 import Breadcrumbs from '../../../components/Breadcrumbs.jsx';
@@ -27,6 +27,7 @@ function RoomDetail() {
     const [hasReviewed, setHasReviewed] = useState(false);
     const [userComment, setUserComment] = useState("");
     const [isSubmittingReview, setIsSubmittingReview] = useState(false);
+    const [isAdmin, SetIsAdmin] = useState(false);
 
     const [room, setRoom] = useState({}); // Sửa: khởi tạo object rỗng
     useEffect(() => {
@@ -35,6 +36,7 @@ function RoomDetail() {
             const userObj = JSON.parse(userStr);
             setIsLogin(true);
             setCurrentUser(userObj);
+            SetIsAdmin(userObj.role === "Admin" || userObj.isAdmin === true);
         }
     }, []);
 
@@ -241,7 +243,28 @@ function RoomDetail() {
             window.dispatchEvent(new CustomEvent('openChat', { detail: { hostId: hostid } }));
         }
     };
+    const handleDeleteReview = async (reviewId) => {
+        if (!window.confirm("Bạn có chắc chắn muốn xóa bình luận này?")) return;
 
+        try {
+            // Gọi API xóa (giả sử bạn có hàm deleteReview import từ api)
+            await deleteReview(reviewId);
+
+            // Cập nhật lại state room để loại bỏ bình luận khỏi giao diện
+            setRoom(prevRoom => {
+                if (!prevRoom.reviews) return prevRoom;
+                return {
+                    ...prevRoom,
+                    reviews: prevRoom.reviews.filter(r => r.review_Id !== reviewId)
+                };
+            });
+
+            alert("Đã xóa bình luận.");
+        } catch (error) {
+            console.error("Lỗi khi xóa:", error);
+            alert("Có lỗi xảy ra khi xóa.");
+        }
+    };
     // Điều kiện return sớm
     if (loading) return <main className="container py-5"><div className="text-center text-muted">Đang tải chi tiết phòng...</div></main>;
     if (!house || Object.keys(house).length === 0) return <main className="container py-5"><div className="alert alert-warning">Không tìm thấy nhà trọ. <button className="btn btn-link p-0 ms-2" onClick={() => navigate('/houses')}>Quay lại</button></div></main>;
@@ -306,6 +329,38 @@ function RoomDetail() {
                                     <i className="fas fa-map-marker-alt me-2" aria-hidden="true" />
                                     {house.street}, {house.commune}, {house.province}
                                 </p>
+                                <div className="d-flex gap-4 mb-3 p-3 bg-light rounded border border-light-subtle">
+                                    {/* Giá điện */}
+                                    <div className="d-flex align-items-center">
+                                        <div className="rounded-circle bg-warning bg-opacity-10 p-2 me-2">
+                                            <i className="fas fa-bolt text-warning" />
+                                        </div>
+                                        <div>
+                                            <div className="small text-secondary fw-semibold">Điện</div>
+                                            <div className="fw-bold text-dark">
+                                                {house.electric_Cost
+                                                    ? `${house.electric_Cost.toLocaleString('vi-VN')} đ/kW`
+                                                    : 'Liên hệ'}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Giá nước */}
+                                    <div className="d-flex align-items-center border-start ps-4">
+                                        <div className="rounded-circle bg-primary bg-opacity-10 p-2 me-2">
+                                            <i className="fas fa-tint text-primary" />
+                                        </div>
+                                        <div>
+                                            <div className="small text-secondary fw-semibold">Nước</div>
+                                            <div className="fw-bold text-dark">
+                                                {house.water_Cost
+                                                    ? `${house.water_Cost.toLocaleString('vi-VN')}`
+                                                    : 'Liên hệ'}
+                                                đ/m<sup>3</sup>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </header>
                             <hr />
                             <section aria-labelledby="room-details-heading">
@@ -382,17 +437,32 @@ function RoomDetail() {
                                                     <StarRating rating={rv.rating} small />
                                                 </div>
 
-                                                {/* Nút Báo cáo (Chỉ hiện nếu không phải review của chính mình) */}
-                                                {currentUser?.id !== rv.user_Id && (
-                                                    <button
-                                                        className="btn btn-link text-muted p-0 text-decoration-none fs-9"
-                                                        onClick={() => handleReportReview(rv.review_Id || rv.id)} // Lưu ý kiểm tra đúng tên trường ID trong API trả về
-                                                        title="Báo cáo vi phạm"
-                                                    >
-                                                        <i className="bi bi-flag me-1"></i> Báo cáo
-                                                    </button>
-                                                )}
+                                                <div className="d-flex align-items-center gap-2">
+                                                    {/* Nút Báo cáo */}
+                                                    {currentUser?.id !== rv.user_Id && (
+                                                        <button
+                                                            className="btn btn-link text-muted p-0 text-decoration-none fs-9 d-flex align-items-center p-2"
+                                                            onClick={() => handleReportReview(rv.review_Id || rv.id)}
+                                                            title="Báo cáo vi phạm"
+                                                        >
+                                                            <i className="bi bi-flag me-1"></i>
+                                                            <span className="d-none d-sm-inline">Báo cáo</span>
+                                                        </button>
+                                                    )}
+
+                                                    {/* Nút Xóa (Admin) */}
+                                                    {isAdmin && (
+                                                        <button
+                                                            className="btn btn-sm btn-outline-danger border-0 p-1 lh-1 p-2"
+                                                            onClick={() => handleDeleteReview(rv.review_Id)}
+                                                            title="Xóa bình luận này"
+                                                        >
+                                                            <i className="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    )}
+                                                </div>
                                             </div>
+
 
                                             {/* Nội dung bình luận */}
                                             <div className="text-dark">{rv.comment || 'Không có bình luận.'}</div>

@@ -1,3 +1,4 @@
+wwwroot\uploads\avatars\0e414c58-06c0-4f38-9b02-f074dfd94c16.jpg
 wwwroot\uploads\avatars\21f35891-0504-430c-b282-b2046ee171b7.png
 wwwroot\uploads\avatars\3ece864e-9b61-4880-b14b-6844315cde68.jpg
 wwwroot\uploads\avatars\4ed935c5-2e23-471e-bf59-a67f8aa3db30.png
@@ -12,6 +13,7 @@ wwwroot\uploads\avatars\6d59d3a4-58fa-4a76-8676-0e8845ed49fc.png
 wwwroot\uploads\avatars\8ec8fac3-48ba-4d1c-8934-f33a11423eee.jpg
 wwwroot\uploads\avatars\afb07648-62cd-441d-bd92-e5389d4f916c.png
 wwwroot\uploads\avatars\b375c907-bd23-4a35-92ef-c47f3dc47d8a.jpg
+wwwroot\uploads\avatars\dafbe496-4db7-4f3b-84ab-dfc9e067684e.jpg
 wwwroot\uploads\avatars\e8c22309-fda5-47d1-856f-7296ed2ab2e7.jpg
 wwwroot\uploads\avatars\Generated Image October 05, 2025 - 6_38PM.png
 wwwroot\uploads\house\5014\0941f6a4-50e9-42c2-8b29-2d73439e3031.jpg

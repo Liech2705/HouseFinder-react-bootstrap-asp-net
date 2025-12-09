@@ -57,6 +57,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Google.GenAI": {
+              "target": "Package",
+              "version": "[0.7.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.Facebook": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -86,6 +90,14 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.9, )"
+            },
+            "OpenAI": {
+              "target": "Package",
+              "version": "[2.7.0, )"
+            },
+            "Qdrant.Client": {
+              "target": "Package",
+              "version": "[1.16.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

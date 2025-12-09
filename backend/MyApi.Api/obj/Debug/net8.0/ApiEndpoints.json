@@ -1070,6 +1070,16 @@
     ]
   },
   {
+    "ContainingType": "MyApi.Api.Controllers.GeminiDebugController",
+    "Method": "ListModels",
+    "RelativePath": "api/debug/gemini-models",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MyApi.Api.Controllers.FavoriteHouseController",
     "Method": "ToggleFavorite",
     "RelativePath": "api/FavoriteHouse/{houseId}",
@@ -1547,6 +1557,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.Api.Controllers.RagController",
+    "Method": "IndexAll",
+    "RelativePath": "api/Rag/index",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -2788,6 +2808,38 @@
       {
         "Name": "unlockedDto",
         "Type": "MyApi.Application.DTOs.UserDtos.UnlockUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.Api.Controllers.RagChatController",
+    "Method": "Assist",
+    "RelativePath": "chat/assist",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "MyApi.Api.Controllers.ToolRagChatRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MyApi.Api.Controllers.OpenAIChatController",
+    "Method": "Assist",
+    "RelativePath": "chat/OpenAI/assist",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "MyApi.Api.Controllers.ToolRagChatRequest",
         "IsRequired": true
       }
     ],

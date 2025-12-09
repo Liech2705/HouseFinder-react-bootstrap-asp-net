@@ -25,6 +25,7 @@ import PaymentSuccess from '../pages/user/Booking/PaymentSuccess.jsx';
 import PaymentFail from '../pages/user/Booking/PaymentFail.jsx';
 import MapPage from '../pages/user/Maps/MapPage.jsx';
 import ReportHouse from '../pages/user/ReportHouse.jsx';
+import AIChatAssistant from '../components/AIChatAssistant.jsx';
 
 
 const AppRouter = () => {
@@ -63,6 +64,7 @@ const AppRouter = () => {
                 <Route path="/auth-re/callback" element={<AuthCallback />} />
                 <Route path="/register/" element={<Register />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/ai-chat-assistant" element={<MainLayout><AIChatAssistant /></MainLayout>} />
             </Routes>
         </Router>
     );

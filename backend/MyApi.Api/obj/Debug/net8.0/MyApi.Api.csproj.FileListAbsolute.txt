@@ -559,3 +559,16 @@ D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\bac
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\obj\Debug\net8.0\MyApi.Api.genruntimeconfig.cache
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\obj\Debug\net8.0\ref\MyApi.Api.dll
 D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Google.Protobuf.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Grpc.Core.Api.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Grpc.Net.Client.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Grpc.Net.Common.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Qdrant.Client.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Google.Apis.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Google.Apis.Auth.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Google.Apis.Core.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\Google.GenAI.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\System.Management.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\OpenAI.dll
+D:\University\Semester VIII\Project IT 4\HouseFinder-react-bootstrap-asp-net\backend\MyApi.Api\bin\Debug\net8.0\System.Net.ServerSentEvents.dll

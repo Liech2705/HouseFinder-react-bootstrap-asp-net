@@ -4,8 +4,18 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using MyApi.Api.Services.RAG;
+using MyApi.Api.Services.RAG.Embedding;
+using MyApi.Api.Services.RAG.Index;
+using MyApi.Api.Services.RAG.Llm;
+using MyApi.Api.Services.RAG.Model;
+using MyApi.Api.Services.RAG.Tools;
+using MyApi.Api.Services.RAG.Vector;
 using MyApi.Application.Mappings;
 using MyApi.Domain.Interfaces;
 using MyApi.Infrastructure.Data;
@@ -13,14 +23,16 @@ using MyApi.Infrastructure.Interfaces;
 using MyApi.Infrastructure.Repositories;
 //using MyApi.Infrastructure.Seeders;
 using MyApi.Infrastructure.Services;
+using OpenAI.Chat;
+using OpenAI.Embeddings;
+using Qdrant.Client;
+using RagAppBasic.Services.Llm;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -30,9 +42,71 @@ builder.Services.AddControllers()
     }); ;
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets<Program>(optional: true);
+}
+
+// Load config (appsettings + env)
+var configuration = builder.Configuration.Get<AppConfig>() ?? new AppConfig();
+
+builder.Services.AddSingleton(configuration);
+builder.Services.AddHttpClient();
+
+builder.Services.Configure<FormOptions>(o =>
+{
+    o.MultipartBodyLengthLimit = 1024L * 1024L * 200L; // 200MB
+});
+builder.Services.AddScoped<SearchDocsTool>();  // tool service
+
+// Embedding provider
+if (configuration.Provider.Equals("Gemini", StringComparison.OrdinalIgnoreCase))
+{
+    builder.Services.AddSingleton(sp =>
+    {
+        // Lấy IConfiguration gốc để đọc chuỗi kết nối
+        var config = sp.GetRequiredService<IConfiguration>();
+        var apiKey = config["Gemini:ApiKey"];
+
+        if (string.IsNullOrEmpty(apiKey))
+            throw new InvalidOperationException("Gemini:ApiKey is missing in configuration.");
+
+        return new Google.GenAI.Client(apiKey : apiKey);
+    });
+    builder.Services.AddSingleton<IEmbeddingProvider, GeminiEmbeddingProvider>();
+    builder.Services.AddSingleton<ILlmChatProvider, GeminiChatProvider>();
+} else if (configuration.Provider.Equals("OpenAI", StringComparison.OrdinalIgnoreCase))
+{
+    builder.Services.AddSingleton(new EmbeddingClient(configuration.OpenAI.EmbedModel, configuration.OpenAI.ApiKey));
+    builder.Services.AddSingleton(new ChatClient(configuration.OpenAI.ChatModel, configuration.OpenAI.ApiKey));
+    builder.Services.AddSingleton<IEmbeddingProvider, OpenAIEmbeddingProvider>();
+    builder.Services.AddSingleton<ILlmChatProvider, OpenAIChatProvider>();
+} else if (configuration.Provider.Equals("Groq", StringComparison.OrdinalIgnoreCase))
+{
+    builder.Services.AddSingleton(sp =>
+    {
+        // Lấy IConfiguration gốc để đọc chuỗi kết nối
+        var config = sp.GetRequiredService<IConfiguration>();
+        var apiKey = config["Gemini:ApiKey"];
+
+        if (string.IsNullOrEmpty(apiKey))
+            throw new InvalidOperationException("Gemini:ApiKey is missing in configuration.");
+
+        return new Google.GenAI.Client(apiKey: apiKey);
+    });
+    builder.Services.AddHttpClient<GroqChatProvider>();
+    builder.Services.AddSingleton<IEmbeddingProvider, GeminiEmbeddingProvider>();
+    builder.Services.AddScoped<ILlmChatProvider, GroqChatProvider>();
+}
+
+builder.Services.AddSingleton<MyApi.Api.Services.RAG.Vector.IQdrantClient, QdrantHttpClient>();
+builder.Services.AddScoped<HouseIndexer>();
+//builder.Services.AddSingleton<RagPipeline>();
 
 // service authentication + authorization
 var jwtSettings = builder.Configuration.GetSection("Jwt");
@@ -171,6 +245,8 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<EmailService>();
 builder.WebHost.UseWebRoot("wwwroot");
+
+builder.Services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "RoomFinder RAG API", Version = "v1" }));
 
 var app = builder.Build();
 

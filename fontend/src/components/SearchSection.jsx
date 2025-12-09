@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { api } from '../api/api';
 import { useNavigate } from 'react-router-dom';
+import { BsRobot } from 'react-icons/bs';
 
 // Hàm format tiền tệ
 const formatCurrency = (value) => {
@@ -95,6 +96,7 @@ function SearchSection() {
                                 autoComplete="off"
                             />
 
+
                             {/* --- PHẦN DROPDOWN GỢI Ý --- */}
                             {showSuggestions && suggestions.length > 0 && (
                                 <div className="card position-absolute w-100 shadow mt-1" style={{ zIndex: 1000, top: '100%', left: 0 }}>
@@ -133,6 +135,16 @@ function SearchSection() {
 
                         <button type="submit" className="btn btn-dark btn-sm fw-semibold">
                             Tìm kiếm
+                        </button>
+                        <button
+                            className="btn btn-sm btn-outline-primary d-flex align-items-center"
+                            type="button"
+                            title="Tìm kiếm bằng AI"
+                            // Thay đổi đường dẫn này tới trang chat AI của bạn
+                            onClick={() => navigate('/ai-chat-assistant')}
+                        >
+                            <BsRobot size={24} />
+                            <span className="d-none d-md-inline ms-2 small fw-semibold">AI Search</span>
                         </button>
                     </form>
                 </div>

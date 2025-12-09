@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "MyApi.Api",
-    "version": "1.0"
+    "title": "RoomFinder RAG API",
+    "version": "v1"
   },
   "paths": {
     "/api/Auth/register": {
@@ -1950,6 +1950,18 @@
         }
       }
     },
+    "/api/debug/gemini-models": {
+      "get": {
+        "tags": [
+          "GeminiDebug"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/HouseImages": {
       "get": {
         "tags": [
@@ -2464,6 +2476,37 @@
         }
       }
     },
+    "/chat/OpenAI/assist": {
+      "post": {
+        "tags": [
+          "OpenAIChat"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToolRagChatRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToolRagChatRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToolRagChatRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Payments": {
       "get": {
         "tags": [
@@ -2642,6 +2685,49 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Rag/index": {
+      "post": {
+        "tags": [
+          "Rag"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/chat/assist": {
+      "post": {
+        "tags": [
+          "RagChat"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToolRagChatRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToolRagChatRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToolRagChatRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -6109,6 +6195,26 @@
         "properties": {
           "email": {
             "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ToolRagChatRequest": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "topK": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "minScore": {
+            "type": "number",
+            "format": "float",
             "nullable": true
           }
         },

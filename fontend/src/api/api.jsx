@@ -11,7 +11,8 @@ export * from './chatrealtime.jsx';
 export * from './roomImages.jsx';
 export * from './reports.jsx';
 export * from './bookings.jsx';
-export * from './reviews.jsx'
+export * from './reviews.jsx';
+export * from './chatApi.jsx';
 
 // api.js
 import axios from 'axios';

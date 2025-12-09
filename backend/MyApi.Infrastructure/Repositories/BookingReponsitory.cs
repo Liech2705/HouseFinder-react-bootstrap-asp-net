@@ -44,18 +44,20 @@ namespace MyApi.Infrastructure.Repositories
 
         public async Task<int> GetIdByRoomIdAsync(VNPayRequest model)
         {
-            var booking = new Booking
-            {
-                Room_Id = model.RoomId,
-                User_Id = model.UserId,
-                Amount = model.Amount,
-                Check_In_Date = model.Check_In_Date,
-                Check_Out_Date = model.Check_Out_Date
-            };
+            var isbooking = await _dbSet.FirstOrDefaultAsync(b => b.User_Id == model.UserId && b.Room_Id == model.RoomId && b.Amount == model.Amount);
+            if (isbooking == null) {
+                var booking = new Booking
+                {
+                    Room_Id = model.RoomId,
+                    User_Id = model.UserId,
+                    Amount = model.Amount,
+                    Check_In_Date = model.Check_In_Date,
+                    Check_Out_Date = model.Check_Out_Date
+                };
 
-            await _dbSet.AddAsync(booking);
-            await _context.SaveChangesAsync();
-
+                await _dbSet.AddAsync(booking);
+                await _context.SaveChangesAsync();
+            }
             var idbooking = _dbSet.FirstOrDefault(b => b.Room_Id == model.RoomId && b.User_Id == model.UserId && b.Check_In_Date == model.Check_In_Date);
             if (idbooking == null) return -1;
 

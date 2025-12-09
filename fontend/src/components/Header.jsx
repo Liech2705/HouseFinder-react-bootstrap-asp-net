@@ -59,7 +59,7 @@ function Header() {
                             Tìm phòng
                         </Link>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <a className="nav-link px-2 text-dark" href="#">
                             Đăng tin
                         </a>
@@ -68,7 +68,7 @@ function Header() {
                         <a className="nav-link px-2 text-dark" href="#">
                             Liên hệ
                         </a>
-                    </li>
+                    </li> */}
                 </ul>
 
                 <div className="d-flex gap-2 align-items-center">
@@ -124,7 +124,7 @@ function Header() {
                                 ) : null
                                 }
                                 {user?.role == "Host" ? (
-                                    <li>    
+                                    <li>
                                         <Link className="dropdown-item" to="/manage">
                                             <i className="bi bi-gear me-2"></i>
                                             Quản lý phòng trọ

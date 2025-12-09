@@ -9,7 +9,9 @@ function HouseDetail() {
     // Đổi tên biến: id trong URL giờ là houseId
     const { id: houseId } = useParams();
     const navigate = useNavigate();
-    const userId = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : null;
+    const user = localStorage.getItem('user');
+    const userId = user.id || null;
+    const isAdmin = user.role === "Admin";
     const [showLargeMap, setShowLargeMap] = useState(false);
     const [housesData, setHousesData] = useState([]);
     const [isFavorite, setIsFavorite] = useState(false);
@@ -212,7 +214,6 @@ function HouseDetail() {
         );
     }
     // --- RENDER CHÍNH ---
-
     return (
         <main className="container py-4 room-detail-page">
             <Breadcrumbs
@@ -290,6 +291,37 @@ function HouseDetail() {
                                     <i className="fas fa-map-marker-alt me-2" aria-hidden="true" />
                                     {house.street}, {house.commune}, {house.province}
                                 </p>
+                                <div className="d-flex gap-4 mb-3 p-3 bg-light rounded border border-light-subtle">
+                                    {/* Giá điện */}
+                                    <div className="d-flex align-items-center">
+                                        <div className="rounded-circle bg-warning bg-opacity-10 p-2 me-2">
+                                            <i className="fas fa-bolt text-warning" />
+                                        </div>
+                                        <div>
+                                            <div className="small text-secondary fw-semibold">Điện</div>
+                                            <div className="fw-bold text-dark">
+                                                {house.electric_Cost
+                                                    ? `${house.electric_Cost.toLocaleString('vi-VN')} ₫`
+                                                    : 'Liên hệ'}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Giá nước */}
+                                    <div className="d-flex align-items-center border-start ps-4">
+                                        <div className="rounded-circle bg-primary bg-opacity-10 p-2 me-2">
+                                            <i className="fas fa-tint text-primary" />
+                                        </div>
+                                        <div>
+                                            <div className="small text-secondary fw-semibold">Nước</div>
+                                            <div className="fw-bold text-dark">
+                                                {house.water_Cost
+                                                    ? `${house.water_Cost.toLocaleString('vi-VN')} ₫`
+                                                    : 'Liên hệ'}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </header>
 
                             <hr />

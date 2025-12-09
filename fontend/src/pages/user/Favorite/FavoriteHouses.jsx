@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { HeartFill } from "react-bootstrap-icons"; // dùng icon từ bootstrap-icons
+import { house } from "../../../api/house";
 
 const FavoriteHouses = () => {
     const [favorites, setFavorites] = useState([]);
-
+    const placeholder = 'https://surl.li/drynzt';
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
@@ -43,9 +44,13 @@ const FavoriteHouses = () => {
                     {favorites.map((fav) => {
                         const house = fav.house;
                         if (!house) return null;
+                        const firstImage = house.houseImages && house.houseImages.length > 0
+                            ? house.houseImages[0].image_Url
+                            : null;
 
-                        const imageUrl =
-                            house.houseImages?.[0]?.imageUrl || "https://surl.li/drynzt";
+                        const imageUrl = firstImage
+                            ? import.meta.env.VITE_URL_ROOT + firstImage
+                            : placeholder;
 
                         return (
                             <div
@@ -56,7 +61,7 @@ const FavoriteHouses = () => {
                                     {/* Ảnh nhà */}
                                     <Link to={`/houses/${house.house_Id}`}>
                                         <img
-                                            src={imageUrl}
+                                            src={imageUrl || placeholder}
                                             alt={house.house_Name}
                                             className="card-img-top"
                                             style={{ height: "220px", objectFit: "cover" }}

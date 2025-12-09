@@ -20,6 +20,7 @@ namespace MyApi.Infrastructure.Repositories
             return await _context.FavoriteHouses
                 .Where(f => f.User_Id == userId && f.IsFavorite)
                 .Include(f => f.BoardingHouse)
+                 .ThenInclude(f => f.HouseImages)
                 .Include(f => f.Room)
                 .ToListAsync();
         }
